@@ -1,4 +1,4 @@
-package com.example.multi_vendor_starter
+package com.vendor.one
 
 import io.flutter.embedding.android.FlutterActivity
 
