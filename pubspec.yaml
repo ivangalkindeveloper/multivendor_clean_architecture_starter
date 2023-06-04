@@ -1,0 +1,39 @@
+name: multi_vendor_starter
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_native_splash:
+  intl:
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test:
+  flutter_lints:
+  flutter_launcher_icons:
+
+flutter:
+  uses-material-design: true
+  
+flutter_localizations:
+  sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  min_sdk_android: 21
+  ios: true
+  image_path: asset/application_icon/application_icon.png
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: asset/application_splash/application_splash.png
+  android: true
+  ios: true
