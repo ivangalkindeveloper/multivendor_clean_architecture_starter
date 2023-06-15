@@ -77,7 +77,7 @@ echo ""
 echo -e ${Yellow}"Switch application icon - Start"${NoColor}
 rm -f ./asset/application_icon/application_icon.png
 cp vendor/application_icon/$folderName.png asset/application_icon/application_icon.png
-flutter pub run flutter_launcher_icons:main
+dart run flutter_launcher_icons:main
 echo -e ${Yellow}"Switch application icon - Success"${NoColor}
 echo ""
 
@@ -85,7 +85,7 @@ echo -e ${Yellow}"Switch application splash screen - Start"${NoColor}
 rm -f ./asset/application_splash/application_splash.png
 cp vendor/application_splash/$folderName.png asset/application_splash/application_splash.png
 gsed -i "/color:/c\  color: \"$splashColor\"" pubspec.yaml
-flutter pub run flutter_native_splash:create
+dart run flutter_native_splash:create
 echo -e ${Yellow}"Switch application splash screen - Success"${NoColor}
 echo ""
 
