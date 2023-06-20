@@ -1,35 +1,33 @@
-title=$1
-folderName=$2
-applicationName=$3
-splashColor=$4
-package=$5
-facebookApplicationId=$6
-facebookClientToken=$7
+folderName=$1
+applicationName=$2
+androidPackage=$3
+bundleID=$4
+splashColor=$5
+splashColorDark=$6
+splashAndroid12Color=$7
+splashAndroid12ColorDark=$8
+splashAndroid12IconColor=$9
+splashAndroid12IconColorDark=$10
+# facebookApplicationId=$11
+# facebookClientToken=$12
+
+
 
 Green='\033[0;32m'
 Yellow='\033[0;33m'
 NoColor='\033[0m'
 
-echo -e ${Green}"Switch vendor $title - Start"${NoColor}
+echo -e $Green"Switch vendor: $applicationName - Start"$NoColor
 echo -e ""
 
-echo -e ${Yellow}"Switch application name: $applicationName - Start"${NoColor}
-# Android Main AndroidManifest
-gsed -i "/android:label=/c\        android:label=\"$applicationName\"" android/app/src/main/AndroidManifest.xml
-# iOS Info.plist
-gsed -i "/<key>CFBundleDisplayName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
-gsed -i "/<key>CFBundleName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
-echo -e ${Yellow}"Switch application name: $applicationName - Success"${NoColor}
-echo ""
-
-echo -e ${Yellow}"Switch Android package and iOS bundleID - Start"${NoColor}
+echo -e $Yellow"Switch Android package: $androidPackage - Start"$NoColor
 # Android MainActivity.kt
 currentAndroidPackage=$(grep -o 'package="[^"]\+"' android/app/src/debug/AndroidManifest.xml | cut -d'"' -f2)
 currentAndroidPackageList=(${currentAndroidPackage//./ })
-androidPackageList=(${package//./ })
+androidPackageList=(${androidPackage//./ })
 oldDirectory="android/app/src/main/kotlin/${currentAndroidPackageList[0]}/${currentAndroidPackageList[1]}/${currentAndroidPackageList[2]}"
 newDirectory="android/app/src/main/kotlin/${androidPackageList[0]}/${androidPackageList[1]}/${androidPackageList[2]}"
-if [[ $currentAndroidPackage != $package ]]
+if [[ $currentAndroidPackage != $androidPackage ]]
 then
     if [[ ! -d "android/app/src/main/kotlin/${androidPackageList[0]}" ]]
     then
@@ -59,45 +57,85 @@ then
         rm -rf "android/app/src/main/kotlin/${currentAndroidPackageList[0]}"
     fi
 fi
-gsed -i "/package/c\package $package" $newDirectory/MainActivity.kt
+gsed -i "/package/c\package $androidPackage" $newDirectory/MainActivity.kt
 # Android Debug AndroidManifest
-gsed -i "/package=/c\    package=\"$package\">" android/app/src/debug/AndroidManifest.xml
+gsed -i "/package=/c\    package=\"$androidPackage\">" android/app/src/debug/AndroidManifest.xml
 # Android Main AndroidManifest
-gsed -i "/package=/c\    package=\"$package\">" android/app/src/main/AndroidManifest.xml
-gsed -i "/<activity/{n;s/.*/            android:name=\"$package.MainActivity\"/}" android/app/src/main/AndroidManifest.xml
+gsed -i "/package=/c\    package=\"$androidPackage\">" android/app/src/main/AndroidManifest.xml
+gsed -i "/<activity/{n;s/.*/            android:name=\"$androidPackage.MainActivity\"/}" android/app/src/main/AndroidManifest.xml
 # Android Profile AndroidManifest
-gsed -i "/package=/c\    package=\"$package\">" android/app/src/profile/AndroidManifest.xml
+gsed -i "/package=/c\    package=\"$androidPackage\">" android/app/src/profile/AndroidManifest.xml
 # Android Gradle ApplicationId
-gsed -i "/applicationId/c\        applicationId \"$package\"" android/app/build.gradle
-# iOS BundleID
-gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\				PRODUCT_BUNDLE_IDENTIFIER = $package;" ios/Runner.xcodeproj/project.pbxproj
-echo -e ${Yellow}"Switch Android package and iOS bundleID - Success"${NoColor}
+gsed -i "/applicationId/c\        applicationId \"$androidPackage\"" android/app/build.gradle
+echo -e $Yellow"Switch Android package: $androidPackage - Success"$NoColor
 echo ""
 
-echo -e ${Yellow}"Switch application icon - Start"${NoColor}
+echo -e $Yellow"Switch iOS bundleID: $bundleID - Success"$NoColor
+gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\				PRODUCT_BUNDLE_IDENTIFIER = $bundleID;" ios/Runner.xcodeproj/project.pbxproj
+echo -e $Yellow"Switch iOS bundleID: $bundleID - Success"$NoColor
+echo ""
+
+echo -e $Yellow"Switch application name: $applicationName - Start"$NoColor
+# Android Main AndroidManifest
+gsed -i "/android:label=/c\        android:label=\"$applicationName\"" android/app/src/main/AndroidManifest.xml
+# iOS Info.plist
+gsed -i "/<key>CFBundleDisplayName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
+gsed -i "/<key>CFBundleName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
+echo -e $Yellow"Switch application name: $applicationName - Success"$NoColor
+echo ""
+
+echo -e $Yellow"Switch application icon - Start"$NoColor
 rm -f ./asset/application_icon/application_icon.png
-cp vendor/application_icon/$folderName.png asset/application_icon/application_icon.png
-dart run flutter_launcher_icons:main
-echo -e ${Yellow}"Switch application icon - Success"${NoColor}
+cp vendor/$folderName/application_icon.png asset/application_icon/application_icon.png
+dart run flutter_launcher_icons
+echo -e $Yellow"Switch application icon - Success"$NoColor
 echo ""
 
-echo -e ${Yellow}"Switch application splash screen - Start"${NoColor}
+echo -e $Yellow"Switch application splash screen - Start"$NoColor
+# Color
+splashConfigIndex=$(grep -n "flutter_native_splash:" pubspec.yaml| sed '2!d' | cut -d: -f1)
+splashColorIndex=$((splashConfigIndex + 1))
+splashColorDarkIndex=$((splashConfigIndex + 2))
+gsed -i "${splashColorIndex}s/.*/  color: \"$splashColor\"/" pubspec.yaml
+gsed -i "${splashColorDarkIndex}s/.*/  color_dark: \"$splashColorDark\"/" pubspec.yaml
+# Background
+rm -f ./asset/application_splash/background_splash.png
+cp vendor/$folderName/background_splash.png asset/application_splash/background_splash.png
+rm -f ./asset/application_splash/background_splash_dark.png
+cp vendor/$folderName/background_splash_dark.png asset/application_splash/background_splash_dark.png
+# Image
 rm -f ./asset/application_splash/application_splash.png
-cp vendor/application_splash/$folderName.png asset/application_splash/application_splash.png
-gsed -i "/color:/c\  color: \"$splashColor\"" pubspec.yaml
+cp vendor/$folderName/application_splash.png asset/application_splash/application_splash.png
+rm -f ./asset/application_splash/application_splash_dark.png
+cp vendor/$folderName/application_splash_dark.png asset/application_splash/application_splash_dark.png
+# Android 12
+# Android 12 / Color
+splashAndroid12Index=$(grep -n "android_12" pubspec.yaml| sed '1!d' | cut -d: -f1)
+splashAndroid12ColorIndex=$(($splashAndroid12Index + 1))
+splashAndroid12ColorDarkIndex=$(($splashAndroid12Index + 2))
+gsed -i "${splashAndroid12ColorIndex}s/.*/    color: \"$splashAndroid12Color\"/" pubspec.yaml
+gsed -i "${splashAndroid12ColorDarkIndex}s/.*/    color_dark: \"$splashAndroid12ColorDark\"/" pubspec.yaml
+# Android 12 / Background
+gsed -i "/icon_background_color=/c\  icon_background_color: \"$splashAndroid12IconColor\"/" pubspec.yaml
+gsed -i "/icon_background_color_dark=/c\  icon_background_color_dark: \"$splashAndroid12IconColorDark\"/" pubspec.yaml
+# Android 12 / Image
+rm -f ./asset/application_splash/application_splash_android_12.png
+cp vendor/$folderName/application_splash_android_12.png asset/application_splash/application_splash_android_12.png
+rm -f ./asset/application_splash/application_splash_android_12_dark.png
+cp vendor/$folderName/application_splash_android_12_dark.png asset/application_splash/application_splash_android_12_dark.png
 dart run flutter_native_splash:create
-echo -e ${Yellow}"Switch application splash screen - Success"${NoColor}
+echo -e $Yellow"Switch application splash screen - Success"$NoColor
 echo ""
 
-echo -e ${Yellow}"Switch Firebase Analytics - Start"${NoColor}
+echo -e $Yellow"Switch Firebase Analytics - Start"$NoColor
 rm -f android/app/google-services.json
-cp vendor/firebase_analytics/android/google-services-$folderName.json android/app/google-services.json
+cp vendor/$folderName/google-services.json android/app/google-services.json
 rm -f ios/Runner/GoogleService-Info.plist
-cp vendor/firebase_analytics/ios/GoogleService-Info-$folderName.plist ios/Runner/GoogleService-Info.plist
-echo -e ${Yellow}"Switch Firebase Analytics - Success"${NoColor}
+cp vendor/$folderName/GoogleService-Info.plist ios/Runner/GoogleService-Info.plist
+echo -e $Yellow"Switch Firebase Analytics - Success"$NoColor
 echo ""
 
-# echo -e ${Yellow}"Switch Facebook Events - Start"${NoColor}
+# echo -e $Yellow"Switch Facebook Events - Start"$NoColor
 # # Android Values String
 # gsed -i "/facebook_app_id/c\    <string name=\"facebook_app_id\">$facebookApplicationId</string>" android/app/src/main/res/values/strings.xml
 # gsed -i "/facebook_client_token/c\    <string name=\"facebook_client_token\">$facebookClientToken</string>" android/app/src/main/res/values/strings.xml
@@ -106,16 +144,16 @@ echo ""
 # gsed -i "/<key>FacebookAppID<\/key>/{n;s/<string>.*<\/string>/<string>$facebookApplicationId<\/string>/}" ios/Runner/Info.plist
 # gsed -i "/<key>FacebookClientToken<\/key>/{n;s/<string>.*<\/string>/<string>$facebookClientToken<\/string>/}" ios/Runner/Info.plist
 # gsed -i "/<key>FacebookDisplayName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
-# echo -e ${Yellow}"Switch Facebook Events - Success"${NoColor}
+# echo -e $Yellow"Switch Facebook Events - Success"$NoColor
 # echo ""
 
-# echo -e ${Yellow}"Switch Freshchat - Start"${NoColor}
-# gsed -i "/freshchat_file_provider_authority/c\    <string name=\"freshchat_file_provider_authority\">$package.provider</string>" android/app/src/main/res/values/strings.xml
-# echo -e ${Yellow}"Switch Freshchat - Success"${NoColor}
+# echo -e $Yellow"Switch Freshchat - Start"$NoColor
+# gsed -i "/freshchat_file_provider_authority/c\    <string name=\"freshchat_file_provider_authority\">$androidPackage.provider</string>" android/app/src/main/res/values/strings.xml
+# echo -e $Yellow"Switch Freshchat - Success"$NoColor
 # echo ""
 
 flutter clean
 flutter pub get
 echo -e ""
 
-echo -e ${Green}"Switch vendor $title - Success"${NoColor}
+echo -e $Green"Switch vendor: $applicationName - Success"$NoColor

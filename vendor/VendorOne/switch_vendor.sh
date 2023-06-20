@@ -1,0 +1,12 @@
+folderName="VendorOne"
+applicationName="VendorOne"
+androidPackage="com.vendor.one"
+bundleID="com.vendor.one"
+splashColor="#000000"
+splashColorDark="#111111"
+splashAndroid12Color="#000000"
+splashAndroid12ColorDark="#111111"
+splashAndroid12IconColor="#111111"
+splashAndroid12IconColorDark="#000000"
+
+bash ./vendor/script/switch_vendor.sh "$folderName" "$applicationName" "$androidPackage" "$bundleID" "$splashColor" "$splashColorDark" "$splashAndroid12Color" "$splashAndroid12ColorDark" "$splashAndroid12IconColor" "$splashAndroid12IconColorDark"
