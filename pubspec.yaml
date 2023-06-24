@@ -4,13 +4,16 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc:
   flutter_native_splash:
   intl:
+  url_strategy:
 
 dev_dependencies:
   flutter_test:
@@ -27,20 +30,31 @@ flutter_localizations:
 
 # Don't change this for correct environment script work
 flutter_launcher_icons:
-  image_path: asset/application_icon/application_icon.png
+  image_path: asset/icon/icon.png
   ios: true
   remove_alpha_ios: true
   android: launcher_icon
-  min_sdk_android: 21
+  min_sdk_android: 16
+  web:
+    generate: true
+    image_path: asset/icon/icon.png
+  windows:
+    generate: true
+    image_path: asset/icon/icon.png
+    # min:48, max:256, default: 48
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: asset/icon/icon.png
 
 # Don't change this for correct environment script work
 flutter_native_splash:
   color: "#000000"
   color_dark: "#111111"
-  background_image: "asset/application_splash/background_splash.png"
-  background_image_dark: "asset/application_splash/background_splash_dark.png"
-  image: "asset/application_splash/application_splash.png"
-  image_dark: "asset/application_splash/application_splash_dark.png"
+  background_image: "asset/splash/splash_background.png"
+  background_image_dark: "asset/splash/splash_background_dark.png"
+  image: "asset/splash/splash_logo.png"
+  image_dark: "asset/splash/splash_logo_dark.png"
   ios: true
   android: true
   android_12:
@@ -48,5 +62,5 @@ flutter_native_splash:
     color_dark: "#111111"
     icon_background_color: "#000000"
     icon_background_color_dark: "#111111"
-    image: "asset/application_splash/application_splash_android_12.png"
-    image_dark: "asset/application_splash/application_splash_android_12_dark.png"
+    image: "asset/splash/splash_logo_android_12.png"
+    image_dark: "asset/splash/splash_logo_android_12_dark.png"
