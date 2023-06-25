@@ -8,59 +8,51 @@ environment:
   flutter: ">=3.10.0 <4.0.0"
 
 dependencies:
+  # Framework
   flutter:
     sdk: flutter
+
+  # Data
+  dio:
+  freezed_annotation:
+  json_annotation:
+
+  # Presentation
+  auto_route:
   flutter_bloc:
-  flutter_native_splash:
+  flutter_localizations:
+    sdk: flutter
+  flutter_platform_component:
   intl:
+
+  # Utility
+  flutter_launcher_icons:
+  flutter_native_splash:
   url_strategy:
 
 dev_dependencies:
+  # Test
   flutter_test:
     sdk: flutter
   test:
+
+  # Data
+  freezed:
+  json_serializable:
+
+  # Presentation
+  auto_route_generator:
+
+  # Utility
+  build_runner:
   flutter_lints:
-  flutter_launcher_icons:
 
 flutter:
+  generate: true
   uses-material-design: true
-  
-flutter_localizations:
-  sdk: flutter
-
-# Don't change this for correct environment script work
-flutter_launcher_icons:
-  image_path: asset/icon/icon.png
-  ios: true
-  remove_alpha_ios: true
-  android: launcher_icon
-  min_sdk_android: 16
-  web:
-    generate: true
-    image_path: asset/icon/icon.png
-  windows:
-    generate: true
-    image_path: asset/icon/icon.png
-    # min:48, max:256, default: 48
-    icon_size: 48
-  macos:
-    generate: true
-    image_path: asset/icon/icon.png
-
-# Don't change this for correct environment script work
-flutter_native_splash:
-  color: "#000000"
-  color_dark: "#111111"
-  background_image: "asset/splash/splash_background.png"
-  background_image_dark: "asset/splash/splash_background_dark.png"
-  image: "asset/splash/splash_logo.png"
-  image_dark: "asset/splash/splash_logo_dark.png"
-  ios: true
-  android: true
-  android_12:
-    color: "#000000"
-    color_dark: "#111111"
-    icon_background_color: "#000000"
-    icon_background_color_dark: "#111111"
-    image: "asset/splash/splash_logo_android_12.png"
-    image_dark: "asset/splash/splash_logo_android_12_dark.png"
+  fonts:
+    - family: IconData
+      fonts:
+        - asset: asset/font/IconData.ttf
+  assets:
+    - asset/vec/

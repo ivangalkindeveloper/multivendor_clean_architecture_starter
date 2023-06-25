@@ -93,11 +93,11 @@ echo ""
 
 echo -e $Yellow"Switch application splash screen - Start"$NoColor
 # Color
-splashConfigIndex=$(grep -n "flutter_native_splash:" pubspec.yaml| sed '2!d' | cut -d: -f1)
+splashConfigIndex=$(grep -n "flutter_native_splash:" flutter_native_splash.yaml| sed '1!d' | cut -d: -f1)
 splashColorIndex=$((splashConfigIndex + 1))
 splashColorDarkIndex=$((splashConfigIndex + 2))
-gsed -i "${splashColorIndex}s/.*/  color: \"$splashColor\"/" pubspec.yaml
-gsed -i "${splashColorDarkIndex}s/.*/  color_dark: \"$splashColorDark\"/" pubspec.yaml
+gsed -i "${splashColorIndex}s/.*/  color: \"$splashColor\"/" flutter_native_splash.yaml
+gsed -i "${splashColorDarkIndex}s/.*/  color_dark: \"$splashColorDark\"/" flutter_native_splash.yaml
 # Background
 rm -f ./asset/splash/splash_background.png
 cp vendor/$folderName/splash_background.png asset/splash/splash_background.png
@@ -110,14 +110,14 @@ rm -f ./asset/splash/splash_logo_dark.png
 cp vendor/$folderName/splash_logo_dark.png asset/splash/splash_logo_dark.png
 # Android 12
 # Android 12 / Color
-splashAndroid12Index=$(grep -n "android_12" pubspec.yaml| sed '1!d' | cut -d: -f1)
+splashAndroid12Index=$(grep -n "android_12" flutter_native_splash.yaml| sed '1!d' | cut -d: -f1)
 splashColorAndroid12Index=$(($splashAndroid12Index + 1))
 splashColorAndroid12DarkIndex=$(($splashAndroid12Index + 2))
-gsed -i "${splashColorAndroid12Index}s/.*/    color: \"$splashColorAndroid12\"/" pubspec.yaml
-gsed -i "${splashColorAndroid12DarkIndex}s/.*/    color_dark: \"$splashColorAndroid12Dark\"/" pubspec.yaml
+gsed -i "${splashColorAndroid12Index}s/.*/    color: \"$splashColorAndroid12\"/" flutter_native_splash.yaml
+gsed -i "${splashColorAndroid12DarkIndex}s/.*/    color_dark: \"$splashColorAndroid12Dark\"/" flutter_native_splash.yaml
 # Android 12 / Logo Background Color
-gsed -i "/icon_background_color=/c\  icon_background_color: \"$splashIconColorAndroid12\"/" pubspec.yaml
-gsed -i "/icon_background_color_dark=/c\  icon_background_color_dark: \"$splashIconColorAndroid12Dark\"/" pubspec.yaml
+gsed -i "/icon_background_color=/c\  icon_background_color: \"$splashIconColorAndroid12\"/" flutter_native_splash.yaml
+gsed -i "/icon_background_color_dark=/c\  icon_background_color_dark: \"$splashIconColorAndroid12Dark\"/" flutter_native_splash.yaml
 # Android 12 / Logo
 rm -f ./asset/splash/splash_logo_android_12.png
 cp vendor/$folderName/splash_logo_android_12.png asset/splash/splash_logo_android_12.png
@@ -135,6 +135,8 @@ cp vendor/$folderName/GoogleService-Info.plist ios/Runner/GoogleService-Info.pli
 echo -e $Yellow"Switch Firebase Analytics - Success"$NoColor
 echo ""
 
+# Example for Facebook Events
+
 # echo -e $Yellow"Switch Facebook Events - Start"$NoColor
 # # Android Values String
 # gsed -i "/facebook_app_id/c\    <string name=\"facebook_app_id\">$facebookApplicationId</string>" android/app/src/main/res/values/strings.xml
@@ -146,6 +148,8 @@ echo ""
 # gsed -i "/<key>FacebookDisplayName<\/key>/{n;s/<string>.*<\/string>/<string>$applicationName<\/string>/}" ios/Runner/Info.plist
 # echo -e $Yellow"Switch Facebook Events - Success"$NoColor
 # echo ""
+
+# Example for Freshchat
 
 # echo -e $Yellow"Switch Freshchat - Start"$NoColor
 # gsed -i "/freshchat_file_provider_authority/c\    <string name=\"freshchat_file_provider_authority\">$androidPackage.provider</string>" android/app/src/main/res/values/strings.xml

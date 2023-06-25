@@ -1,0 +1,17 @@
+# Don't change this for correct environment script work
+flutter_native_splash:
+  color: "#000000"
+  color_dark: "#111111"
+  background_image: "asset/splash/splash_background.png"
+  background_image_dark: "asset/splash/splash_background_dark.png"
+  image: "asset/splash/splash_logo.png"
+  image_dark: "asset/splash/splash_logo_dark.png"
+  ios: true
+  android: true
+  android_12:
+    color: "#000000"
+    color_dark: "#111111"
+    icon_background_color: "#000000"
+    icon_background_color_dark: "#111111"
+    image: "asset/splash/splash_logo_android_12.png"
+    image_dark: "asset/splash/splash_logo_android_12_dark.png"
