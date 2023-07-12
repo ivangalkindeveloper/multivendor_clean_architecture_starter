@@ -1,9 +1,11 @@
-import 'package:multi_vendor_starter/src/core/utility/init_application.dart';
-import 'package:multi_vendor_starter/src/core/data/implementation/enum.dart';
+import 'package:multi_vendor_starter/src/core/utility/initializer/initializer.dart';
+import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 
-Future<void> runApplication({
-  required Environment environment,
-}) =>
-    initApplication(
-      environment: environment,
-    );
+class Runner {
+  static Future<void> run({
+    required Environment environment,
+  }) =>
+      Initializer.main(
+        environment: environment,
+      ).initializeAndRunApp();
+}

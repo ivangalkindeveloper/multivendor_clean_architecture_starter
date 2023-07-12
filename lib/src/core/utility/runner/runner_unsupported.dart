@@ -1,9 +1,11 @@
-import 'package:multi_vendor_starter/src/core/data/implementation/enum.dart';
+import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 
-Future<void> runApplication({
-  required Environment environment,
-}) =>
-    _runApplication();
+class Runner {
+  static Future<void> run({
+    required Environment environment,
+  }) =>
+      _runApplication();
 
-Never _runApplication() =>
-    throw UnsupportedError("Running unsupported platform");
+  static Never _runApplication() =>
+      throw UnsupportedError("Running unsupported platform");
+}

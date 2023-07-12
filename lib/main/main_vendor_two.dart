@@ -1,7 +1,6 @@
-import 'package:multi_vendor_starter/src/core/data/implementation/enum.dart';
-import 'package:multi_vendor_starter/src/core/utility/runner/runner.dart'
-    as runner;
+import 'package:multi_vendor_starter/src/core/utility/runner/runner.dart';
+import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 
-Future<void> main() => runner.runApplication(
+Future<void> main() => Runner.run(
       environment: Environment.vendorTwo,
     );

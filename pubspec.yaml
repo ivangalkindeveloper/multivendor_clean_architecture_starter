@@ -26,6 +26,8 @@ dependencies:
   intl:
 
   # Utility
+  l:
+  stack_trace:
   flutter_launcher_icons:
   flutter_native_splash:
   url_strategy:

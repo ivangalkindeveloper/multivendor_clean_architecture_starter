@@ -461,6 +461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.7.0"
+  l:
+    dependency: "direct main"
+    description:
+      name: l
+      sha256: "7436cf7018e18233eea3d50b1800ff06fa8d7743f71cdc2663d61a723b445ae7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.2"
   lints:
     dependency: transitive
     description:
@@ -691,7 +699,7 @@ packages:
     source: hosted
     version: "1.9.1"
   stack_trace:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: stack_trace
       sha256: c3c7d8edb15bee7f0f74debd4b9c5f3c2ea86766fe4178eb2a18eb30a0bdaed5
