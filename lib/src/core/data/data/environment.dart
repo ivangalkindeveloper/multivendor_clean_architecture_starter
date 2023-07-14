@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 enum Environment {
   vendorOne,
   vendorTwo;
@@ -5,13 +7,13 @@ enum Environment {
   static Environment fromString(
     String value,
   ) {
-    switch (value) {
-      case "vendorOne":
-        return vendorOne;
-      case "vendorTwo":
-        return vendorTwo;
-      default:
-        throw ArgumentError("Unknown Environment: $value");
+    final Environment? result = Environment.values
+        .firstWhereOrNull((Environment element) => element.name == value);
+
+    if (result == null) {
+      throw ArgumentError("Unknown Environment: $value");
     }
+
+    return result;
   }
 }

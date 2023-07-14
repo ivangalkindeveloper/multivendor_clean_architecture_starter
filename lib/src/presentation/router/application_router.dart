@@ -12,7 +12,6 @@ class ApplicationRouter extends _$ApplicationRouter {
   ApplicationRouter();
 
   @override
-  @override
   RouteType get defaultRouteType {
     return FPCPlatformUtil.decompose<RouteType, RouteType, RouteType>(
       platform: FPCPlatform.values.fromTargetPlatform(defaultTargetPlatform),

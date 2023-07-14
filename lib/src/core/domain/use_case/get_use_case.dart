@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/core/data/data/repository/repository.dart';
+import 'package:multi_vendor_starter/src/core/data/repository/repository.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/domain_entity.dart';
 import 'package:multi_vendor_starter/src/core/domain/use_case/use_case.dart';
 import 'dart:async';

@@ -33,13 +33,20 @@ targets:
           copy_with: true
           equal: true
           map:
-            map: true
-            map_or_null: true
-            maybe_map: true
+            map: false
+            map_or_null: false
+            maybe_map: false
           when:
-            when: true
-            when_or_null: true
-            maybe_when: true
+            when: false
+            when_or_null: false
+            maybe_when: false
+      auto_route:
+        enabled: true
+        generate_for:
+          - lib/**.dart
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.gr.dart'
 
 builders:
   freezed:

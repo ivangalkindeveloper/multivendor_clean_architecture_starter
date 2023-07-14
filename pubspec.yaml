@@ -17,6 +17,14 @@ dependencies:
   freezed_annotation:
   json_annotation:
 
+  # Utility
+  collection:
+  l:
+  stack_trace:
+  flutter_launcher_icons:
+  flutter_native_splash:
+  url_strategy:
+
   # Presentation
   auto_route:
   flutter_bloc:
@@ -24,13 +32,6 @@ dependencies:
     sdk: flutter
   flutter_platform_component:
   intl:
-
-  # Utility
-  l:
-  stack_trace:
-  flutter_launcher_icons:
-  flutter_native_splash:
-  url_strategy:
 
 dev_dependencies:
   # Test

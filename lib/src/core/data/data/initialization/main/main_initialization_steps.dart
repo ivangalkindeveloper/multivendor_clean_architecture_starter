@@ -4,7 +4,7 @@ import 'package:multi_vendor_starter/src/core/data/data/initialization/initializ
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_one.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_two.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
-import 'package:multi_vendor_starter/src/core/data/data/repository/repository.dart';
+import 'package:multi_vendor_starter/src/core/data/repository/repository.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';

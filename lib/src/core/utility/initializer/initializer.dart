@@ -1,20 +1,19 @@
-import 'package:multi_vendor_starter/src/core/data/data/initialization/main_initialization_steps.dart';
+import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main_initialization_callback.dart';
+import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main_initialization_steps.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
 import 'package:multi_vendor_starter/src/presentation/application/application.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
-import 'package:multi_vendor_starter/src/core/utility/logger.dart';
 import 'package:flutter/widgets.dart';
 
 class Initializer {
   const Initializer({
     required this.environment,
     required this.steps,
-    this.onStart,
-    this.onStepSuccess,
-    this.onSuccess,
-    this.onError,
+    this.callback,
+    required this.onSuccessRun,
+    this.onErrorRun,
   });
 
   factory Initializer.main({
@@ -23,84 +22,28 @@ class Initializer {
       Initializer(
         environment: environment,
         steps: MainInitializationSteps.steps,
-        onStart: (
-          List<InitializationStep> steps,
-        ) =>
-            Logger.i(
-          'Initialization start.'
-          'Steps length [${steps.length}].',
+        callback: const MainItializationCallback(),
+        onSuccessRun: (InitializationResult result) => Application(
+          result: result,
         ),
-        onStepSuccess: (
-          List<InitializationStep> steps,
-          InitializationStep step,
-          Duration duration,
-        ) {
-          final int index = steps.indexOf(step);
-          Logger.i(
-            'Success initialization step: [$index/${steps.length}] ${step.title}.'
-            'Duration: ${duration.inMicroseconds}.',
-          );
-        },
-        onSuccess: (
-          InitializationResult result,
-          Duration duration,
-        ) {
-          Logger.i(
-            'Initialization success.'
-            'Duration: ${duration.inMicroseconds}.',
-          );
-
-          runApp(
-            Application(
-              result: result,
-            ),
-          );
-        },
-        onError: (
-          List<InitializationStep> steps,
-          InitializationStep step,
-          dynamic error,
-          StackTrace stackTrace,
-        ) {
-          final int index = steps.indexOf(step);
-          Logger.e(
-            'Initialization failed on the step: [$index/${steps.length}] ${step.title}.'
-            'Error: $error'
-            'StackTrace: $stackTrace',
-          );
-        },
       );
 
   final Environment environment;
   final List<InitializationStep> steps;
-
-  final void Function(
-    List<InitializationStep> steps,
-  )? onStart;
-
-  final void Function(
-    List<InitializationStep> steps,
-    InitializationStep step,
-    Duration duration,
-  )? onStepSuccess;
-
-  final void Function(
-    InitializationResult result,
-    Duration duration,
-  )? onSuccess;
-
-  final void Function(
+  final MainItializationCallback? callback;
+  final Widget Function(InitializationResult result) onSuccessRun;
+  final Widget Function(
     List<InitializationStep> steps,
     InitializationStep step,
     dynamic error,
     StackTrace stackTrace,
-  )? onError;
+  )? onErrorRun;
 
   Future<void> initializeAndRunApp() async {
     final Stopwatch stopwatch = Stopwatch()..start();
     final InitializationProgress progress = InitializationProgress();
     InitializationStep currentStep = steps.first;
-    this.onStart?.call(steps);
+    this.callback?.onStart(steps);
 
     try {
       for (InitializationStep step in this.steps) {
@@ -111,32 +54,44 @@ class Initializer {
           progress,
         );
         requestStopWatch.stop();
-        this.onStepSuccess?.call(
+        this.callback?.onStepSuccess(
               this.steps,
               step,
               requestStopWatch.elapsed,
             );
       }
     } catch (error, stackTrace) {
-      this.onError?.call(
+      this.callback?.onError(
             steps,
             currentStep,
             error,
             stackTrace,
           );
+      if (this.onErrorRun != null) {
+        runApp(this.onErrorRun!(
+          steps,
+          currentStep,
+          error,
+          stackTrace,
+        ));
+      }
       rethrow;
     }
 
     stopwatch.stop();
-    this.onSuccess?.call(
-          InitializationResult(
-            config: progress.config!,
-            apiClient: progress.apiClient!,
-            repository: progress.repository!,
-            locale: progress.locale!,
-            router: progress.router!,
-          ),
+    final InitializationResult result = InitializationResult(
+      config: progress.config!,
+      apiClient: progress.apiClient!,
+      repository: progress.repository!,
+      locale: progress.locale!,
+      router: progress.router!,
+    );
+    this.callback?.onSuccess(
+          result,
           stopwatch.elapsed,
         );
+    runApp(
+      this.onSuccessRun(result),
+    );
   }
 }

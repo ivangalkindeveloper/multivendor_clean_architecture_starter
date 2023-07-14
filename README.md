@@ -2,24 +2,33 @@
 Multi vendor starter repo for new project.
 
 
-
-## Switch vendor environment
-
+## Vendor
+### Benefits
+### Add new vendor environment
+### Switch vendor environment
 ```sh
 bash ./vendor/VendorOne/switch.sh
 bash ./vendor/VendorTwo/switch.sh
 ```
+### Customization
 
-## Project layers
+
+
+## Architecture
+### Architecture Examples
+
+
 
 ## Package dependecies
+### Recomended packages
+### Unrecomended packages
 
 
 ## CLI
 ### Build runner
 ```
 dart run build_runner build --delete-conflicting-outputs
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 ### Build
