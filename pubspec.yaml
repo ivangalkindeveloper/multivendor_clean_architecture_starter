@@ -19,6 +19,7 @@ dependencies:
 
   # Utility
   collection:
+  equatable:
   l:
   stack_trace:
   flutter_launcher_icons:

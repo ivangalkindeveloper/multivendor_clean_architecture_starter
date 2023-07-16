@@ -11,9 +11,9 @@ class ConfigVendorOne implements IConfig {
   final Environment environment = Environment.vendorOne;
 
   @override
-  final String baseUrl = "https://vendor-one.com";
+  final String baseUrl = "https://cat-fact.herokuapp.com";
   @override
-  final String apiController = "/api/v1";
+  final String apiController = "";
 
   @override
   final IFPCTheme themeLight = ThemeLightVendorOne();

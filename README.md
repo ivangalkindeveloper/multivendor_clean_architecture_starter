@@ -15,6 +15,7 @@ bash ./vendor/VendorTwo/switch.sh
 
 
 ## Architecture
+### Used patterns
 ### Architecture Examples
 
 

@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/presentation/feature/page/initial/page/initial_page.dart';
+import 'package:multi_vendor_starter/src/presentation/feature/page/cat_fact_page/page/cat_fact_page.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
@@ -23,8 +23,8 @@ class ApplicationRouter extends _$ApplicationRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          path: "/initial",
-          page: InitialPageRoute.page,
+          path: "/cat_fact",
+          page: CatFactPageRoute.page,
           initial: true,
         ),
       ];

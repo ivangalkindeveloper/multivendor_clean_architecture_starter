@@ -82,7 +82,7 @@ class Initializer {
     final InitializationResult result = InitializationResult(
       config: progress.config!,
       apiClient: progress.apiClient!,
-      repository: progress.repository!,
+      catFactRepository: progress.catFactRepository!,
       locale: progress.locale!,
       router: progress.router!,
     );

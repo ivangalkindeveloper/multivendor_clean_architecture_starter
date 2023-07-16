@@ -8,24 +8,28 @@ abstract class IApiClient {
   Future<Response> get({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
   Future<Response> post({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
   Future<Response> put({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
   Future<Response> delete({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 }
@@ -35,25 +39,29 @@ class ApiClient implements IApiClient {
     required this.config,
     BaseOptions? baseOptions,
   }) : this.dio = Dio(baseOptions) {
-    this.dio.interceptors.addAll(const [
-      RequestInterceptor(),
-    ]);
+    this.dio.interceptors.addAll(
+      const [
+        RequestInterceptor(),
+      ],
+    );
   }
 
   final IConfig config;
   final Dio dio;
 
-  String get _baseUrl => this.config.baseUrl;
+  String get _base => "${this.config.baseUrl}${this.config.apiController}";
 
   @override
   Future<Response> get({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
       this.dio.get(
-            "${this._baseUrl}$endpoint",
+            "${this._base}$endpoint",
             data: data,
+            queryParameters: queryParameters,
             options: Options(
               headers: headers,
             ),
@@ -63,11 +71,13 @@ class ApiClient implements IApiClient {
   Future<Response> post({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
       this.dio.post(
-            "${this._baseUrl}$endpoint",
+            "${this._base}$endpoint",
             data: data,
+            queryParameters: queryParameters,
             options: Options(
               headers: headers,
             ),
@@ -77,11 +87,13 @@ class ApiClient implements IApiClient {
   Future<Response> put({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
       this.dio.post(
-            "${this._baseUrl}$endpoint",
+            "${this._base}$endpoint",
             data: data,
+            queryParameters: queryParameters,
             options: Options(
               headers: headers,
             ),
@@ -91,11 +103,13 @@ class ApiClient implements IApiClient {
   Future<Response> delete({
     required String endpoint,
     Object? data,
+    Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
       this.dio.post(
-            "${this._baseUrl}$endpoint",
+            "${this._base}$endpoint",
             data: data,
+            queryParameters: queryParameters,
             options: Options(
               headers: headers,
             ),
