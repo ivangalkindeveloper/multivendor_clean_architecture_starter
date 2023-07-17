@@ -1,8 +1,8 @@
-import 'package:drift/drift.dart';
-import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fact_store.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/cat_fact_api.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/cat_fact.dart';
+import 'package:drift/drift.dart';
 import 'dart:async';
 
 abstract class ICatFactRepository {

@@ -2,15 +2,15 @@ import 'package:multi_vendor_starter/src/core/data/source/database/table/cat_fac
 import 'package:multi_vendor_starter/src/core/utility/opener/opener.dart';
 import 'package:drift/drift.dart';
 
-part '../../../../../generated/src/core/data/source/database/application_database.g.dart';
+part '../../../../../generated/src/core/data/source/database/database.g.dart';
 
 @DriftDatabase(
   tables: [
     CatFactDatabaseTable,
   ],
 )
-class ApplicationDatabase extends _$ApplicationDatabase {
-  ApplicationDatabase()
+class Database extends _$Database {
+  Database()
       : super(
           Opener.openDatabase(name: "multi_vendor_starter"),
         );

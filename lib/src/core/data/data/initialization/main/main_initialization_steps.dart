@@ -2,11 +2,11 @@ import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fac
 import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_one.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_two.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/cat_fact_api.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
@@ -71,7 +71,7 @@ class MainInitializationSteps {
         Environment environment,
         InitializationProgress progress,
       ) =>
-          progress.applicationDatabase = ApplicationDatabase(),
+          progress.database = Database(),
     ),
     InitializationStep(
       title: "CatFactRepository",
@@ -84,7 +84,7 @@ class MainInitializationSteps {
           apiClient: progress.apiClient!,
         ),
         catFactStore: CatFactStore(
-          applicationDatabase: progress.applicationDatabase!,
+          database: progress.database!,
         ),
       ),
     ),

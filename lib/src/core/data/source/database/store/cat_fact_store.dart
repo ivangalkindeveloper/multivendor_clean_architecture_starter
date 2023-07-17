@@ -1,38 +1,30 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 
 class CatFactStore {
   const CatFactStore({
-    required this.applicationDatabase,
+    required this.database,
   });
 
-  final ApplicationDatabase applicationDatabase;
+  final Database database;
 
-  Future<List<CatFactDatabase>> getCatFacts() => applicationDatabase
-      .select(applicationDatabase.catFactDatabaseTable)
-      .get();
+  Future<List<CatFactDatabase>> getCatFacts() =>
+      database.select(database.catFactDatabaseTable).get();
 
-  Stream<List<CatFactDatabase>> watchCatFacts() => applicationDatabase
-      .select(applicationDatabase.catFactDatabaseTable)
-      .watch();
+  Stream<List<CatFactDatabase>> watchCatFacts() =>
+      database.select(database.catFactDatabaseTable).watch();
 
   Future<void> insertCatFact({
     required CatFactDatabaseTableCompanion companion,
   }) =>
-      applicationDatabase
-          .into(applicationDatabase.catFactDatabaseTable)
-          .insert(companion);
+      database.into(database.catFactDatabaseTable).insert(companion);
 
   Future<void> updateCatFact({
     required CatFactDatabaseTableCompanion companion,
   }) =>
-      applicationDatabase
-          .update(applicationDatabase.catFactDatabaseTable)
-          .replace(companion);
+      database.update(database.catFactDatabaseTable).replace(companion);
 
   Future<void> deleteCatFact({
     required CatFactDatabaseTableCompanion companion,
   }) =>
-      applicationDatabase
-          .delete(applicationDatabase.catFactDatabaseTable)
-          .delete(companion);
+      database.delete(database.catFactDatabaseTable).delete(companion);
 }

@@ -1,7 +1,7 @@
-import 'package:multi_vendor_starter/src/core/domain/use_case/get_random_cat_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/domain/use_case/get_last_cat_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/domain/use_case/update_cat_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/domain/use_case/save_cat_fact_use_case.dart';
+import 'package:multi_vendor_starter/src/core/domain/use_case/cat_fact/get_random_cat_fact_use_case.dart';
+import 'package:multi_vendor_starter/src/core/domain/use_case/cat_fact/get_last_cat_fact_use_case.dart';
+import 'package:multi_vendor_starter/src/core/domain/use_case/cat_fact/update_cat_fact_use_case.dart';
+import 'package:multi_vendor_starter/src/core/domain/use_case/cat_fact/save_cat_fact_use_case.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/cat_fact.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

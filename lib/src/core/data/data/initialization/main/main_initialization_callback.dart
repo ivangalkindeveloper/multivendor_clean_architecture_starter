@@ -11,7 +11,7 @@ class MainItializationCallback extends IInitializationCallback {
     List<InitializationStep> steps,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln('Initialization start')
       ..writeln('Steps length [${steps.length}].');
     Logger.i(stringBuffer.toString());
@@ -23,9 +23,9 @@ class MainItializationCallback extends IInitializationCallback {
     InitializationStep step,
     Duration duration,
   ) {
-    final int index = steps.indexOf(step);
+    final int index = steps.indexOf(step) + 1;
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln(
           'Start initialization step: [$index/${steps.length}] ${step.title}.')
       ..writeln('Duration: ${duration.inMicroseconds}.');
@@ -38,9 +38,9 @@ class MainItializationCallback extends IInitializationCallback {
     InitializationStep step,
     Duration duration,
   ) {
-    final int index = steps.indexOf(step);
+    final int index = steps.indexOf(step) + 1;
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln(
           'Success initialization step: [$index/${steps.length}] ${step.title}.')
       ..writeln('Duration: ${duration.inMicroseconds}.');
@@ -53,7 +53,7 @@ class MainItializationCallback extends IInitializationCallback {
     Duration duration,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln('Initialization success.')
       ..writeln('Duration: ${duration.inMicroseconds}.');
     Logger.i(stringBuffer.toString());
@@ -68,7 +68,7 @@ class MainItializationCallback extends IInitializationCallback {
   ) {
     final int index = steps.indexOf(step);
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln(
           'Initialization failed on the step: [$index/${steps.length}] ${step.title}.')
       ..writeln('Error: $error')

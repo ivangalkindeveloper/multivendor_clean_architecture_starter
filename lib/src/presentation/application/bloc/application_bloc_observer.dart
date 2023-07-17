@@ -11,7 +11,7 @@ class ApplicationBlocObserver extends BlocObserver {
     Transition<Object?, Object?> transition,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln('Bloc: ${bloc.runtimeType} | ${transition.event.runtimeType}')
       ..writeln(
           'Transition: ${transition.currentState.runtimeType} -> ${transition.nextState.runtimeType}')
@@ -27,7 +27,7 @@ class ApplicationBlocObserver extends BlocObserver {
     Object? event,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
-      ..writeln('')
+      ..writeln('\n')
       ..writeln('Bloc: ${bloc.runtimeType} | ${event.runtimeType}')
       ..writeln('Event: ${event.toString().limit(100)}');
     Logger.i(stringBuffer.toString());
