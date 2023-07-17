@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fact_store.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/cat_fact_api.dart';
@@ -63,11 +64,16 @@ class CatFactRepository implements ICatFactRepository {
   @override
   Future<void> updateCatFact({
     required CatFact catFact,
-  }) =>
-      this._catFactStore.updateCatFact(
-            companion: CatFactDatabaseTableCompanion.insert(
-              factId: catFact.id,
-              description: catFact.description,
-            ),
-          );
+  }) async {
+    final List<CatFactDatabase> catFactsDatabase =
+        await this._catFactStore.getCatFacts();
+
+    this._catFactStore.updateCatFact(
+          companion: CatFactDatabaseTableCompanion.insert(
+            id: Value(catFactsDatabase.first.id),
+            factId: catFact.id,
+            description: catFact.description,
+          ),
+        );
+  }
 }

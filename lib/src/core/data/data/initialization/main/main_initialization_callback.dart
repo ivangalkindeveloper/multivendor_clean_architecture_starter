@@ -9,11 +9,13 @@ class MainItializationCallback extends IInitializationCallback {
   @override
   void onStart(
     List<InitializationStep> steps,
-  ) =>
-      Logger.i(
-        'Initialization start.'
-        'Steps length [${steps.length}].',
-      );
+  ) {
+    final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
+      ..writeln('Initialization start')
+      ..writeln('Steps length [${steps.length}].');
+    Logger.i(stringBuffer.toString());
+  }
 
   @override
   void onStepStart(
@@ -22,10 +24,12 @@ class MainItializationCallback extends IInitializationCallback {
     Duration duration,
   ) {
     final int index = steps.indexOf(step);
-    Logger.i(
-      'Start initialization step: [$index/${steps.length}] ${step.title}.'
-      'Duration: ${duration.inMicroseconds}.',
-    );
+    final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
+      ..writeln(
+          'Start initialization step: [$index/${steps.length}] ${step.title}.')
+      ..writeln('Duration: ${duration.inMicroseconds}.');
+    Logger.i(stringBuffer.toString());
   }
 
   @override
@@ -35,10 +39,12 @@ class MainItializationCallback extends IInitializationCallback {
     Duration duration,
   ) {
     final int index = steps.indexOf(step);
-    Logger.i(
-      'Success initialization step: [$index/${steps.length}] ${step.title}.'
-      'Duration: ${duration.inMicroseconds}.',
-    );
+    final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
+      ..writeln(
+          'Success initialization step: [$index/${steps.length}] ${step.title}.')
+      ..writeln('Duration: ${duration.inMicroseconds}.');
+    Logger.i(stringBuffer.toString());
   }
 
   @override
@@ -46,10 +52,11 @@ class MainItializationCallback extends IInitializationCallback {
     InitializationResult result,
     Duration duration,
   ) {
-    Logger.i(
-      'Initialization success.'
-      'Duration: ${duration.inMicroseconds}.',
-    );
+    final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
+      ..writeln('Initialization success.')
+      ..writeln('Duration: ${duration.inMicroseconds}.');
+    Logger.i(stringBuffer.toString());
   }
 
   @override
@@ -60,10 +67,12 @@ class MainItializationCallback extends IInitializationCallback {
     StackTrace stackTrace,
   ) {
     final int index = steps.indexOf(step);
-    Logger.e(
-      'Initialization failed on the step: [$index/${steps.length}] ${step.title}.'
-      'Error: $error'
-      'StackTrace: $stackTrace',
-    );
+    final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
+      ..writeln(
+          'Initialization failed on the step: [$index/${steps.length}] ${step.title}.')
+      ..writeln('Error: $error')
+      ..writeln('StackTrace: $stackTrace');
+    Logger.i(stringBuffer.toString());
   }
 }

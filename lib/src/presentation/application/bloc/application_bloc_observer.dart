@@ -11,11 +11,13 @@ class ApplicationBlocObserver extends BlocObserver {
     Transition<Object?, Object?> transition,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
       ..writeln('Bloc: ${bloc.runtimeType} | ${transition.event.runtimeType}')
-      ..write('Transition: ${transition.currentState.runtimeType}')
-      ..writeln(' -> ${transition.nextState.runtimeType}')
+      ..writeln(
+          'Transition: ${transition.currentState.runtimeType} -> ${transition.nextState.runtimeType}')
       ..writeln('New State: ${transition.nextState.toString().limit(100)}');
     Logger.i(stringBuffer.toString());
+
     super.onTransition(bloc, transition);
   }
 
@@ -25,9 +27,11 @@ class ApplicationBlocObserver extends BlocObserver {
     Object? event,
   ) {
     final StringBuffer stringBuffer = StringBuffer()
+      ..writeln('')
       ..writeln('Bloc: ${bloc.runtimeType} | ${event.runtimeType}')
       ..writeln('Event: ${event.toString().limit(100)}');
     Logger.i(stringBuffer.toString());
+
     super.onEvent(bloc, event);
   }
 
@@ -38,6 +42,7 @@ class ApplicationBlocObserver extends BlocObserver {
     StackTrace stackTrace,
   ) {
     Logger.e('Bloc: ${bloc.runtimeType} | $error', stackTrace);
+
     super.onError(bloc, error, stackTrace);
   }
 }
