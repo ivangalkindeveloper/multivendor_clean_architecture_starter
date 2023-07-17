@@ -1,11 +1,12 @@
 import 'package:multi_vendor_starter/src/core/domain/use_case/get_random_cat_fact_use_case.dart';
 import 'package:multi_vendor_starter/src/core/domain/use_case/get_last_cat_fact_use_case.dart';
+import 'package:multi_vendor_starter/src/core/domain/use_case/update_cat_fact_use_case.dart';
 import 'package:multi_vendor_starter/src/core/domain/use_case/save_cat_fact_use_case.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/cat_fact.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc/bloc.dart';
 
 part 'cat_fact_event.dart';
 part 'cat_fact_state.dart';
@@ -32,6 +33,9 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
     catFactRepository: this.catFactRepository,
   );
   late final SaveCatFactUseCase saveCatFactUseCase = SaveCatFactUseCase(
+    catFactRepository: this.catFactRepository,
+  );
+  late final UpdateCatFactUseCase updateCatFactUseCase = UpdateCatFactUseCase(
     catFactRepository: this.catFactRepository,
   );
 
@@ -81,9 +85,17 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
     try {
       final CatFact randomCatFact =
           await this.getRandomCatFactUseCase.execute();
-      await this.saveCatFactUseCase.execute(
-            catFact: randomCatFact,
-          );
+
+      if (state.lastCatFact == null) {
+        await this.saveCatFactUseCase.execute(
+              catFact: randomCatFact,
+            );
+      } else {
+        await this.updateCatFactUseCase.execute(
+              catFact: randomCatFact,
+            );
+      }
+
       emit(
         state.copyWith(
           newCatFact: randomCatFact,

@@ -12,9 +12,10 @@ class Opener {
       LazyDatabase(() async {
         // Put the database file, called db.sqlite here, into the documents folder
         // for your app.
-        final Directory dbDirectory =
+        final Directory databaseDirectory =
             await path_provider.getApplicationDocumentsDirectory();
-        final File file = File(path.join(dbDirectory.path, '$name.sqlite'));
+        final File file =
+            File(path.join(databaseDirectory.path, '$name.sqlite'));
         return NativeDatabase.createInBackground(file);
       });
 }

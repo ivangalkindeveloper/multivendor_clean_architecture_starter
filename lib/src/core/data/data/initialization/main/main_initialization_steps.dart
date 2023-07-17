@@ -1,3 +1,4 @@
+import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fact_store.dart';
 import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
@@ -73,7 +74,7 @@ class MainInitializationSteps {
           progress.applicationDatabase = ApplicationDatabase(),
     ),
     InitializationStep(
-      title: "Repository",
+      title: "CatFactRepository",
       initialize: (
         Environment environment,
         InitializationProgress progress,
@@ -82,7 +83,9 @@ class MainInitializationSteps {
         catFactApi: CatFactApi(
           apiClient: progress.apiClient!,
         ),
-        applicationDatabase: progress.applicationDatabase!,
+        catFactStore: CatFactStore(
+          applicationDatabase: progress.applicationDatabase!,
+        ),
       ),
     ),
   ];

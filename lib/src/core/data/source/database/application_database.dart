@@ -11,31 +11,12 @@ part '../../../../../generated/src/core/data/source/database/application_databas
 )
 class ApplicationDatabase extends _$ApplicationDatabase {
   ApplicationDatabase()
-      : super(Opener.openDatabase(name: "multi_vendor_starter"));
+      : super(
+          Opener.openDatabase(name: "multi_vendor_starter"),
+        );
 
   // You should bump this number whenever you change or add a table definition.
   // Migrations are covered later in the documentation.
   @override
   int get schemaVersion => 1;
-
-  Future<List<CatFactDatabase>> getCatFacts() =>
-      select(catFactDatabaseTable).get();
-
-  Stream<List<CatFactDatabase>> watchCatFacts() =>
-      select(catFactDatabaseTable).watch();
-
-  Future<void> insertCatFact({
-    required CatFactDatabaseTableCompanion companion,
-  }) =>
-      into(catFactDatabaseTable).insert(companion);
-
-  Future<void> updateCatFact({
-    required CatFactDatabaseTableCompanion companion,
-  }) =>
-      update(catFactDatabaseTable).replace(companion);
-
-  Future<void> deleteCatFact({
-    required CatFactDatabaseTableCompanion companion,
-  }) =>
-      delete(catFactDatabaseTable).delete(companion);
 }
