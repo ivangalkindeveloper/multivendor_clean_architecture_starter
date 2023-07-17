@@ -11,6 +11,15 @@ class MVSText {
         text: text,
       );
 
+  static Widget regular16Danger({
+    required BuildContext context,
+    required String text,
+  }) =>
+      FPCText.regular16Danger(
+        context: context,
+        text: text,
+      );
+
   static Widget medium16Black({
     required BuildContext context,
     required String text,

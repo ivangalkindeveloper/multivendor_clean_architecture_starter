@@ -18,8 +18,7 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
           lastCatFactStatus: CatFactStatus.initial,
           newCatFactStatus: CatFactStatus.initial,
         )) {
-    on<_InitialEvent>(this._onInitial);
-    on<_ReloadEvent>(this._onReload);
+    on<_GetCatFactsEvent>(this._getCatFacts);
   }
 
   final ICatFactRepository catFactRepository;
@@ -36,12 +35,26 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
     catFactRepository: this.catFactRepository,
   );
 
-  void _onInitial(event, emit) async {
+  void _getCatFacts(
+    _GetCatFactsEvent event,
+    Emitter emit,
+  ) async {
     emit(state.copyWith(
       lastCatFactStatus: CatFactStatus.loading,
       newCatFactStatus: CatFactStatus.loading,
     ));
 
+    await this._getLastFact(
+      emit: emit,
+    );
+    await this._getAndSaveNewCatFact(
+      emit: emit,
+    );
+  }
+
+  Future<void> _getLastFact({
+    required Emitter emit,
+  }) async {
     try {
       final CatFact? lastCatFact = await this.getLastCatFactUseCase.execute();
       emit(
@@ -50,10 +63,27 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
           lastCatFactStatus: CatFactStatus.success,
         ),
       );
+    } catch (error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      emit(
+        state.copyWith(
+          lastCatFactError: error.toString(),
+          lastCatFactStatus: CatFactStatus.error,
+        ),
+      );
+    }
+  }
 
+  Future<void> _getAndSaveNewCatFact({
+    required Emitter emit,
+  }) async {
+    try {
       final CatFact randomCatFact =
           await this.getRandomCatFactUseCase.execute();
-      await this.saveCatFactUseCase.execute(catFact: randomCatFact);
+      await this.saveCatFactUseCase.execute(
+            catFact: randomCatFact,
+          );
       emit(
         state.copyWith(
           newCatFact: randomCatFact,
@@ -61,10 +91,14 @@ class CatFactBloc extends Bloc<CatFactEvent, CatFactState> {
         ),
       );
     } catch (error, stackTrace) {
-      print(error.toString());
-      print(stackTrace.toString());
+      print(error);
+      print(stackTrace);
+      emit(
+        state.copyWith(
+          newCatFactError: error.toString(),
+          newCatFactStatus: CatFactStatus.error,
+        ),
+      );
     }
   }
-
-  void _onReload(event, emit) {}
 }

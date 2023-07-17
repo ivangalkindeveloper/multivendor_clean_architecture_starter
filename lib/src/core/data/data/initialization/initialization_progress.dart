@@ -1,3 +1,4 @@
+import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
@@ -12,6 +13,7 @@ class InitializationProgress with _$InitializationProgress {
   factory InitializationProgress({
     IConfig? config,
     IApiClient? apiClient,
+    ApplicationDatabase? applicationDatabase,
     ICatFactRepository? catFactRepository,
     Locale? locale,
     ApplicationRouter? router,

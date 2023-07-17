@@ -1,7 +1,7 @@
 import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/data/source/data_base/cat_fact_store.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/application_database.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_one.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_two.dart';
@@ -65,6 +65,14 @@ class MainInitializationSteps {
       ),
     ),
     InitializationStep(
+      title: "Database",
+      initialize: (
+        Environment environment,
+        InitializationProgress progress,
+      ) =>
+          progress.applicationDatabase = ApplicationDatabase(),
+    ),
+    InitializationStep(
       title: "Repository",
       initialize: (
         Environment environment,
@@ -74,7 +82,7 @@ class MainInitializationSteps {
         catFactApi: CatFactApi(
           apiClient: progress.apiClient!,
         ),
-        catFactStore: CatFactStore(),
+        applicationDatabase: progress.applicationDatabase!,
       ),
     ),
   ];

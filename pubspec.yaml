@@ -14,6 +14,8 @@ dependencies:
 
   # Data
   dio:
+  drift:
+  sqlite3_flutter_libs:
   freezed_annotation:
   json_annotation:
 
@@ -21,6 +23,8 @@ dependencies:
   collection:
   equatable:
   l:
+  path:
+  path_provider:
   stack_trace:
   flutter_launcher_icons:
   flutter_native_splash:
@@ -41,6 +45,7 @@ dev_dependencies:
   test:
 
   # Data
+  drift_dev:
   freezed:
   json_serializable:
 

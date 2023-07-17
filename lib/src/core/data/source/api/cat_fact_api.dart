@@ -9,9 +9,18 @@ class CatFactApi {
 
   final IApiClient _apiClient;
 
-  Future<CatFact> getRandomCatFacts({
-    required int amount,
-  }) async {
+  Future<CatFact> getRandomCatFact() async {
+    final Response response = await this._apiClient.get(
+      endpoint: "/facts/random",
+      queryParameters: {
+        "animal_type": "cat",
+        "amount": 1,
+      },
+    );
+    return CatFact.fromJson(response.data);
+  }
+
+  Future<List<CatFact>> getRandomCatFacts({required int amount}) async {
     final Response response = await this._apiClient.get(
       endpoint: "/facts/random",
       queryParameters: {
@@ -19,6 +28,7 @@ class CatFactApi {
         "amount": amount,
       },
     );
-    return CatFact.fromJson(response.data);
+    return List.from(
+        (response.data as List).map((json) => CatFact.fromJson(json)));
   }
 }

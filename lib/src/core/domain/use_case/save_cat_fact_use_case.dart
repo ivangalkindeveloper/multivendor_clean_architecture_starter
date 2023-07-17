@@ -19,7 +19,7 @@ class SaveCatFactUseCase implements ISaveCatFactUseCase {
   Future<void> execute({
     required CatFact catFact,
   }) =>
-      this.catFactRepository.setCatFact(
+      this.catFactRepository.insertCatFact(
             catFact: catFact,
           );
 }
