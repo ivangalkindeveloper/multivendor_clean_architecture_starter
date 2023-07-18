@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vendor.one">
+    package="com.fact.cat">
    <application
-        android:label="VendorOne"
+        android:label="Cat Fact"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name="com.vendor.one.MainActivity"
+            android:name="com.fact.cat.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

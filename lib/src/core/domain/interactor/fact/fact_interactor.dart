@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
+import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
 
 abstract class IFactInteractor {
@@ -34,7 +34,7 @@ class FactInteractor implements IFactInteractor {
   Future<void> save({
     required Fact fact,
   }) =>
-      this.catFactRepository.insertNewFact(
+      this.catFactRepository.insertFact(
             fact: fact,
           );
 
@@ -42,7 +42,7 @@ class FactInteractor implements IFactInteractor {
   Future<void> update({
     required Fact fact,
   }) =>
-      this.catFactRepository.updateFact(
+      this.catFactRepository.updateLastFact(
             fact: fact,
           );
 }

@@ -12,11 +12,11 @@ abstract class IFactRepository {
 
   Future<Fact?> getLastFact();
 
-  Future<void> insertNewFact({
+  Future<void> insertFact({
     required Fact fact,
   });
 
-  Future<void> updateFact({
+  Future<void> updateLastFact({
     required Fact fact,
   });
 }
@@ -50,7 +50,7 @@ class FactRepository implements IFactRepository {
   }
 
   @override
-  Future<void> insertNewFact({
+  Future<void> insertFact({
     required Fact fact,
   }) =>
       this._factStore.insert(
@@ -61,14 +61,14 @@ class FactRepository implements IFactRepository {
           );
 
   @override
-  Future<void> updateFact({
+  Future<void> updateLastFact({
     required Fact fact,
   }) async {
-    final List<FactDatabase> catFactsDatabase = await this._factStore.get();
+    final List<FactDatabase> factsDatabase = await this._factStore.get();
 
     this._factStore.update(
           companion: FactDatabaseTableCompanion.insert(
-            id: Value(catFactsDatabase.last.id),
+            id: Value(factsDatabase.last.id),
             factId: fact.id,
             description: fact.description,
           ),

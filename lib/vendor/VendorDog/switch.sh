@@ -1,0 +1,12 @@
+folderName="VendorTwo"
+applicationName="Dog Fact"
+androidPackage="com.fact.dog"
+bundleID="com.fact.dog"
+splashColor="#000000"
+splashColorDark="#111111"
+splashColorAndroid12="#000000"
+splashColorAndroid12Dark="#111111"
+splashIconColorAndroid12="#111111"
+splashIconColorAndroid12Dark="#000000"
+
+bash ./lib/vendor/core/switch_vendor.sh "$folderName" "$applicationName" "$androidPackage" "$bundleID" "$splashColor" "$splashColorDark" "$splashColorAndroid12" "$splashColorAndroid12Dark" "$splashIconColorAndroid12" "$splashIconColorAndroid12Dark"

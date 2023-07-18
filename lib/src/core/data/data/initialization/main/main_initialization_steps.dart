@@ -1,11 +1,11 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/store/fact_store.dart';
 import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/store/fact_store.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_cat.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_dog.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
+import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';

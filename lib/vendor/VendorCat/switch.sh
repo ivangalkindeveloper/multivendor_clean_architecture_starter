@@ -1,0 +1,12 @@
+folderName="VendorCat"
+applicationName="Cat Fact"
+androidPackage="com.fact.cat"
+bundleID="com.fact.cat"
+splashColor="#000000"
+splashColorDark="#111111"
+splashColorAndroid12="#000000"
+splashColorAndroid12Dark="#111111"
+splashIconColorAndroid12="#111111"
+splashIconColorAndroid12Dark="#000000"
+
+bash ./lib/vendor/core/switch_vendor.sh "$folderName" "$applicationName" "$androidPackage" "$bundleID" "$splashColor" "$splashColorDark" "$splashColorAndroid12" "$splashColorAndroid12Dark" "$splashIconColorAndroid12" "$splashIconColorAndroid12Dark"

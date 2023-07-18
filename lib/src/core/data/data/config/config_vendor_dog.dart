@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/presentation/component/theme/light/theme_light_vendor_two.dart';
-import 'package:multi_vendor_starter/src/presentation/component/theme/dark/theme_dark_vendor_two.dart';
+import 'package:multi_vendor_starter/src/presentation/component/theme/light/theme_light_vendor_dog.dart';
+import 'package:multi_vendor_starter/src/presentation/component/theme/dark/theme_dark_vendor_dog.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
@@ -17,7 +17,7 @@ class ConfigVendorDog implements IConfig {
   final String animalType = "dog";
 
   @override
-  final IFPCTheme themeLight = ThemeLightVendorTwo();
+  final IFPCTheme themeLight = ThemeLightVendorDog();
   @override
-  final IFPCTheme themeDark = ThemeDarkVendorTwo();
+  final IFPCTheme themeDark = ThemeDarkVendorDog();
 }

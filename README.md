@@ -7,8 +7,8 @@ Multi vendor starter repo for new project.
 ### Add new vendor environment
 ### Switch vendor environment
 ```sh
-bash ./vendor/VendorOne/switch.sh
-bash ./vendor/VendorTwo/switch.sh
+bash ./lib/vendor/VendorCat/switch.sh
+bash ./lib/vendor/VendorDog/switch.sh
 ```
 ### Customization
 

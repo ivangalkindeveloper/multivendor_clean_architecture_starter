@@ -1,4 +1,4 @@
-package com.vendor.one
+package com.fact.cat
 
 import io.flutter.embedding.android.FlutterActivity
 

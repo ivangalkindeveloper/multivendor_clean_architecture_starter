@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
+import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
 import 'dart:async';
 
@@ -19,7 +19,7 @@ class UpdateFactUseCase implements IUpdateFactUseCase {
   Future<void> execute({
     required Fact fact,
   }) =>
-      this.factRepository.updateFact(
+      this.factRepository.updateLastFact(
             fact: fact,
           );
 }

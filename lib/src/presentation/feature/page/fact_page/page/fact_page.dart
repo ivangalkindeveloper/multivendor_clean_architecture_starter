@@ -1,5 +1,6 @@
 import 'package:multi_vendor_starter/src/presentation/component/indicator/mvs_primary_circular_indicator.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multi_vendor_starter/src/presentation/component/animation/mvs_animated_size.dart';
 import 'package:multi_vendor_starter/src/presentation/feature/page/fact_page/bloc/fact_bloc.dart';
 import 'package:multi_vendor_starter/src/presentation/component/app_bar/mvs_screen_app_bar.dart';
 import 'package:multi_vendor_starter/src/presentation/component/button/mvs_primary_button.dart';
@@ -40,140 +41,140 @@ class _FactPage extends StatelessWidget {
     return MVSScaffold(
       appBar: MVSScreenAppBar(
         context: context,
-        title: "Cat Fact",
+        title: "Animal Fact",
       ),
       body: MVSListView(
         children: [
           MVSText.medium16Black(
             context: context,
-            text: "Config: ${config.environment.name}",
-          ),
-          MVSText.medium16Black(
-            context: context,
-            text: "URL: ${config.baseUrl}",
+            text: "Animal: ${config.animalType}",
           ),
           SizedBox(height: size.s16),
-          BlocBuilder<FactBloc, FactState>(
-            builder: (
-              BuildContext context,
-              FactState state,
-            ) {
-              switch (state.lastFactStatus) {
-                case FactStatus.initial:
-                  return const SizedBox();
+          MVSAnimatedSize(
+            child: BlocBuilder<FactBloc, FactState>(
+              builder: (
+                BuildContext context,
+                FactState state,
+              ) {
+                switch (state.lastFactStatus) {
+                  case FactStatus.initial:
+                    return const SizedBox();
 
-                case FactStatus.loading:
-                  return const MVSPrimaryCircularIndicator();
+                  case FactStatus.loading:
+                    return const MVSPrimaryCircularIndicator();
 
-                case FactStatus.success:
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MVSText.medium16Black(
-                        context: context,
-                        text: "Last fact about ${config.animalType}s:",
-                      ),
-                      SizedBox(height: size.s16 / 4),
-                      if (state.lastFact != null)
-                        MVSText.regular16Black(
+                  case FactStatus.success:
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MVSText.medium16Black(
                           context: context,
-                          text: state.lastFact!.description,
-                        )
-                      else
-                        MVSText.regular16Black(
-                          context: context,
-                          text: "No last fact :(",
+                          text: "Last fact about ${config.animalType}s:",
                         ),
-                    ],
-                  );
+                        SizedBox(height: size.s16 / 4),
+                        if (state.lastFact != null)
+                          MVSText.regular16Black(
+                            context: context,
+                            text: state.lastFact!.description,
+                          )
+                        else
+                          MVSText.regular16Black(
+                            context: context,
+                            text: "No last fact :(",
+                          ),
+                      ],
+                    );
 
-                case FactStatus.error:
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MVSText.medium16Black(
-                        context: context,
-                        text: "Last fact error:",
-                      ),
-                      SizedBox(height: size.s16 / 4),
-                      if (state.lastFactError != null)
-                        MVSText.regular16Danger(
+                  case FactStatus.error:
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MVSText.medium16Black(
                           context: context,
-                          text: state.lastFactError!,
+                          text: "Last fact error:",
                         ),
-                      if (state.lastFact != null)
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MVSText.medium16Black(
-                              context: context,
-                              text: "Last fact about ${config.animalType}s:",
-                            ),
-                            SizedBox(height: size.s16 / 4),
-                            MVSText.regular16Black(
-                              context: context,
-                              text: state.lastFact!.description,
-                            ),
-                          ],
-                        ),
-                    ],
-                  );
-              }
-            },
+                        SizedBox(height: size.s16 / 4),
+                        if (state.lastFactError != null)
+                          MVSText.regular16Danger(
+                            context: context,
+                            text: state.lastFactError!,
+                          ),
+                        if (state.lastFact != null)
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MVSText.medium16Black(
+                                context: context,
+                                text: "Last fact about ${config.animalType}s:",
+                              ),
+                              SizedBox(height: size.s16 / 4),
+                              MVSText.regular16Black(
+                                context: context,
+                                text: state.lastFact!.description,
+                              ),
+                            ],
+                          ),
+                      ],
+                    );
+                }
+              },
+            ),
           ),
           SizedBox(height: size.s16),
-          BlocBuilder<FactBloc, FactState>(
-            builder: (
-              BuildContext context,
-              FactState state,
-            ) {
-              switch (state.newFactStatus) {
-                case FactStatus.initial:
-                  return const SizedBox();
+          MVSAnimatedSize(
+            child: BlocBuilder<FactBloc, FactState>(
+              builder: (
+                BuildContext context,
+                FactState state,
+              ) {
+                switch (state.newFactStatus) {
+                  case FactStatus.initial:
+                    return const SizedBox();
 
-                case FactStatus.loading:
-                  return const MVSPrimaryCircularIndicator();
+                  case FactStatus.loading:
+                    return const MVSPrimaryCircularIndicator();
 
-                case FactStatus.success:
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MVSText.medium16Black(
-                        context: context,
-                        text: "New fact about ${config.animalType}s:",
-                      ),
-                      SizedBox(height: size.s16 / 4),
-                      if (state.newFact != null)
-                        MVSText.regular16Black(
+                  case FactStatus.success:
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MVSText.medium16Black(
                           context: context,
-                          text: state.newFact!.description,
+                          text: "New fact about ${config.animalType}s:",
                         ),
-                    ],
-                  );
+                        SizedBox(height: size.s16 / 4),
+                        if (state.newFact != null)
+                          MVSText.regular16Black(
+                            context: context,
+                            text: state.newFact!.description,
+                          ),
+                      ],
+                    );
 
-                case FactStatus.error:
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MVSText.medium16Black(
-                        context: context,
-                        text: "New fact error:",
-                      ),
-                      SizedBox(height: size.s16 / 4),
-                      if (state.newFactError != null)
-                        MVSText.regular16Danger(
+                  case FactStatus.error:
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MVSText.medium16Black(
                           context: context,
-                          text: state.newFactError!,
+                          text: "New fact error:",
                         ),
-                    ],
-                  );
-              }
-            },
+                        SizedBox(height: size.s16 / 4),
+                        if (state.newFactError != null)
+                          MVSText.regular16Danger(
+                            context: context,
+                            text: state.newFactError!,
+                          ),
+                      ],
+                    );
+                }
+              },
+            ),
           ),
           SizedBox(height: size.s16),
           BlocBuilder<FactBloc, FactState>(
