@@ -7,7 +7,8 @@ abstract class IConfig {
   abstract final Environment environment;
 
   abstract final String baseUrl;
-  abstract final String apiController;
+
+  abstract final String animalType;
 
   abstract final IFPCTheme themeLight;
   abstract final IFPCTheme themeDark;

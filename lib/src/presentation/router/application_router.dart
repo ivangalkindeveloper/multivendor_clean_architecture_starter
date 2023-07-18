@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/presentation/feature/page/cat_fact_page/page/cat_fact_page.dart';
+import 'package:multi_vendor_starter/src/presentation/feature/page/fact_page/page/fact_page.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
@@ -12,19 +12,18 @@ class ApplicationRouter extends _$ApplicationRouter {
   ApplicationRouter();
 
   @override
-  RouteType get defaultRouteType {
-    return FPCPlatformUtil.decompose<RouteType, RouteType, RouteType>(
-      platform: FPCPlatform.values.fromTargetPlatform(defaultTargetPlatform),
-      cupertino: const RouteType.cupertino(),
-      material: const RouteType.material(),
-    );
-  }
+  RouteType get defaultRouteType =>
+      FPCPlatformUtil.decompose<RouteType, RouteType, RouteType>(
+        platform: FPCPlatform.values.fromTargetPlatform(defaultTargetPlatform),
+        cupertino: const RouteType.cupertino(),
+        material: const RouteType.material(),
+      );
 
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          path: "/cat_fact",
-          page: CatFactPageRoute.page,
+          path: "/fact",
+          page: FactPageRoute.page,
           initial: true,
         ),
       ];

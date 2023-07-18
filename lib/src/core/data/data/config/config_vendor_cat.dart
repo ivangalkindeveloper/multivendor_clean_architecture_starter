@@ -4,16 +4,17 @@ import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 
-class ConfigVendorOne implements IConfig {
-  ConfigVendorOne();
+class ConfigVendorCat implements IConfig {
+  ConfigVendorCat();
 
   @override
-  final Environment environment = Environment.vendorOne;
+  final Environment environment = Environment.vendorCat;
 
   @override
   final String baseUrl = "https://cat-fact.herokuapp.com";
+
   @override
-  final String apiController = "";
+  final String animalType = "cat";
 
   @override
   final IFPCTheme themeLight = ThemeLightVendorOne();

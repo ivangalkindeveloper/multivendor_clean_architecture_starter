@@ -1,13 +1,13 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fact_store.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/store/fact_store.dart';
 import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/cat_fact_repository.dart';
-import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_one.dart';
-import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_two.dart';
+import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_cat.dart';
+import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_dog.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
-import 'package:multi_vendor_starter/src/core/data/source/api/cat_fact_api.dart';
+import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
@@ -48,10 +48,10 @@ class MainInitializationSteps {
         InitializationProgress progress,
       ) {
         switch (environment) {
-          case Environment.vendorOne:
-            progress.config = ConfigVendorOne();
-          case Environment.vendorTwo:
-            progress.config = ConfigVendorTwo();
+          case Environment.vendorCat:
+            progress.config = ConfigVendorCat();
+          case Environment.vendorDog:
+            progress.config = ConfigVendorDog();
         }
       },
     ),
@@ -74,16 +74,17 @@ class MainInitializationSteps {
           progress.database = Database(),
     ),
     InitializationStep(
-      title: "CatFactRepository",
+      title: "FactRepository",
       initialize: (
         Environment environment,
         InitializationProgress progress,
       ) =>
-          progress.catFactRepository = CatFactRepository(
-        catFactApi: CatFactApi(
+          progress.factRepository = FactRepository(
+        factApi: FactApi(
+          config: progress.config!,
           apiClient: progress.apiClient!,
         ),
-        catFactStore: CatFactStore(
+        factStore: FactStore(
           database: progress.database!,
         ),
       ),

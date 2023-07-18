@@ -14,7 +14,7 @@ class InitializationProgress with _$InitializationProgress {
     IConfig? config,
     IApiClient? apiClient,
     Database? database,
-    ICatFactRepository? catFactRepository,
+    IFactRepository? factRepository,
     Locale? locale,
     ApplicationRouter? router,
   }) = _InitializationProgress;

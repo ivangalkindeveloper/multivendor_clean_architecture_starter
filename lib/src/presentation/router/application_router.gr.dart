@@ -15,25 +15,25 @@ abstract class _$ApplicationRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    CatFactPageRoute.name: (routeData) {
+    FactPageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CatFactPage(),
+        child: const FactPage(),
       );
     }
   };
 }
 
 /// generated route for
-/// [CatFactPage]
-class CatFactPageRoute extends PageRouteInfo<void> {
-  const CatFactPageRoute({List<PageRouteInfo>? children})
+/// [FactPage]
+class FactPageRoute extends PageRouteInfo<void> {
+  const FactPageRoute({List<PageRouteInfo>? children})
       : super(
-          CatFactPageRoute.name,
+          FactPageRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'CatFactPageRoute';
+  static const String name = 'FactPageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

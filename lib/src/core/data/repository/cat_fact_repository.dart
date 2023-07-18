@@ -1,78 +1,76 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/store/cat_fact_store.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/store/fact_store.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
-import 'package:multi_vendor_starter/src/core/data/source/api/cat_fact_api.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/cat_fact.dart';
+import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
+import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
 import 'package:drift/drift.dart';
 import 'dart:async';
 
-abstract class ICatFactRepository {
-  const ICatFactRepository();
+abstract class IFactRepository {
+  const IFactRepository();
 
-  Future<CatFact> getOneRandomCatFact();
+  Future<Fact> getOneRandomFact();
 
-  Future<CatFact?> getCatFact();
+  Future<Fact?> getLastFact();
 
-  Future<void> insertCatFact({
-    required CatFact catFact,
+  Future<void> insertNewFact({
+    required Fact fact,
   });
 
-  Future<void> updateCatFact({
-    required CatFact catFact,
+  Future<void> updateFact({
+    required Fact fact,
   });
 }
 
-class CatFactRepository implements ICatFactRepository {
-  const CatFactRepository({
-    required CatFactApi catFactApi,
-    required CatFactStore catFactStore,
-  })  : this._catFactApi = catFactApi,
-        this._catFactStore = catFactStore;
+class FactRepository implements IFactRepository {
+  const FactRepository({
+    required IFactApi factApi,
+    required IFactStore factStore,
+  })  : this._factApi = factApi,
+        this._factStore = factStore;
 
-  final CatFactApi _catFactApi;
-  final CatFactStore _catFactStore;
-
-  @override
-  Future<CatFact> getOneRandomCatFact() => this._catFactApi.getRandomCatFact();
+  final IFactApi _factApi;
+  final IFactStore _factStore;
 
   @override
-  Future<CatFact?> getCatFact() async {
-    final List<CatFactDatabase> catFactsDatabase =
-        await this._catFactStore.getCatFacts();
-    if (catFactsDatabase.isEmpty) {
+  Future<Fact> getOneRandomFact() => this._factApi.getRandomFact();
+
+  @override
+  Future<Fact?> getLastFact() async {
+    final List<FactDatabase> factsDatabase = await this._factStore.get();
+    if (factsDatabase.isEmpty) {
       return null;
     }
 
-    final CatFactDatabase catFactDatabase = catFactsDatabase.first;
+    final FactDatabase lastFactDatabase = factsDatabase.last;
 
-    return CatFact(
-      id: catFactDatabase.factId,
-      description: catFactDatabase.description,
+    return Fact(
+      id: lastFactDatabase.factId,
+      description: lastFactDatabase.description,
     );
   }
 
   @override
-  Future<void> insertCatFact({
-    required CatFact catFact,
+  Future<void> insertNewFact({
+    required Fact fact,
   }) =>
-      this._catFactStore.insertCatFact(
-            companion: CatFactDatabaseTableCompanion.insert(
-              factId: catFact.id,
-              description: catFact.description,
+      this._factStore.insert(
+            companion: FactDatabaseTableCompanion.insert(
+              factId: fact.id,
+              description: fact.description,
             ),
           );
 
   @override
-  Future<void> updateCatFact({
-    required CatFact catFact,
+  Future<void> updateFact({
+    required Fact fact,
   }) async {
-    final List<CatFactDatabase> catFactsDatabase =
-        await this._catFactStore.getCatFacts();
+    final List<FactDatabase> catFactsDatabase = await this._factStore.get();
 
-    this._catFactStore.updateCatFact(
-          companion: CatFactDatabaseTableCompanion.insert(
-            id: Value(catFactsDatabase.first.id),
-            factId: catFact.id,
-            description: catFact.description,
+    this._factStore.update(
+          companion: FactDatabaseTableCompanion.insert(
+            id: Value(catFactsDatabase.last.id),
+            factId: fact.id,
+            description: fact.description,
           ),
         );
   }

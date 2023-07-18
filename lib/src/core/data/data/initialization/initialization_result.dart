@@ -14,7 +14,7 @@ class InitializationResult with _$InitializationResult {
     required IConfig config,
     required IApiClient apiClient,
     required Database database,
-    required ICatFactRepository catFactRepository,
+    required IFactRepository factRepository,
     required Locale locale,
     required ApplicationRouter router,
   }) = _InitializationResult;

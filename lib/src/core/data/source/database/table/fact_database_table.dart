@@ -1,8 +1,8 @@
 import 'package:drift/drift.dart';
 
-@DataClassName('CatFactDatabase')
-class CatFactDatabaseTable extends Table {
-  const CatFactDatabaseTable();
+@DataClassName('FactDatabase')
+class FactDatabaseTable extends Table {
+  const FactDatabaseTable();
 
   IntColumn get id => integer().autoIncrement()();
   TextColumn get factId => text().withLength(min: 1, max: 256)();

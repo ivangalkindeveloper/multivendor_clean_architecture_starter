@@ -83,7 +83,7 @@ class Initializer {
       config: progress.config!,
       apiClient: progress.apiClient!,
       database: progress.database!,
-      catFactRepository: progress.catFactRepository!,
+      factRepository: progress.factRepository!,
       locale: progress.locale!,
       router: progress.router!,
     );

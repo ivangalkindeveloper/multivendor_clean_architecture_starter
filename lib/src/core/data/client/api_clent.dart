@@ -36,20 +36,19 @@ abstract class IApiClient {
 
 class ApiClient implements IApiClient {
   ApiClient({
-    required this.config,
+    required IConfig config,
     BaseOptions? baseOptions,
-  }) : this.dio = Dio(baseOptions) {
-    this.dio.interceptors.addAll(
+  })  : this._config = config,
+        this._dio = Dio(baseOptions) {
+    this._dio.interceptors.addAll(
       const [
         RequestInterceptor(),
       ],
     );
   }
 
-  final IConfig config;
-  final Dio dio;
-
-  String get _base => "${this.config.baseUrl}${this.config.apiController}";
+  final IConfig _config;
+  final Dio _dio;
 
   @override
   Future<Response> get({
@@ -58,8 +57,8 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this.dio.get(
-            "${this._base}$endpoint",
+      this._dio.get(
+            "${this._config.baseUrl}$endpoint",
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -74,8 +73,8 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this.dio.post(
-            "${this._base}$endpoint",
+      this._dio.post(
+            "${this._config.baseUrl}$endpoint",
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -90,8 +89,8 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this.dio.post(
-            "${this._base}$endpoint",
+      this._dio.put(
+            "${this._config.baseUrl}$endpoint",
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -106,8 +105,8 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this.dio.post(
-            "${this._base}$endpoint",
+      this._dio.delete(
+            "${this._config.baseUrl}$endpoint",
             data: data,
             queryParameters: queryParameters,
             options: Options(

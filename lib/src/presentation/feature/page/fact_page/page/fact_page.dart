@@ -1,6 +1,6 @@
 import 'package:multi_vendor_starter/src/presentation/component/indicator/mvs_primary_circular_indicator.dart';
-import 'package:multi_vendor_starter/src/presentation/feature/page/cat_fact_page/bloc/cat_fact_bloc.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multi_vendor_starter/src/presentation/feature/page/fact_page/bloc/fact_bloc.dart';
 import 'package:multi_vendor_starter/src/presentation/component/app_bar/mvs_screen_app_bar.dart';
 import 'package:multi_vendor_starter/src/presentation/component/button/mvs_primary_button.dart';
 import 'package:multi_vendor_starter/src/presentation/component/default/mvs_list_view.dart';
@@ -13,25 +13,24 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
 @RoutePage()
-class CatFactPage extends StatelessWidget {
-  const CatFactPage({
+class FactPage extends StatelessWidget {
+  const FactPage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CatFactBloc(
-        catFactRepository:
-            context.read<InitializationResult>().catFactRepository,
-      )..add(const CatFactEvent.getCatFacts()),
-      child: const _CatFactPage(),
+      create: (BuildContext context) => FactBloc(
+        factRepository: context.read<InitializationResult>().factRepository,
+      )..add(const FactEvent.getFacts()),
+      child: const _FactPage(),
     );
   }
 }
 
-class _CatFactPage extends StatelessWidget {
-  const _CatFactPage();
+class _FactPage extends StatelessWidget {
+  const _FactPage();
 
   @override
   Widget build(BuildContext context) {
@@ -49,33 +48,37 @@ class _CatFactPage extends StatelessWidget {
             context: context,
             text: "Config: ${config.environment.name}",
           ),
+          MVSText.medium16Black(
+            context: context,
+            text: "URL: ${config.baseUrl}",
+          ),
           SizedBox(height: size.s16),
-          BlocBuilder<CatFactBloc, CatFactState>(
+          BlocBuilder<FactBloc, FactState>(
             builder: (
               BuildContext context,
-              CatFactState state,
+              FactState state,
             ) {
-              switch (state.lastCatFactStatus) {
-                case CatFactStatus.initial:
+              switch (state.lastFactStatus) {
+                case FactStatus.initial:
                   return const SizedBox();
 
-                case CatFactStatus.loading:
+                case FactStatus.loading:
                   return const MVSPrimaryCircularIndicator();
 
-                case CatFactStatus.success:
+                case FactStatus.success:
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MVSText.medium16Black(
                         context: context,
-                        text: "Last fact about cats:",
+                        text: "Last fact about ${config.animalType}s:",
                       ),
                       SizedBox(height: size.s16 / 4),
-                      if (state.lastCatFact != null)
+                      if (state.lastFact != null)
                         MVSText.regular16Black(
                           context: context,
-                          text: state.lastCatFact!.description,
+                          text: state.lastFact!.description,
                         )
                       else
                         MVSText.regular16Black(
@@ -85,7 +88,7 @@ class _CatFactPage extends StatelessWidget {
                     ],
                   );
 
-                case CatFactStatus.error:
+                case FactStatus.error:
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,24 +98,24 @@ class _CatFactPage extends StatelessWidget {
                         text: "Last fact error:",
                       ),
                       SizedBox(height: size.s16 / 4),
-                      if (state.lastCatFactError != null)
+                      if (state.lastFactError != null)
                         MVSText.regular16Danger(
                           context: context,
-                          text: state.lastCatFactError!,
+                          text: state.lastFactError!,
                         ),
-                      if (state.lastCatFact != null)
+                      if (state.lastFact != null)
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             MVSText.medium16Black(
                               context: context,
-                              text: "Last fact about cats:",
+                              text: "Last fact about ${config.animalType}s:",
                             ),
                             SizedBox(height: size.s16 / 4),
                             MVSText.regular16Black(
                               context: context,
-                              text: state.lastCatFact!.description,
+                              text: state.lastFact!.description,
                             ),
                           ],
                         ),
@@ -122,37 +125,37 @@ class _CatFactPage extends StatelessWidget {
             },
           ),
           SizedBox(height: size.s16),
-          BlocBuilder<CatFactBloc, CatFactState>(
+          BlocBuilder<FactBloc, FactState>(
             builder: (
               BuildContext context,
-              CatFactState state,
+              FactState state,
             ) {
-              switch (state.newCatFactStatus) {
-                case CatFactStatus.initial:
+              switch (state.newFactStatus) {
+                case FactStatus.initial:
                   return const SizedBox();
 
-                case CatFactStatus.loading:
+                case FactStatus.loading:
                   return const MVSPrimaryCircularIndicator();
 
-                case CatFactStatus.success:
+                case FactStatus.success:
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MVSText.medium16Black(
                         context: context,
-                        text: "New fact about cats:",
+                        text: "New fact about ${config.animalType}s:",
                       ),
                       SizedBox(height: size.s16 / 4),
-                      if (state.newCatFact != null)
+                      if (state.newFact != null)
                         MVSText.regular16Black(
                           context: context,
-                          text: state.newCatFact!.description,
+                          text: state.newFact!.description,
                         ),
                     ],
                   );
 
-                case CatFactStatus.error:
+                case FactStatus.error:
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,10 +165,10 @@ class _CatFactPage extends StatelessWidget {
                         text: "New fact error:",
                       ),
                       SizedBox(height: size.s16 / 4),
-                      if (state.newCatFactError != null)
+                      if (state.newFactError != null)
                         MVSText.regular16Danger(
                           context: context,
-                          text: state.newCatFactError!,
+                          text: state.newFactError!,
                         ),
                     ],
                   );
@@ -173,20 +176,19 @@ class _CatFactPage extends StatelessWidget {
             },
           ),
           SizedBox(height: size.s16),
-          BlocBuilder<CatFactBloc, CatFactState>(
+          BlocBuilder<FactBloc, FactState>(
             builder: (
               BuildContext context,
-              CatFactState state,
+              FactState state,
             ) {
               final bool isLoading =
-                  state.lastCatFactStatus == CatFactStatus.loading ||
-                      state.newCatFactStatus == CatFactStatus.loading;
+                  state.lastFactStatus == FactStatus.loading ||
+                      state.newFactStatus == FactStatus.loading;
 
               return MVSPrimaryButton(
                 title: "Reload",
-                onPressed: () => context
-                    .read<CatFactBloc>()
-                    .add(const CatFactEvent.getCatFacts()),
+                onPressed: () =>
+                    context.read<FactBloc>().add(const FactEvent.getFacts()),
                 isLoading: isLoading,
               );
             },
