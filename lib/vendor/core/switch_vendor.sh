@@ -127,7 +127,7 @@ dart run flutter_native_splash:create
 echo -e $Yellow"Switch application splash screen - Success"$NoColor
 echo ""
 
-echo -e $Yellow"Switch Firebase Analytics - Start"$NoColor
+echo -e $Yellow"Switch Firebase Services - Start"$NoColor
 rm -f android/app/google-services.json
 cp vendor/$folderName/google-services.json android/app/google-services.json
 rm -f ios/Runner/GoogleService-Info.plist

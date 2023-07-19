@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/store/fact_store.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/storage/fact_storage.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
@@ -24,19 +24,19 @@ abstract class IFactRepository {
 class FactRepository implements IFactRepository {
   const FactRepository({
     required IFactApi factApi,
-    required IFactStore factStore,
+    required IFactStorage factStorage,
   })  : this._factApi = factApi,
-        this._factStore = factStore;
+        this._factStorage = factStorage;
 
   final IFactApi _factApi;
-  final IFactStore _factStore;
+  final IFactStorage _factStorage;
 
   @override
   Future<Fact> getOneRandomFact() => this._factApi.getRandomFact();
 
   @override
   Future<Fact?> getLastFact() async {
-    final List<FactDatabase> factsDatabase = await this._factStore.get();
+    final List<FactDatabase> factsDatabase = await this._factStorage.get();
     if (factsDatabase.isEmpty) {
       return null;
     }
@@ -53,7 +53,7 @@ class FactRepository implements IFactRepository {
   Future<void> insertFact({
     required Fact fact,
   }) =>
-      this._factStore.insert(
+      this._factStorage.insert(
             companion: FactDatabaseTableCompanion.insert(
               factId: fact.id,
               description: fact.description,
@@ -64,9 +64,9 @@ class FactRepository implements IFactRepository {
   Future<void> updateLastFact({
     required Fact fact,
   }) async {
-    final List<FactDatabase> factsDatabase = await this._factStore.get();
+    final List<FactDatabase> factsDatabase = await this._factStorage.get();
 
-    this._factStore.update(
+    this._factStorage.update(
           companion: FactDatabaseTableCompanion.insert(
             id: Value(factsDatabase.last.id),
             factId: fact.id,

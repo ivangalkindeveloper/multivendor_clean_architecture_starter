@@ -1,6 +1,6 @@
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 
-abstract class IFactStore {
+abstract class IFactStorage {
   Future<List<FactDatabase>> get();
 
   Stream<List<FactDatabase>> watch();
@@ -18,8 +18,8 @@ abstract class IFactStore {
   });
 }
 
-class FactStore implements IFactStore {
-  const FactStore({
+class FactStorage implements IFactStorage {
+  const FactStorage({
     required this.database,
   });
 
