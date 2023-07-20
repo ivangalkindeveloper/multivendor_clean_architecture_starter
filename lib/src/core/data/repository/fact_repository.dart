@@ -1,8 +1,8 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/storage/fact_storage.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/dao/dao.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
-import 'package:drift/drift.dart';
+import 'package:multi_vendor_starter/src/core/data/data/fact/fact_dto.dart';
+import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 
 abstract class IFactRepository {
@@ -15,33 +15,37 @@ abstract class IFactRepository {
   Future<void> insertFact({
     required Fact fact,
   });
-
-  Future<void> updateLastFact({
-    required Fact fact,
-  });
 }
 
 class FactRepository implements IFactRepository {
   const FactRepository({
     required IFactApi factApi,
-    required IFactStorage factStorage,
+    required IDao<FactDatabaseTableData> factDao,
   })  : this._factApi = factApi,
-        this._factStorage = factStorage;
+        this._factDao = factDao;
 
   final IFactApi _factApi;
-  final IFactStorage _factStorage;
+  final IDao<FactDatabaseTableData> _factDao;
 
   @override
-  Future<Fact> getOneRandomFact() => this._factApi.getRandomFact();
+  Future<Fact> getOneRandomFact() async {
+    final FactDto factorDto = await this._factApi.getRandomFact();
+
+    return Fact(
+      id: factorDto.id,
+      description: factorDto.description,
+    );
+  }
 
   @override
   Future<Fact?> getLastFact() async {
-    final List<FactDatabase> factsDatabase = await this._factStorage.get();
-    if (factsDatabase.isEmpty) {
+    final List<FactDatabaseTableData> factsDatabaseData =
+        await this._factDao.get();
+    if (factsDatabaseData.isEmpty) {
       return null;
     }
 
-    final FactDatabase lastFactDatabase = factsDatabase.last;
+    final FactDatabaseTableData lastFactDatabase = factsDatabaseData.last;
 
     return Fact(
       id: lastFactDatabase.factId,
@@ -53,25 +57,11 @@ class FactRepository implements IFactRepository {
   Future<void> insertFact({
     required Fact fact,
   }) =>
-      this._factStorage.insert(
+      this._factDao.insert(
             companion: FactDatabaseTableCompanion.insert(
               factId: fact.id,
+              timestamp: DateTime.timestamp(),
               description: fact.description,
             ),
           );
-
-  @override
-  Future<void> updateLastFact({
-    required Fact fact,
-  }) async {
-    final List<FactDatabase> factsDatabase = await this._factStorage.get();
-
-    this._factStorage.update(
-          companion: FactDatabaseTableCompanion.insert(
-            id: Value(factsDatabase.last.id),
-            factId: fact.id,
-            description: fact.description,
-          ),
-        );
-  }
 }

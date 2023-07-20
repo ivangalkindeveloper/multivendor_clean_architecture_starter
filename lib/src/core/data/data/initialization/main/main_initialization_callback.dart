@@ -1,7 +1,7 @@
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_callback.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/utility/logger.dart';
+import 'package:multi_vendor_starter/src/utility/logger/logger.dart';
 
 class MainItializationCallback extends IInitializationCallback {
   const MainItializationCallback();

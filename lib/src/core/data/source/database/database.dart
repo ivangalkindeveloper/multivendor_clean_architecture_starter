@@ -1,5 +1,5 @@
 import 'package:multi_vendor_starter/src/core/data/source/database/table/fact_database_table.dart';
-import 'package:multi_vendor_starter/src/core/utility/opener/opener.dart';
+import 'package:multi_vendor_starter/src/utility/opener/opener.dart';
 import 'package:drift/drift.dart';
 
 part '../../../../../generated/src/core/data/source/database/database.g.dart';

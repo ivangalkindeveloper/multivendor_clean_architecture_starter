@@ -3,8 +3,8 @@ import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
+import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
 import 'package:multi_vendor_starter/src/presentation/application/application.dart';
-import 'package:multi_vendor_starter/src/core/data/data/environment.dart';
 import 'package:flutter/widgets.dart';
 
 class Initializer {

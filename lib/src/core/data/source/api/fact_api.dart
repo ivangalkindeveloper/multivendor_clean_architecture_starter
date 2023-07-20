@@ -1,12 +1,12 @@
-import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
+import 'package:multi_vendor_starter/src/core/data/data/fact/fact_dto.dart';
+import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:dio/dio.dart';
 
 abstract class IFactApi {
-  Future<Fact> getRandomFact();
+  Future<FactDto> getRandomFact();
 
-  Future<List<Fact>> getRandomFacts({
+  Future<List<FactDto>> getRandomFacts({
     required int amount,
   });
 }
@@ -22,7 +22,7 @@ class FactApi implements IFactApi {
   final IApiClient _apiClient;
 
   @override
-  Future<Fact> getRandomFact() async {
+  Future<FactDto> getRandomFact() async {
     final Response response = await this._apiClient.get(
       endpoint: "/facts/random",
       queryParameters: {
@@ -30,11 +30,11 @@ class FactApi implements IFactApi {
         "amount": 1,
       },
     );
-    return Fact.fromJson(response.data);
+    return FactDto.fromJson(response.data);
   }
 
   @override
-  Future<List<Fact>> getRandomFacts({
+  Future<List<FactDto>> getRandomFacts({
     required int amount,
   }) async {
     final Response response = await this._apiClient.get(
@@ -45,6 +45,6 @@ class FactApi implements IFactApi {
       },
     );
     return List.from(
-        (response.data as List).map((json) => Fact.fromJson(json)));
+        (response.data as List).map((json) => FactDto.fromJson(json)));
   }
 }

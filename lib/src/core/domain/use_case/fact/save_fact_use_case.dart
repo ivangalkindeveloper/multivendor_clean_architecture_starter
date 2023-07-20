@@ -1,5 +1,5 @@
 import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
+import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 
 abstract class ISaveFactUseCase {

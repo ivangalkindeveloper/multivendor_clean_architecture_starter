@@ -1,5 +1,5 @@
 import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact.dart';
+import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 
 abstract class IFactInteractor {
   const IFactInteractor();
@@ -9,10 +9,6 @@ abstract class IFactInteractor {
   Future<Fact> getRandom();
 
   Future<void> save({
-    required Fact fact,
-  });
-
-  Future<void> update({
     required Fact fact,
   });
 }
@@ -35,14 +31,6 @@ class FactInteractor implements IFactInteractor {
     required Fact fact,
   }) =>
       this.catFactRepository.insertFact(
-            fact: fact,
-          );
-
-  @override
-  Future<void> update({
-    required Fact fact,
-  }) =>
-      this.catFactRepository.updateLastFact(
             fact: fact,
           );
 }

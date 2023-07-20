@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/utility/extension/string_extension.dart';
-import 'package:multi_vendor_starter/src/core/utility/logger.dart';
+import 'package:multi_vendor_starter/src/utility/extension/string_extension.dart';
+import 'package:multi_vendor_starter/src/utility/logger/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ApplicationBlocObserver extends BlocObserver {
