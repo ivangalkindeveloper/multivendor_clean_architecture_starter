@@ -13,25 +13,26 @@ part '../../../../../../generated/src/presentation/feature/page/fact_page/bloc/f
 
 class FactBloc extends Bloc<FactEvent, FactState> {
   FactBloc({
-    required this.factRepository,
-  }) : super(const FactState(
+    required IFactRepository factRepository,
+  })  : this._getLastFactUseCase = GetLastFactUseCase(
+          factRepository: factRepository,
+        ),
+        this._getRandomFactUseCase = GetRandomFactUseCase(
+          factRepository: factRepository,
+        ),
+        this._saveFactUseCase = SaveFactUseCase(
+          factRepository: factRepository,
+        ),
+        super(const FactState(
           lastFactStatus: FactStatus.initial,
           newFactStatus: FactStatus.initial,
         )) {
     on<_GetFactsEvent>(this._getFacts);
   }
 
-  final IFactRepository factRepository;
-
-  late final GetLastFactUseCase getLastFactUseCase = GetLastFactUseCase(
-    factRepository: this.factRepository,
-  );
-  late final GetRandomFactUseCase getRandomFactUseCase = GetRandomFactUseCase(
-    factRepository: this.factRepository,
-  );
-  late final SaveFactUseCase saveFactUseCase = SaveFactUseCase(
-    factRepository: this.factRepository,
-  );
+  final GetLastFactUseCase _getLastFactUseCase;
+  final GetRandomFactUseCase _getRandomFactUseCase;
+  final SaveFactUseCase _saveFactUseCase;
 
   void _getFacts(
     _GetFactsEvent event,
@@ -54,7 +55,7 @@ class FactBloc extends Bloc<FactEvent, FactState> {
     required Emitter emit,
   }) async {
     try {
-      final Fact? lastFact = await this.getLastFactUseCase.execute();
+      final Fact? lastFact = await this._getLastFactUseCase.execute();
       emit(
         state.copyWith(
           lastFact: lastFact,
@@ -77,14 +78,14 @@ class FactBloc extends Bloc<FactEvent, FactState> {
     required Emitter emit,
   }) async {
     try {
-      final Fact randomFact = await this.getRandomFactUseCase.execute();
+      final Fact randomFact = await this._getRandomFactUseCase.execute();
 
       if (state.lastFact == null) {
-        await this.saveFactUseCase.execute(
+        await this._saveFactUseCase.execute(
               fact: randomFact,
             );
       } else {
-        await this.saveFactUseCase.execute(
+        await this._saveFactUseCase.execute(
               fact: randomFact,
             );
       }

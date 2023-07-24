@@ -37,11 +37,10 @@ Under vendors, not only specific vendors of one application can be implemented (
 It allows you to have one project that can change the complete application environment depending on the vendor, while having only one Dart codebase.\
 The environment change is implemented by [a shell script](https://github.com/ivangalkindeveloper/multi_vendor_starter/blob/master/lib/vendor/core/switch_vendor.sh).\
 Current script changes the following environment properties:
-- Android package;
-- iOS and macOS bundleID;
-- Application name;
-- Application icon;
-- Application splash screen (light & dark theme);
+- Project identificators (Android package, iOS bundleID, Linux applicationId, macOS bundleID);
+- Application name (Android, iOS, Lunix, macOS, Web, Windows);
+- Application icon (Android, iOS, Lunix, macOS, Web, Windows);
+- Application splash screen (Android, iOS, Web);
 - Third-party services.
 
 And there are also examples of changing identifiers for [Facebook Events](https://pub.dev/packages/facebook_app_events) and [FreshchatSDK](https://pub.dev/packages/freshchat_sdk).
@@ -76,14 +75,14 @@ The last line is sure to run the core script.\
 The required name - switch.sh.\
 4. Add a command to change the vendor in this README in the CLI section for quick convenience:
 ```sh
-bash ./lib/vendor/<new-vendor-folder-name>/switch.sh
+bash ./vendor/<new-vendor-folder-name>/switch.sh
 ```
 
 About launcher icon see details [here](https://pub.dev/packages/flutter_launcher_icons) or splash screen see details [here](https://pub.dev/packages/flutter_native_splash).
 ### Switch vendor
 To start the vendor environment change, run:
 ```sh
-bash ./lib/vendor/<vendor-folder-name>/switch.sh
+bash ./vendor/<vendor-folder-name>/switch.sh
 ```
 ### Config registration
 Registration of the config occurs in different main fucntions through the arguments of the runner and initializer utilities in order to be able to change the environment locally and look at the generated application materials by running only the development environment.\
@@ -134,46 +133,53 @@ The starter used the following programming patterns:
 The structure of the project clearly reflects the interaction of the layers of the architecture:
 ```
 lib/
-    generated/    - directory of all generated files (should be in .gitignore);
-    main/     - main functions that launch the runner/initializer utility.
-    src/    - main source directory;
-        core/     - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
-    -----------------------------------------
-            data/     - common data and datasources of the program core;
-                client/     - clents classes, for example - API client;
-                      interceptor/    - interceptors for api client;
-                data/   - data models;
-                repository/     - repositories for working with datasources;
-                source/     - datasources directory;
-                      api/    - api datasources;
-                      database/     - database directory;
-                              dao/    - DAO(CRUD) database models;
-                              table/    - tables of database;
-    <I>-----------------------------------------<I>
-            domain/     - business entities and rules;
-                  entity/     - entities directory;
-                  interactor/     - interactor directory;
-                  use_case/     - use cases directory;
-    <I>-----------------------------------------<I>
-        presentation/     - presentation/view layer;
-                    application/    - root application widget;
-                    component/    - components directory;
-                    feature/    - main directory of presentation activities and presenters;
-                            dialog/     -  dialogs directory;
-                            modal/    -  modals directory;
-                            page/     - pages and presenters directory;
-                            picker/     -  dateTime or timeOfDay pickers directory;
-                    l10n/     - localization arb files and untranslated fields;
-                    router/     - router(s) of application;
-    -----------------------------------------
-    utility/    - utilities or helpers directory;
-            extension/    - extension directory (BuildContext, types and other);
-            initializer/    - initialization library-utility;
-            logger/     - application ligger;
-            mixin/    - classes mixins;
-            opener/     - open datasources library-utility;
-            runner/     - runner application library-utility;
-    vendor/     - directory vendor for materials and scripts;
+├── generated/    - directory of all generated files (should be in .gitignore);
+├── main/     - main functions that launch the runner/initializer utility.
+├── src/    - main source directory;
+│   ├── core/     - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
+│   │
+│   └─────── data/     - common data and datasources of the program core;
+│   │        ├─── client/     - clents classes, for example - API client;
+│   │        │    └───── interceptor/    - interceptors for api client;
+│   │        ├─── data/   - data models;
+│   │        ├─── repository/     - repositories for working with datasources;
+│   │        │
+<I>---------------------------------------------<IApi, IDao>
+│   │        │
+│   │        └─── source/     - datasources directory;
+│   │             ├───── api/    - api directory;
+│   │             └───── database/     - database directory;
+│   │                     ├────── dao/    - DAO(CRUD) database models;
+│   │                     └────── table/    - tables of database;
+│   │
+<I>---------------------------------------------<IRepository>
+│   │
+│   └─────── domain/     - business entities and rules;
+│             ├──── entity/     - entities directory;
+│             ├──── interactor/     - interactor directory;
+│             └──── use_case/     - use cases directory;
+│
+<I>---------------------------------------------<IUseCase / IInteractor>
+│
+├────── presentation/     - presentation/view layer;
+│       ├─────────── application/    - root application widget;
+│       ├─────────── component/    - components directory;
+│       ├─────────── feature/    - main directory of presentation activities and presenters;
+│       │            ├────── dialog/     -  dialogs directory;
+│       │            ├────── modal/    -  modals directory;
+│       │            ├────── page/     - pages and presenters directory;
+│       │            └────── picker/     -  dateTime or timeOfDay pickers directory;
+│       ├─────────── l10n/     - localization arb files and untranslated fields;
+│       └─────────── router/     - router(s) of application;
+│
+└────── utility/    - utilities or helpers directory;
+        ├────── extension/    - extension directory (BuildContext, types and other);
+        ├────── initializer/    - initialization library-utility;
+        ├────── logger/     - application ligger;
+        ├────── mixin/    - classes mixins;
+        ├────── opener/     - open datasources library-utility;
+        └────── runner/     - runner application library-utility;
+vendor/     - directory vendor for materials and scripts;
 ```
 
 ### Approaches
@@ -190,17 +196,20 @@ It is customary to share the following data names and their responsibility:\
 Data Tranfser Object (DTO postfix) - data received only from the API;\
 Data Access Object (DAO postfix) - data access only from database;\
 "Config" \ "InitializatonStep" \ "Database" - only core data of program;\
-"Profile" \ "Remittance" \ "DocumentFlow" - only domain business models and rules;\
-"Runner" \ "Initializer" \ "Mapper" - only utilities or helpers.
+"Profile" \ "Remittance" \ "DocumentRequirements" - only domain business models and rules;\
+"Runner" \ "Initializer" \ "Mapper" \ "Parser" - only utilities or helpers.
 #### Generation
 Never mix generation code with main code.\
 Keep the generation in a separate directory that is not tracked by GIT.
 #### Components
 Always make widget components with a prefix that specifies only the name of the project or target group of projects to understand that this component is custom from the standard Flutter widgets.\
 For example, project name "financial_wallet" - FW:\
-FWAppbar, FWrimaryButton, FWText...\
+FWAppbar, FWPrimaryButton, FWText...\
 Components should not contain business logic, but should only provide an API to manage them.\
 You can pass any model to a component only if the model properties are needed only to display the component.
+#### Presentation features
+
+
 
 ### Misconceptions
 A few misconceptions about Clean Architecture:
@@ -235,8 +244,8 @@ dart run build_runner build
 ```
 #### Vendor
 ```sh
-bash ./lib/vendor/VendorCat/switch.sh
-bash ./lib/vendor/VendorDog/switch.sh
+bash ./vendor/VendorCat/switch.sh
+bash ./vendor/VendorDog/switch.sh
 ```
 #### Build
 ```
