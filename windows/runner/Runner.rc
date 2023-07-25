@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.vendor" "\0"
-            VALUE "FileDescription", "multi_vendor_starter" "\0"
+            VALUE "CompanyName", "com.fact.cat" "0"
+            VALUE "FileDescription", "Cat Fact" "0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "multi_vendor_starter" "\0"
+            VALUE "InternalName", "Cat Fact" "0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.vendor. All rights reserved." "\0"
-            VALUE "OriginalFilename", "multi_vendor_starter.exe" "\0"
-            VALUE "ProductName", "multi_vendor_starter" "\0"
+            VALUE "OriginalFilename", "Cat Fact.exe" "0"
+            VALUE "ProductName", "Cat Fact" "0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

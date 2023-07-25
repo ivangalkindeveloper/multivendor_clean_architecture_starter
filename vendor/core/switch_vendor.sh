@@ -3,15 +3,16 @@ androidPackage=$2
 iosBundleID=$3
 linuxApplicationId=$4
 macosBundleId=$5
-applicationName=$6
-splashColor=$7
-splashColorDark=$8
-splashColorAndroid12=$9
-splashColorAndroid12Dark=$10
-splashIconColorAndroid12=$11
-splashIconColorAndroid12Dark=$12
-# facebookApplicationId=$11
-# facebookClientToken=$12
+windowsCompanyName=$6
+applicationName=$7
+splashColor=$8
+splashColorDark=$9
+splashColorAndroid12=$10
+splashColorAndroid12Dark=$11
+splashIconColorAndroid12=$12
+splashIconColorAndroid12Dark=$13
+# facebookApplicationId=$14
+# facebookClientToken=$15
 
 
 
@@ -94,15 +95,24 @@ echo -e $Yellow"Switch Linux applicationID: $linuxApplicationId - Start"$NoColor
 gsed -i "/set(APPLICATION_ID \"/c\set(APPLICATION_ID \"$linuxApplicationId\")" linux/CMakeLists.txt
 #
 echo -e $Yellow"Switch Linux applicationID: $linuxApplicationId - Success"$NoColor
+echo ""
+
+# macOS bundleID
+echo -e $Yellow"Switch macOS bundleID: $macosBundleId - Start"$NoColor
+#
+gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\PRODUCT_BUNDLE_IDENTIFIER = $macosBundleId" macos/Runner/Configs/AppInfo.xcconfig
+gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\				PRODUCT_BUNDLE_IDENTIFIER = $macosBundleId.RunnerTests;" macos/Runner.xcodeproj/project.pbxproj
+#
+echo -e $Yellow"Switch macOS bundleID: $macosBundleId - Success"$NoColor
+echo ""
 
 
-# Macos bundleID
-echo -e $Yellow"Switch Macos bundleID: $macosBundleId - Start"$NoColor
+# Windows companyName
+echo -e $Yellow"Switch Windows companyName: $windowsCompanyName - Start"$NoColor
 #
-gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\				PRODUCT_BUNDLE_IDENTIFIER = $macosBundleId" macos/Runner/Configs/AppInfo.xcconfig
-gsed -i "/PRODUCT_BUNDLE_IDENTIFIER/c\				PRODUCT_BUNDLE_IDENTIFIER = $macosBundleId.RunnerTests" macos/Runner.xcodeproj/project.pbxproj
+gsed -i "/VALUE \"CompanyName\", \"/c\            VALUE \"CompanyName\", \"$windowsCompanyName\" \"\0\"" windows/runner/Runner.rc
 #
-echo -e $Yellow"Switch iOS bundleID: $macosBundleId - Success"$NoColor
+echo -e $Yellow"Switch Windows companyName: $windowsCompanyName - Success"$NoColor
 echo ""
 
 
@@ -119,7 +129,7 @@ gsed -i "/set(BINARY_NAME \"/c\set(BINARY_NAME \"$applicationName\")" linux/CMak
 gsed -i "/gtk_header_bar_set_title(header_bar, \"/c\    gtk_header_bar_set_title(header_bar, \"$applicationName\");" linux/my_application.cc
 gsed -i "/gtk_window_set_title(window, \"/c\    gtk_window_set_title(window \"$applicationName\");" linux/my_application.cc
 ## Macos
-gsed -i "/PRODUCT_NAME/c\				PRODUCT_NAME = $applicationName" macos/Runner/Configs/AppInfo.xcconfig
+gsed -i "/PRODUCT_NAME/c\PRODUCT_NAME = $applicationName" macos/Runner/Configs/AppInfo.xcconfig
 ## Web
 gsed -i "/<meta name=\"apple-mobile-web-app-title\" content=\"/c\  <meta name=\"apple-mobile-web-app-title\" content=\"$applicationName\">" web/index.html
 gsed -i "/<title>/c\  <title>$applicationName</title>" web/index.html
@@ -188,6 +198,7 @@ dart run flutter_native_splash:create
 echo -e $Yellow"Switch application splash screen - Success"$NoColor
 echo ""
 
+
 # Firebase services
 echo -e $Yellow"Switch Firebase services - Start"$NoColor
 #
@@ -196,7 +207,7 @@ cp vendor/$folderName/google-services.json android/app/google-services.json
 rm -f ios/Runner/GoogleService-Info.plist
 cp vendor/$folderName/GoogleService-Info.plist ios/Runner/GoogleService-Info.plist
 #
-echo -e $Yellow"Switch Firebase Analytics - Success"$NoColor
+echo -e $Yellow"Switch Firebase services - Success"$NoColor
 echo ""
 
 
@@ -227,9 +238,9 @@ echo ""
 # echo ""
 
 
-
 flutter clean
 flutter pub get
 echo -e ""
+
 
 echo -e $Green"Switch vendor: $folderName - Success"$NoColor
