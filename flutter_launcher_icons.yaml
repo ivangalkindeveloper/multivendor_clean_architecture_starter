@@ -8,11 +8,12 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: asset/icon/icon.png
+    # background_color: "#hexcode"
+    # theme_color: "#hexcode"
   windows:
     generate: true
     image_path: asset/icon/icon.png
-    # min:48, max:256, default: 48
-    icon_size: 48
+    icon_size: 48 # min - 48, max - 256, default -48
   macos:
     generate: true
     image_path: asset/icon/icon.png
