@@ -1,9 +1,9 @@
 folderName=$1
-applicationName=$2
-androidPackage=$3
-iosBundleID=$4
-linuxApplicationId=$5
-macosBundleId=$6
+androidPackage=$2
+iosBundleID=$3
+linuxApplicationId=$4
+macosBundleId=$5
+applicationName=$6
 splashColor=$7
 splashColorDark=$8
 splashColorAndroid12=$9
@@ -21,7 +21,7 @@ NoColor='\033[0m'
 
 
 
-echo -e $Green"Switch vendor: $applicationName - Start"$NoColor
+echo -e $Green"Switch vendor: $folderName - Start"$NoColor
 echo -e ""
 
 
@@ -232,4 +232,4 @@ flutter clean
 flutter pub get
 echo -e ""
 
-echo -e $Green"Switch vendor: $applicationName - Success"$NoColor
+echo -e $Green"Switch vendor: $folderName - Success"$NoColor
