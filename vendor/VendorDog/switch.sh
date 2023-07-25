@@ -1,4 +1,4 @@
-folderName="VendorTwo"
+folderName="VendorDog"
 androidPackage="com.fact.dog"
 iosBundleID="com.fact.dog"
 linuxApplicationId="com.fact.dog"

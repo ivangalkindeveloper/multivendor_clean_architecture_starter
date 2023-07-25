@@ -9,8 +9,8 @@ flutter_native_splash:
   ios: true
   android: true
   android_12:
-    color: "VendorCat0"
-    color_dark: "VendorCat1"
+    color: "#000000"
+    color_dark: "#111111"
     icon_background_color: "#000000"
     icon_background_color_dark: "#111111"
     image: "asset/splash/splash_logo_android_12.png"

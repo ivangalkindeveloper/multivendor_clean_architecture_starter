@@ -7,21 +7,26 @@ windowsCompanyName=$6
 applicationName=$7
 splashColor=$8
 splashColorDark=$9
-splashColorAndroid12=$10
-splashColorAndroid12Dark=$11
-splashIconColorAndroid12=$12
-splashIconColorAndroid12Dark=$13
-# facebookApplicationId=$14
-# facebookClientToken=$15
+splashColorAndroid12=${10}
+splashColorAndroid12Dark=${11}
+splashIconColorAndroid12=${12}
+splashIconColorAndroid12Dark=${13}
+# facebookApplicationId=${14}
+# facebookClientToken=${15}
 
 
+# Check parameters count
+if [ $# -lt 13 ]; then
+    echo "Error: Need to pass 13 parameters"
+    exit 1
+fi
 
 Green='\033[0;32m'
 Yellow='\033[0;33m'
 NoColor='\033[0m'
 
 
-
+# Start
 echo -e $Green"Switch vendor: $folderName - Start"$NoColor
 echo -e ""
 
@@ -159,8 +164,14 @@ echo -e $Yellow"Switch application icon - Success"$NoColor
 echo ""
 
 
-# Application splash screen
-echo -e $Yellow"Switch application splash screen - Start"$NoColor
+# Application splash
+echo -e $Yellow"Switch application splash - Start"$NoColor
+echo -e $Yellow"Splash color: $splashColor"$NoColor
+echo -e $Yellow"Splash color dark: $splashColorDark"$NoColor
+echo -e $Yellow"Splash color Android 12: $splashColorAndroid12"$NoColor
+echo -e $Yellow"Splash color Android 12 dark: $splashColorAndroid12Dark"$NoColor
+echo -e $Yellow"Splash icon color Android 12: $splashIconColorAndroid12"$NoColor
+echo -e $Yellow"Splash icon color Android 12 dark: $splashIconColorAndroid12Dark"$NoColor
 #
 ## Color
 splashConfigIndex=$(grep -n "flutter_native_splash:" flutter_native_splash.yaml| sed '1!d' | cut -d: -f1)
@@ -195,7 +206,7 @@ rm -f ./asset/splash/splash_logo_android_12_dark.png
 cp vendor/$folderName/splash_logo_android_12_dark.png asset/splash/splash_logo_android_12_dark.png
 dart run flutter_native_splash:create
 #
-echo -e $Yellow"Switch application splash screen - Success"$NoColor
+echo -e $Yellow"Switch application splash - Success"$NoColor
 echo ""
 
 
@@ -243,4 +254,6 @@ flutter pub get
 echo -e ""
 
 
+# Success
 echo -e $Green"Switch vendor: $folderName - Success"$NoColor
+exit 0
