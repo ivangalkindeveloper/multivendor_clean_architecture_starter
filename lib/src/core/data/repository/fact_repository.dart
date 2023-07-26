@@ -1,10 +1,11 @@
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/dao/dao.dart';
+import 'package:multi_vendor_starter/src/core/data/data/dto/fact/fact_dto.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
-import 'package:multi_vendor_starter/src/core/data/data/fact/fact_dto.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 
+//TODO Starter: IRepository
 abstract class IFactRepository {
   const IFactRepository();
 

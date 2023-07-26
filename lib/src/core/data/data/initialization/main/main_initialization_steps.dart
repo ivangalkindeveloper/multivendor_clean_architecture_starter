@@ -1,22 +1,23 @@
-import 'package:multi_vendor_starter/src/presentation/application/bloc/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/data/source/database/dao/fact_dao.dart';
+import 'package:multi_vendor_starter/src/logic/application/application_bloc_observer.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_cat.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config_vendor_dog.dart';
+import 'package:multi_vendor_starter/src/core/data/source/database/dao/fact_dao.dart';
 import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
 import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
 import 'package:multi_vendor_starter/src/core/data/source/api/fact_api.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
-import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:multi_vendor_starter/src/utility/logger/logger.dart';
+import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
 
+//TODO Starter: MainInitializationSteps
 class MainInitializationSteps {
   static final List<InitializationStep> steps = [
     ..._framework,
@@ -71,7 +72,9 @@ class MainInitializationSteps {
         Environment environment,
         InitializationProgress progress,
       ) =>
-          progress.database = Database(),
+          progress.database = Database(
+        config: progress.config!,
+      ),
     ),
     InitializationStep(
       title: "FactRepository",

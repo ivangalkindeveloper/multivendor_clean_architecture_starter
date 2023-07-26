@@ -3,6 +3,7 @@ import 'package:multi_vendor_starter/src/core/data/data/initialization/initializ
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
 import 'package:multi_vendor_starter/src/utility/logger/logger.dart';
 
+//TODO Starter: MainItializationCallback
 class MainItializationCallback extends IInitializationCallback {
   const MainItializationCallback();
 

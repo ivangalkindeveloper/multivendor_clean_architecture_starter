@@ -3,6 +3,7 @@ import 'package:multi_vendor_starter/src/core/domain/use_case/use_case.dart';
 import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 
+//TODO Starter: UseCase
 class GetLastFactUseCase implements IUseCase<Fact?> {
   const GetLastFactUseCase({
     required this.factRepository,

@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 
+//TODO Starter: DatabaseTable
 class FactDatabaseTable extends Table {
   const FactDatabaseTable();
 

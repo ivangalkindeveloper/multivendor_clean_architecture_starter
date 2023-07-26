@@ -2,6 +2,7 @@ import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.da
 import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 
+//TODO Starter: UseCase
 abstract class ISaveFactUseCase {
   Future<void> execute({
     required Fact fact,

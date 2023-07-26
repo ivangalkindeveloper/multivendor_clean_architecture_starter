@@ -1,10 +1,11 @@
-import 'package:multi_vendor_starter/src/presentation/feature/page/fact_page/page/fact_page.dart';
+import 'package:multi_vendor_starter/src/presentation/view/page/fact/fact_page.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 
 part 'application_router.gr.dart';
 
+//TODO Starter: ApplicationRouter
 @AutoRouterConfig(
   replaceInRouteName: "Screen, Page, Route",
 )

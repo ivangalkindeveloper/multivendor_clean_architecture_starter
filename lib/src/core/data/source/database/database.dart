@@ -1,18 +1,23 @@
 import 'package:multi_vendor_starter/src/core/data/source/database/table/fact_database_table.dart';
-import 'package:multi_vendor_starter/src/utility/opener/opener.dart';
+import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
+import 'package:multi_vendor_starter/src/utility/platform/opener/opener.dart';
 import 'package:drift/drift.dart';
 
 part '../../../../../generated/src/core/data/source/database/database.g.dart';
 
+//TODO Starter: Database
 @DriftDatabase(
   tables: [
     FactDatabaseTable,
   ],
 )
 class Database extends _$Database {
-  Database()
-      : super(
-          Opener.openDatabase(name: "multi_vendor_starter"),
+  Database({
+    required IConfig config,
+  }) : super(
+          Opener.openDatabase(
+            name: config.databaseName,
+          ),
         );
 
   // You should bump this number whenever you change or add a table definition.

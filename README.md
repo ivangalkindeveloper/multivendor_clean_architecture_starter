@@ -131,54 +131,56 @@ The starter used the following programming patterns:
 * Service Locator - the global typemap is an antipattern, since anything can happen to the objects inside the locator during the entire life cycle of the program, which leads to weakly tracked errors.
 ### Structure
 The structure of the project clearly reflects the interaction of the layers of the architecture:
+
+
 ```
 lib/
 ├── generated/    - directory of all generated files (should be in .gitignore);
 ├── main/     - main functions that launch the runner/initializer utility.
-├── src/    - main source directory;
-│   ├── core/     - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
-│   │
-│   └─────── data/     - common data and datasources of the program core;
-│   │        ├─── client/     - clents classes, for example - API client;
-│   │        │    └───── interceptor/    - interceptors for api client;
-│   │        ├─── data/   - data models;
-│   │        ├─── repository/     - repositories for working with datasources;
-│   │        │
+└── src/    - main source directory;
+    ├── core/     - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
+    │   ├── data/     - common data and datasources of the program core;
+    │   │   ├─── client/     - clents classes, for example - API client;
+    │   │   │    └───── interceptor/    - interceptors for api client;
+    │   │   ├─── data/   - data models;
+    │   │   ├─── repository/     - repositories for working with datasources;
+    │   │   │
 <I>---------------------------------------------<IApi, IDao>
-│   │        │
-│   │        └─── source/     - datasources directory;
-│   │             ├───── api/    - api directory;
-│   │             └───── database/     - database directory;
-│   │                     ├────── dao/    - DAO(CRUD) database models;
-│   │                     └────── table/    - tables of database;
-│   │
+    │   │   │
+    │   │   └─── source/     - datasources directory;
+    │   │        ├───── api/    - api directory;
+    │   │        └───── database/     - database directory;
+    │   │               ├─────── dao/    - DAO(CRUD) database models;
+    │   │               └─────── table/    - tables of database;
+    │   │
 <I>---------------------------------------------<IRepository>
-│   │
-│   └─────── domain/     - business entities and rules;
-│             ├──── entity/     - entities directory;
-│             ├──── interactor/     - interactor directory;
-│             └──── use_case/     - use cases directory;
-│
+    │   │
+    │   └─── domain/     - business entities and rules;
+    │        ├───── entity/     - entities directory;
+    │        ├───── interactor/     - interactor directory;
+    │        └───── use_case/     - use cases directory;
+    │
 <I>---------------------------------------------<IUseCase / IInteractor>
-│
-├────── presentation/     - presentation/view layer;
-│       ├─────────── application/    - root application widget;
-│       ├─────────── component/    - components directory;
-│       ├─────────── feature/    - main directory of presentation activities and presenters;
-│       │            ├────── dialog/     -  dialogs directory;
-│       │            ├────── modal/    -  modals directory;
-│       │            ├────── page/     - pages and presenters directory;
-│       │            └────── picker/     -  dateTime or timeOfDay pickers directory;
-│       ├─────────── l10n/     - localization arb files and untranslated fields;
-│       └─────────── router/     - router(s) of application;
-│
-└────── utility/    - utilities or helpers directory;
+    │
+    ├── presentation/     - presentation/view layer;
+    │       ├─────── application/    - root application widget;
+    │       ├─────── component/    - components directory;
+    │       ├─────── l10n/     - localization arb files and untranslated fields;
+    │       ├─────── router/     - router(s) of application;
+    │       └─────── view/    - main directory of presentation activities and presenters;
+    │                ├─── dialog/     -  dialogs directory;
+    │                ├─── modal/    -  modals directory;
+    │                ├─── page/     - pages directory;
+    │                └─── picker/     -  dateTime or timeOfDay pickers directory;
+    │
+    └── utility/    - utilities or helpers directory;
         ├────── extension/    - extension directory (BuildContext, types and other);
         ├────── initializer/    - initialization library-utility;
         ├────── logger/     - application ligger;
         ├────── mixin/    - classes mixins;
         ├────── opener/     - open datasources library-utility;
         └────── runner/     - runner application library-utility;
+
 vendor/     - directory vendor for materials and scripts;
 ```
 

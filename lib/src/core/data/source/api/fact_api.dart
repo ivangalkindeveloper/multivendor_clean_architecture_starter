@@ -1,8 +1,9 @@
+import 'package:multi_vendor_starter/src/core/data/data/dto/fact/fact_dto.dart';
 import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
-import 'package:multi_vendor_starter/src/core/data/data/fact/fact_dto.dart';
 import 'package:multi_vendor_starter/src/core/data/client/api_clent.dart';
 import 'package:dio/dio.dart';
 
+//TODO Starter: IApi
 abstract class IFactApi {
   Future<FactDto> getRandomFact();
 

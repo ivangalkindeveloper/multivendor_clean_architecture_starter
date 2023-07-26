@@ -1,12 +1,7 @@
+import 'package:multi_vendor_starter/src/utility/extension/date_time_extension.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/material.dart';
 import 'package:l/l.dart';
-
-extension on DateTime {
-  /// Transforms DateTime to String with format: 00:00:00
-  String get formatted =>
-      [hour, minute, second].map(Logger._timeFormat).join(':');
-}
 
 extension on LogLevel {
   /// Emoji for each log level
@@ -32,7 +27,7 @@ class Logger {
   static void d(Object message) => l.d(message);
 
   /// How much digits there should be in the time
-  static const int _timeLength = 2;
+  static const int timeLength = 2;
 
   /// Log options for the [L] library
   static const LogOptions _logOptions = LogOptions(
@@ -41,8 +36,8 @@ class Logger {
   );
 
   /// Formats the time to have [_timeLength] digits
-  static String _timeFormat(int input) =>
-      input.toString().padLeft(_timeLength, '0');
+  static String timeFormat(int input) =>
+      input.toString().padLeft(timeLength, '0');
 
   /// Formats the message for the [L] library
   static String _formatLoggerMessage(

@@ -2,7 +2,9 @@ import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main
 import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main_initialization_steps.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency_presentation.dart';
 import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
+import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency_data.dart';
 import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
 import 'package:multi_vendor_starter/src/presentation/application/application.dart';
 import 'package:flutter/widgets.dart';
@@ -80,12 +82,16 @@ class Initializer {
 
     stopwatch.stop();
     final InitializationResult result = InitializationResult(
-      config: progress.config!,
-      apiClient: progress.apiClient!,
-      database: progress.database!,
-      factRepository: progress.factRepository!,
-      locale: progress.locale!,
-      router: progress.router!,
+      data: DependencyData(
+        config: progress.config!,
+        apiClient: progress.apiClient!,
+        database: progress.database!,
+        factRepository: progress.factRepository!,
+      ),
+      presentation: DependencyPresentation(
+        locale: progress.locale!,
+        router: progress.router!,
+      ),
     );
     this.callback?.onSuccess(
           result,
