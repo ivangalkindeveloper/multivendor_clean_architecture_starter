@@ -277,6 +277,7 @@ Asynchrony:
 Networking:
 - [dio](https://pub.dev/packages/dio);
 - [web_socket_channel](https://pub.dev/packages/web_socket_channel);
+- [signalr_core](https://pub.dev/packages/signalr_core);
 
 Database:
 - [sqflite](https://pub.dev/packages/sqflite);
