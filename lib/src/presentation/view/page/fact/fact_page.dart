@@ -57,10 +57,10 @@ class _FactPage extends StatelessWidget {
           ),
           SizedBox(height: size.s16),
           MVSAnimatedSize(
-            child: BlocBuilder<FactBloc, FactState>(
+            child: BlocBuilder<FactBloc, IFactState>(
               builder: (
                 BuildContext context,
-                FactState state,
+                IFactState state,
               ) {
                 switch (state.lastFactStatus) {
                   case FactStatus.initial:
@@ -131,10 +131,10 @@ class _FactPage extends StatelessWidget {
           ),
           SizedBox(height: size.s16),
           MVSAnimatedSize(
-            child: BlocBuilder<FactBloc, FactState>(
+            child: BlocBuilder<FactBloc, IFactState>(
               builder: (
                 BuildContext context,
-                FactState state,
+                IFactState state,
               ) {
                 switch (state.newFactStatus) {
                   case FactStatus.initial:
@@ -183,10 +183,10 @@ class _FactPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.s16),
-          BlocBuilder<FactBloc, FactState>(
+          BlocBuilder<FactBloc, IFactState>(
             builder: (
               BuildContext context,
-              FactState state,
+              IFactState state,
             ) {
               final bool isLoading =
                   state.lastFactStatus == FactStatus.loading ||

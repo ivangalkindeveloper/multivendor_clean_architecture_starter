@@ -12,7 +12,7 @@ part 'fact_state.dart';
 part '../../../generated/src/logic/fact/fact_bloc.freezed.dart';
 
 //TODO Starter: Bloc
-class FactBloc extends Bloc<FactEvent, FactState> {
+class FactBloc extends Bloc<FactEvent, IFactState> {
   FactBloc({
     required IFactRepository factRepository,
   })  : this._getLastFactUseCase = GetLastFactUseCase(

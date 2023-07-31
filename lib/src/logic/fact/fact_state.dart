@@ -1,5 +1,27 @@
 part of 'fact_bloc.dart';
 
+abstract class IFactState {
+  const IFactState();
+
+  abstract final Fact? lastFact;
+  abstract final FactStatus lastFactStatus;
+  abstract final String? lastFactError;
+  //
+  abstract final Fact? newFact;
+  abstract final FactStatus newFactStatus;
+  abstract final String? newFactError;
+
+  IFactState copyWith({
+    Fact? lastFact,
+    FactStatus? lastFactStatus,
+    String? lastFactError,
+    //
+    Fact? newFact,
+    FactStatus? newFactStatus,
+    String? newFactError,
+  });
+}
+
 enum FactStatus {
   initial,
   loading,
@@ -7,7 +29,7 @@ enum FactStatus {
   error,
 }
 
-class FactState extends Equatable {
+class FactState extends Equatable implements IFactState {
   const FactState({
     this.lastFact,
     this.lastFactStatus = FactStatus.initial,
@@ -18,12 +40,18 @@ class FactState extends Equatable {
     this.newFactError,
   });
 
+  @override
   final Fact? lastFact;
+  @override
   final FactStatus lastFactStatus;
+  @override
   final String? lastFactError;
   //
+  @override
   final Fact? newFact;
+  @override
   final FactStatus newFactStatus;
+  @override
   final String? newFactError;
 
   @override
@@ -37,7 +65,8 @@ class FactState extends Equatable {
         this.newFactError,
       ];
 
-  FactState copyWith({
+  @override
+  IFactState copyWith({
     Fact? lastFact,
     FactStatus? lastFactStatus,
     String? lastFactError,
