@@ -174,7 +174,7 @@ lib/
     │   │
 <I>-------------------------------------------↓-<IRepository>
     │   │
-    │   └─── domain/     - directory of domain (enterprise) business entities and logic;
+    │   └─── domain/     - directory of domain (enterprise) business entities and rules;
     │        ├───── entity/     - entities directory;
     │        ├───── interactor/     - interactor directory;
     │        └───── use_case/     - use cases directory;
@@ -245,13 +245,28 @@ But if you are working on a project alone, and it is a simple application, then 
 This project has only DTO, DAO and business entities, ViewModels here, since this function is essentially performed by the BLoC as a presenter.
 #### "Mapping only in the interactor"
 Mapping of models should take place in the layer that should be provided to another in a form convenient for him.\
-This is stated in [the original article](https://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html).\
-"So when we pass data across a boundary, it is always in the form that is most convenient for the inner circle."\
+This is stated in [the original article](https://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html).
+```
+So when we pass data across a boundary, it is always in the form that is most convenient for the inner circle.\
+```
 Therefore, the data should get into the Interactor in the form it needs. Mapping takes place in the Interface Adapters layer, that is, in the Presenter and Repository.
 #### "UseCases is useless"
 The main problem is that use cases are special cases of the command pattern and a legacy of flashy architecture.\
 This pattern and architecture are designed to explicitly display by classes which business functions and rules your application uses, so the options used are required to solve not technical problems, but architectural ones.\
 If it seems to the developer that this approach is too tedious and useless, in this case, he can always combine all the business rules into an interactor.
+Keep in mind that the book itself about Clean Architecture says just about the variety of use cases:
+```
+USE CASES
+The first bullet—use cases—means that the architecture of the system must support the intent of the system. If the system is a shopping cart application, then the architecture must support shopping cart use cases. Indeed, this is the first concern of the architect, and the first priority of the architecture. The architecture must support the use cases. However, as we discussed previously, architecture does not wield much influence over the behavior of the system. There are very few behavioral options that the architecture can leave open. But influence isn’t everything. The most important thing a good architecture can do to support behavior is to clarify and expose that behavior so that the intent of the system is visible at the architectural level.
+A shopping cart application with a good architecture will look like a shopping cart application. The use cases of that system will be plainly visible within the structure of that system. Developers will not have to hunt for behaviors, because those behaviors will be first-class elements visible at the top level of the system. Those elements will be classes or functions or modules that have prominent positions within the architecture, and they will have names that clearly describe their function.
+Chapter 21, “Screaming Architecture,” will make this point much clearer.
+```
+And also about their decoupling and change for several reasons due to business needs:
+```
+DECOUPLING USE CASES
+What else changes for different reasons? The use cases themselves! The use case for adding an order to an order entry system almost certainly will change at a different rate, and for different reasons, than the use case that deletes an order from the system. Use cases are a very natural way to divide the system. At the same time, use cases are narrow vertical slices that cut through the horizontal
+layers of the system. Each use case uses some UI, some application-specific business rules, some application-independent business rules, and some database functionality. Thus, as we are dividing the system in to horizontal layers, we are also dividing the system into thin vertical use cases that cut through those layers. To achieve this decoupling, we separate the UI of the add-order use case from the UI of the delete-order use case. We do the same with the business rules, and with the database. We keep the use cases separate down the vertical height of the system. You can see the pattern here. If you decouple the elements of the system that change for different reasons, then you can continue to add new use cases without interfering with old ones. If you also group the UI and database in support of those use cases, so that each use case uses a different aspect of the UI and database, then adding new use cases will be unlikely to affect older ones.
+```
 #### "Clean Architecture is not needed in small projects"
 There is an opinion that it is not desirable to implement Clean Architecture on small projects, since its implementation can lead to a lot of time and effort spent on a small project that does not require much architectural attention.\
 The author of this package does not agree with this opinion and believes that it is better to implement architecture on absolutely any applications, since any project will always be subject to scaling, development or just refinement.
@@ -325,6 +340,10 @@ Service:
 - [firebase_performance](https://pub.dev/packages/firebase_performance);
 - [firebase_app_check](https://pub.dev/packages/firebase_app_check);
 - [sentry](https://pub.dev/packages/sentry);
+
+Test:
+- [mockito](https://pub.dev/packages/mockito);
+- [golden_toolkit](https://pub.dev/packages/golden_toolkit);
 ### Unrecomended packages
 Data:
 - [get_it](https://pub.dev/packages/get_it):\

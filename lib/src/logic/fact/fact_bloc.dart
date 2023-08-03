@@ -63,9 +63,7 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           lastFactStatus: FactStatus.success,
         ),
       );
-    } catch (error, stackTrace) {
-      print(error);
-      print(stackTrace);
+    } catch (error) {
       emit(
         state.copyWith(
           lastFactError: error.toString(),
@@ -81,15 +79,9 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
     try {
       final Fact randomFact = await this._getRandomFactUseCase.execute();
 
-      if (state.lastFact == null) {
-        await this._saveFactUseCase.execute(
-              fact: randomFact,
-            );
-      } else {
-        await this._saveFactUseCase.execute(
-              fact: randomFact,
-            );
-      }
+      await this._saveFactUseCase.execute(
+            fact: randomFact,
+          );
 
       emit(
         state.copyWith(
@@ -97,9 +89,7 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           newFactStatus: FactStatus.success,
         ),
       );
-    } catch (error, stackTrace) {
-      print(error);
-      print(stackTrace);
+    } catch (error) {
       emit(
         state.copyWith(
           newFactError: error.toString(),
