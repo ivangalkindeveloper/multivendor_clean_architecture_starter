@@ -9,7 +9,7 @@ import 'package:multi_vendor_starter/src/presentation/component/entity/mvs_hapti
 import 'package:multi_vendor_starter/src/presentation/component/entity/mvs_size.dart';
 import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multi_vendor_starter/src/presentation/scope/dependency_scope.dart';
-import 'package:multi_vendor_starter/src/presentation/scope/scope_nester.dart';
+import 'package:multi_vendor_starter/src/utility/scope/scope_nester.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
 

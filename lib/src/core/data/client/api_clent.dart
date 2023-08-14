@@ -38,8 +38,12 @@ class ApiClient implements IApiClient {
   ApiClient({
     required IConfig config,
     BaseOptions? baseOptions,
-  })  : this._config = config,
-        this._dio = Dio(baseOptions) {
+  }) : this._dio = Dio(baseOptions?.copyWith(
+              baseUrl: config.baseUrl,
+            ) ??
+            BaseOptions(
+              baseUrl: config.baseUrl,
+            )) {
     this._dio.interceptors.addAll(
       const [
         RequestInterceptor(),
@@ -47,7 +51,6 @@ class ApiClient implements IApiClient {
     );
   }
 
-  final IConfig _config;
   final Dio _dio;
 
   @override
@@ -58,7 +61,7 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? headers,
   }) =>
       this._dio.get(
-            "${this._config.baseUrl}$endpoint",
+            endpoint,
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -74,7 +77,7 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? headers,
   }) =>
       this._dio.post(
-            "${this._config.baseUrl}$endpoint",
+            endpoint,
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -90,7 +93,7 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? headers,
   }) =>
       this._dio.put(
-            "${this._config.baseUrl}$endpoint",
+            endpoint,
             data: data,
             queryParameters: queryParameters,
             options: Options(
@@ -106,7 +109,7 @@ class ApiClient implements IApiClient {
     Map<String, dynamic>? headers,
   }) =>
       this._dio.delete(
-            "${this._config.baseUrl}$endpoint",
+            endpoint,
             data: data,
             queryParameters: queryParameters,
             options: Options(
