@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 
 class Runner {
   static Future<void> run({

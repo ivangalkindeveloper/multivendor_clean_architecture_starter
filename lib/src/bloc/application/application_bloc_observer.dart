@@ -1,5 +1,5 @@
-import "package:multi_vendor_starter/src/utility/extension/string_extension.dart";
-import "package:multi_vendor_starter/src/utility/logger/logger.dart";
+import "package:multivendor_clean_architecture_starter/src/utility/extension/string_extension.dart";
+import "package:multivendor_clean_architecture_starter/src/utility/logger/logger.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 //TODO Starter: ApplicationBlocObserver

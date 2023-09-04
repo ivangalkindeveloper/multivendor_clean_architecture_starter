@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency.dart';
-import 'package:multi_vendor_starter/src/presentation/scope/dependency_scope.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:flutter/material.dart';

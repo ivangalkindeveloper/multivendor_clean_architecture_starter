@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/utility/logger/logger.dart';
+import 'package:multivendor_clean_architecture_starter/src/utility/logger/logger.dart';
 
 //TODO Starter: DateTimeExtension
 extension DateTimeExtension on DateTime {

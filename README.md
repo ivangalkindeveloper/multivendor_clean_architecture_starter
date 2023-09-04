@@ -39,7 +39,7 @@ This project has the ability to completely change the vendor environment.\
 Under vendors, not only specific vendors of one application can be implemented (for example, as an implementation of an "white-label" application), but also a canonical approach to "Development" and "Production" environments.
 ### Benefits
 It allows you to have one project that can change the complete application environment depending on the vendor, while having only one Dart codebase.\
-The environment change is implemented by [a shell script](https://github.com/ivangalkindeveloper/multi_vendor_starter/blob/master/lib/vendor/core/switch_vendor.sh).\
+The environment change is implemented by [a shell script](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/vendor/core/switch_vendor.sh).\
 Current script changes the following environment properties:
 - Project identificators (Android package, iOS bundleID, Linux applicationId, macOS bundleID);
 - Application name (Android, iOS, Lunix, macOS, Web, Windows);
@@ -52,10 +52,10 @@ And there are also examples of changing identifiers for [Facebook Events](https:
 Make sure you have the [GNU sed](https://www.gnu.org/software/sed/) stream text editor installed.\
 You can work with scripts from any available shell.
 ### Before starting work with vendors
-Please carefully study how the core [script](https://github.com/ivangalkindeveloper/multi_vendor_starter/blob/master/lib/vendor/core/switch_vendor.sh) works to change the environment.\
+Please carefully study how the core [script](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/lib/vendor/core/switch_vendor.sh) works to change the environment.\
 You should modify this script to suit your needs so that the script uses only the materials and services you need.\
 The script contains an example of using [Facebook Events](https://pub.dev/packages/facebook_app_events) and [FreshchatSDK](https://pub.dev/packages/freshchat_sdk) - these lines are commented out for your understanding, so that you also comment or add the necessary lines for your project to work.\
-Also pay attention to [the vendor scripts](https://github.com/ivangalkindeveloper/multi_vendor_starter/blob/master/lib/vendor/VendorCat/switch.sh), which pass parameters for the operation of the core script.
+Also pay attention to [the vendor scripts](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/lib/vendor/VendorCat/switch.sh), which pass parameters for the operation of the core script.
 ### Add new vendor
 In order to create a new vendor environment, you need the following:
 1. Create a folder with the vendor name in the directory ./lib/vendor/;
@@ -136,11 +136,9 @@ If we are talking about a flutter project, there are repositories with good exam
 The main project directories are well suited for separating them into separate application modules.\
 The project does not use the Presenter pattern, logic controllers using the popular BLoC state management are allocated as a separate "logic" directory.\
 The BLoC is not a presenter, but is distinguished as a separate business layer:\
-
 ![](https://madewithflutter.net/wp-content/uploads/2022/11/architecture.png)
 ### Used patterns
 The starter used the following programming patterns:
-* Controller - classes that implement logic only for further data representing;
 * Command - class-commands that explicitly display the purpose of use. Use cases are a special case of this pattern. Use cases are used in the layer as application business rules to explicitly show the entire operation of the application at the interaction level with all business rules embedded.
 * Interactor - business logic implementation class, used as a replacement for use cases in favor of multiple class commands.
 * Repository - a layer of interaction with data from different data sources;
@@ -150,61 +148,56 @@ The starter used the following programming patterns:
 ### Structure
 The structure of the project clearly reflects the interaction of the layers of the architecture:\
 ```
-lib/
-├── generated/    - directory of all generated files (should be in .gitignore);
-├── main/     - main functions that launch the runner/initializer utility.
-└── src/    - main source directory;
-    ├── core/     - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
-    │   ├─── data/     - common data and datasources of the program core;
-    │   │    ├─── client/     - clents classes, for example - API client;
-    │   │    │    └───── interceptor/    - interceptors for API client;
-    │   │    │
-<I>-------------------------------------------↓-<IHttpClient / IApiClient>
-    │   │    │
-    │   │    ├─── data/   - data models;
-    │   │    ├─── repository/     - repositories for working with datasources;
-    │   │    │
-<I>-------------------------------------------↓-<IApi & IDao>
-    │   │    │
-    │   │    └─── source/     - datasources directory;
-    │   │         ├───── api/    - api directory;
-    │   │         └───── database/     - database directory;
-    │   │                ├─────── dao/    - DAO(CRUD) database models;
-    │   │                └─────── table/    - tables of database;
-    │   │
-<I>-------------------------------------------↓-<IRepository>
-    │   │
-    │   └─── domain/     - directory of domain (enterprise) business entities and rules;
-    │        ├───── entity/     - entities directory;
-    │        ├───── interactor/     - interactor directory;
-    │        └───── use_case/     - use cases directory;
-    │
-<I>-------------------------------------------↑-<IUseCase / IInteractor>
-    │
-    ├── logic/    - directory of application business logic for further presentation;
-    │
-<I>-------------------------------------------↑-<IState>
-    │
-    ├── presentation/     - widget/view layer;
-    │       ├─────── application/    - root application widget;
-    │       ├─────── component/    - components directory;
-    │       ├─────── l10n/     - localization arb files and untranslated fields;
-    │       ├─────── router/     - router(s) of application;
-    │       └─────── view/    - main directory of presentation activities and presenters;
-    │                ├─── dialog/     -  dialogs directory;
-    │                ├─── modal/    -  modals directory;
-    │                ├─── page/     - pages directory;
-    │                └─── picker/     -  dateTime or timeOfDay pickers directory;
-    │
-    └── utility/    - utilities or helpers directory;
-        ├────── extension/    - extension directory (BuildContext, types and other);
-        ├────── initializer/    - initialization library-utility;
-        ├────── logger/     - application ligger;
-        ├────── mixin/    - classes mixins;
-        ├────── opener/     - open datasources library-utility;
-        └────── runner/     - runner application library-utility;
-
-vendor/     - directory vendor for materials and scripts;
+├─ lib/
+│  ├── generated/ - directory of all generated files (should be in .gitignore);
+│  ├── main/      - main functions that launch the runner/initializer utility.
+│  └── src/       - source directory;
+│      │
+│      ├── application/                 - application layer of widgets/renderObjects and other view dependencies;
+│      │   ├─────── l10n/               - localization arb files and untranslated fields;
+│      │   ├─────── router/             - router(s) of application;
+│      │   └─────── widget/             - main directory of widgets;
+│      │             ├──── application/ - root application widgets;
+│      │             ├──── component/   - components directory/library;
+│      │             ├──── dialog/      - dialogs directory;
+│      │             ├──── modal/       - modals directory;
+│      │             ├──── page/        - pages directory;
+│      │             ├──── picker/      - dateTime/timeOfDay pickers directory;
+│      │             └──── scope/       - inherited scopes;
+│      │
+│     <I>-<IEvent & IState>
+│      ├── bloc/ - directory of application business logic;
+│      │
+│      ├── core/ - core directory, here is two independent layers - data and domain, as common data and datasources from the point of view of the program core, and domain - business entities and rules from the point of view of architecture;
+│      │   │
+│      │  <I>--<IHttpClient & IRepository & IApi & IDao>
+│      │   ├─── data/                       - common data and datasources of the program core;
+│      │   │    ├─── client/                - clents classes, for example - HTTP client;
+│      │   │    │    └───── interceptor/    - interceptors for HTTP client;
+│      │   │    ├─── data/                  - all core data models;
+│      │   │    ├─── repository/            - repositories for working with datasources;
+│      │   │    └─── source/                - datasources directory;
+│      │   │         ├───── api/            - api directory;
+│      │   │         └───── database/       - database directory;
+│      │   │                ├─────── dao/   - DAO(CRUD) database models;
+│      │   │                └─────── table/ - tables of database;
+│      │   │
+│      │  <I>--<IUseCase / IInteractor>
+│      │   └─── domain/            - directory of domain (enterprise) business entities and rules;
+│      │        ├───── entity/     - entities directory;
+│      │        ├───── interactor/ - interactors directory;
+│      │        └───── use_case/   - use cases directory;
+│      │
+│      └── utility/                 - utilities or helpers directory;
+│          ├────── extension/       - extension directory (BuildContext, types and other);
+│          ├────── initializer/     - initialization utility;
+│          ├────── logger/          - application logger;
+│          ├────── mixin/           - classes mixins;
+│          ├────── platform/        - platform utilities or libraries;
+│          │       ├─────── opener/ - open datasources library-utility;
+│          │       └─────── runner/ - runner application library-utility;
+│          └────── scope/           - scopes utilities;
+├─ vendor/ - directory vendor for materials and scripts;
 ```
 
 ## Approaches
@@ -232,7 +225,7 @@ For example, project name "financial_wallet" - FW:\
 FWAppBar, FWPrimaryButton, FWText...\
 Components should not contain business logic, but should only provide an API to manage them.\
 You can pass any model to a component only if the model properties are needed only to display the component.
-#### Presentation
+#### Widget
 No need to create separate services for modals, dialogs and pickers.\
 You just need separate widget classes, with static "show" method, in which the required field will be BuildContext.
 
@@ -303,7 +296,7 @@ State managment:
 - [bloc](https://pub.dev/packages/bloc);
 - [flutter_bloc](https://pub.dev/packages/flutter_bloc);
 
-Presentation:
+Widget:
 - [flutter_platform_component](https://pub.dev/packages/flutter_platform_component);
 - [animations](https://pub.dev/packages/animations);
 - [flutter_staggered_animations](https://pub.dev/packages/flutter_staggered_animations);
@@ -364,9 +357,9 @@ Previously, it also had bugs that could only be discovered in production.
 - [riverpod](https://pub.dev/packages/riverpod):\
 Implementation of global variables and states.
 - [hydrated_bloc](https://pub.dev/packages/hydrated_bloc):\
-Implementation and stores of global states.
+Implementation and stores of global states from database.
 
-Presentation:
+Widget:
 - [flutter_hooks](https://pub.dev/packages/flutter_hooks):\
 Violation of the functional programming paradigm, which in turn talks about the clean of functions, which should be clean, not affect any external variables and states.\
 The build function in widgets should always be clean.

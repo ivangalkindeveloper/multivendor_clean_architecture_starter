@@ -6,6 +6,7 @@ class Opener {
   }) =>
       _openDatabase();
 
-  static Never _openDatabase() =>
-      throw UnsupportedError("Running unsupported platform");
+  static Never _openDatabase() => throw UnsupportedError(
+        "Running unsupported platform",
+      );
 }

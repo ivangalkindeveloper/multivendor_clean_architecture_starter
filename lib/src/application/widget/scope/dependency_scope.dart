@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency.dart';
-import 'package:multi_vendor_starter/src/utility/mixin/scope_mixin.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
+import 'package:multivendor_clean_architecture_starter/src/utility/mixin/scope_mixin.dart';
 import 'package:flutter/material.dart';
 
 class DependencyScope extends InheritedWidget with ScopeMixin {

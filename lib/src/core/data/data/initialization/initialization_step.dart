@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
-import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:async';
 

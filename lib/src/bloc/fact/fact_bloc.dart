@@ -1,15 +1,16 @@
-import 'package:multi_vendor_starter/src/core/domain/use_case/fact/get_random_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/domain/use_case/fact/get_last_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/domain/use_case/fact/save_fact_use_case.dart';
-import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/get_random_fact_use_case.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/get_last_fact_use_case.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/save_fact_use_case.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
+part '../../../generated/src/bloc/fact/fact_bloc.freezed.dart';
 part 'fact_event.dart';
 part 'fact_state.dart';
-part '../../../generated/src/logic/fact/fact_bloc.freezed.dart';
 
 //TODO Starter: Bloc
 class FactBloc extends Bloc<FactEvent, IFactState> {
@@ -28,7 +29,12 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           lastFactStatus: FactStatus.initial,
           newFactStatus: FactStatus.initial,
         )) {
-    on<_GetFactsEvent>(this._getFacts);
+    on<FactEvent>(
+      ((FactEvent event, Emitter<IFactState> emit) => event.map(
+            getFacts: (_GetFactsEvent event) => this._getFacts(event, emit),
+          )),
+      transformer: bloc_concurrency.sequential(),
+    );
   }
 
   final GetLastFactUseCase _getLastFactUseCase;
@@ -70,6 +76,7 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           lastFactStatus: FactStatus.error,
         ),
       );
+      rethrow;
     }
   }
 
@@ -96,6 +103,7 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           newFactStatus: FactStatus.error,
         ),
       );
+      rethrow;
     }
   }
 }

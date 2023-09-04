@@ -1,9 +1,9 @@
-import 'package:multi_vendor_starter/src/core/data/client/interceptor/request_interceptor.dart';
-import 'package:multi_vendor_starter/src/core/data/data/config/config.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/client/interceptor/request_interceptor.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:dio/dio.dart';
 
-abstract class IApiClient {
-  const IApiClient();
+abstract class IHttpClient {
+  const IHttpClient();
 
   Future<Response> get({
     required String endpoint,
@@ -34,8 +34,8 @@ abstract class IApiClient {
   });
 }
 
-class ApiClient implements IApiClient {
-  ApiClient({
+class HttpClient implements IHttpClient {
+  HttpClient({
     required IConfig config,
     BaseOptions? baseOptions,
   }) : this._dio = Dio(baseOptions?.copyWith(

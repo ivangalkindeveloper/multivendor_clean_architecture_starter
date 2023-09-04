@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/presentation/router/application_router.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/widgets.dart';
 

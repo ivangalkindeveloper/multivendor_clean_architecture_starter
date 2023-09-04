@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_step.dart';
 
 abstract class IInitializationCallback {
   const IInitializationCallback();

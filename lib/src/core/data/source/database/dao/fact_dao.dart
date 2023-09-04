@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/source/database/database.dart';
-import 'package:multi_vendor_starter/src/core/data/source/database/dao/dao.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/database.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/dao/dao.dart';
 import 'package:drift/drift.dart';
 
 //TODO Starter: DAO

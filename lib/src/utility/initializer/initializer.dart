@@ -1,12 +1,12 @@
-import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main_initialization_callback.dart';
-import 'package:multi_vendor_starter/src/core/data/data/initialization/main/main_initialization_steps.dart';
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_progress.dart';
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_result.dart';
-import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency_presentation.dart';
-import 'package:multi_vendor_starter/src/core/data/data/initialization/initialization_step.dart';
-import 'package:multi_vendor_starter/src/core/data/data/dependency/dependency_data.dart';
-import 'package:multi_vendor_starter/src/core/data/data/environment/environment.dart';
-import 'package:multi_vendor_starter/src/presentation/application/application.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/main/main_initialization_callback.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/main/main_initialization_steps.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_presentation.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_step.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_data.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/application/application.dart';
 import 'package:flutter/widgets.dart';
 
 class Initializer {
@@ -84,7 +84,7 @@ class Initializer {
     final InitializationResult result = InitializationResult(
       data: DependencyData(
         config: progress.config!,
-        apiClient: progress.apiClient!,
+        httpClient: progress.httpClient!,
         database: progress.database!,
         factRepository: progress.factRepository!,
       ),

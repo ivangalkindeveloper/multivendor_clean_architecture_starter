@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/presentation/component/global/mvs_picker.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/component/global/mvs_picker.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: TimeOfDayPicker

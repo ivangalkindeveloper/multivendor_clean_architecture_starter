@@ -1,5 +1,5 @@
-import 'package:multi_vendor_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multi_vendor_starter/src/core/domain/entity/fact/fact.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
 
 //TODO Starter: IInteractor
 abstract class IFactInteractor {

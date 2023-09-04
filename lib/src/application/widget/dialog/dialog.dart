@@ -1,18 +1,18 @@
-import 'package:multi_vendor_starter/src/presentation/component/global/mvs_modal.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/component/global/mvs_dialog.dart';
 import 'package:flutter/widgets.dart';
 
-//TODO Starter: PopUpModal
-class PopUpModal extends StatelessWidget {
-  const PopUpModal({
+//TODO Starter: Dialog
+class Dialog extends StatelessWidget {
+  const Dialog({
     super.key,
   });
 
   static show({
     required BuildContext context,
   }) =>
-      showMVSPopUpModal(
+      showMVSDialog(
         context: context,
-        child: const PopUpModal(),
+        child: const Dialog(),
       );
 
   @override

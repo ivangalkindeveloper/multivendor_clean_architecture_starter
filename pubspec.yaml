@@ -1,4 +1,4 @@
-name: multi_vendor_starter
+name: multivendor_clean_architecture_starter
 description: Multivendor starter repo for new project.
 publish_to: 'none'
 version: 1.0.0+1
@@ -11,6 +11,15 @@ dependencies:
   # Framework
   flutter:
     sdk: flutter
+
+  # Application
+  auto_route:
+  bloc_concurrency:
+  flutter_bloc:
+  flutter_localizations:
+    sdk: flutter
+  flutter_platform_component:
+  intl:
 
   # Data
   dio:
@@ -30,27 +39,19 @@ dependencies:
   flutter_native_splash:
   url_strategy:
 
-  # Presentation
-  auto_route:
-  flutter_bloc:
-  flutter_localizations:
-    sdk: flutter
-  flutter_platform_component:
-  intl:
-
 dev_dependencies:
-  # Test
-  flutter_test:
-    sdk: flutter
-  test:
+  # Application
+  auto_route_generator:
 
   # Data
   drift_dev:
   freezed:
   json_serializable:
 
-  # Presentation
-  auto_route_generator:
+  # Test
+  flutter_test:
+    sdk: flutter
+  test:
 
   # Utility
   build_runner:

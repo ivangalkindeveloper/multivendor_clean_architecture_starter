@@ -1,4 +1,4 @@
-import 'package:multi_vendor_starter/src/utility/extension/date_time_extension.dart';
+import 'package:multivendor_clean_architecture_starter/src/utility/extension/date_time_extension.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/material.dart';
 import 'package:l/l.dart';

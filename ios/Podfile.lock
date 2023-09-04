@@ -9,18 +9,18 @@ PODS:
     - FlutterMacOS
   - smart_auth (0.0.1):
     - Flutter
-  - sqlite3 (3.41.2):
-    - sqlite3/common (= 3.41.2)
-  - sqlite3/common (3.41.2)
-  - sqlite3/fts5 (3.41.2):
+  - sqlite3 (3.43.0):
+    - sqlite3/common (= 3.43.0)
+  - sqlite3/common (3.43.0)
+  - sqlite3/fts5 (3.43.0):
     - sqlite3/common
-  - sqlite3/perf-threadsafe (3.41.2):
+  - sqlite3/perf-threadsafe (3.43.0):
     - sqlite3/common
-  - sqlite3/rtree (3.41.2):
+  - sqlite3/rtree (3.43.0):
     - sqlite3/common
   - sqlite3_flutter_libs (0.0.1):
     - Flutter
-    - sqlite3 (~> 3.41.2)
+    - sqlite3 (~> 3.43.0)
     - sqlite3/fts5
     - sqlite3/perf-threadsafe
     - sqlite3/rtree
@@ -57,8 +57,8 @@ SPEC CHECKSUMS:
   flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
-  sqlite3: fd89671d969f3e73efe503ce203e28b016b58f68
-  sqlite3_flutter_libs: 04ba0d14a04335a2fbf9a331e8664f401fbccdd5
+  sqlite3: 7afcf055d3700254769a4dcba56f27d26b5515c9
+  sqlite3_flutter_libs: 878ccbdcfd7b7cb41a774ec238223d876880c5ec
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

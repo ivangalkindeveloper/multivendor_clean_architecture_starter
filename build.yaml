@@ -33,7 +33,7 @@ targets:
           copy_with: true
           equal: true
           map:
-            map: false
+            map: true
             map_or_null: false
             maybe_map: false
           when:
