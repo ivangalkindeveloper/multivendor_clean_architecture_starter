@@ -71,7 +71,7 @@ The recommended size - 1152x1152.\
 The required names - splash_logo_android_12.png, splash_logo_android_12_dark.png.
   2.5. Splash screen logo for light and dark theme:\
 The recommended size - no more than 400 in height.\
-The required names - splash_logo.png, splash_logo_dark.png.\
+The required names - splash_logo.png, splash_logo_dark.png.
 3. Add a script to change the environment.\
 Repeat already created scripts for the environment and fill in the parameters that need to be updated.\
 The last line is sure to run the core script.\
