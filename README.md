@@ -68,14 +68,14 @@ The recommended size - 375x812.\
 The required names - splash_background.png, splash_background_dark.png.\
   2.4. Splash screen logo for Android 12 for light and dark theme:\
 The recommended size - 1152x1152.\
-The required names - splash_logo_android_12.png, splash_logo_android_12_dark.png.\
+The required names - splash_logo_android_12.png, splash_logo_android_12_dark.png.
   2.5. Splash screen logo for light and dark theme:\
 The recommended size - no more than 400 in height.\
 The required names - splash_logo.png, splash_logo_dark.png.\
 3. Add a script to change the environment.\
 Repeat already created scripts for the environment and fill in the parameters that need to be updated.\
 The last line is sure to run the core script.\
-The required name - switch.sh.\
+The required name - switch.sh.
 4. Add a command to change the vendor in this README in the CLI section for quick convenience:
 ```sh
 bash ./vendor/<new-vendor-folder-name>/switch.sh
@@ -112,7 +112,7 @@ At the moment, this is the best architecture that is suitable not only for enter
 The main concept - the allocation of business rules as the core, low connectivity of modules and interaction with dependency inversion.\
 Main layers of architecture:
 
-![](https://hsto.org/r/w1560/web/22b/033/c50/22b033c50a144c7491662c8cd292fbab.jpg)\
+![](https://hsto.org/r/w1560/web/22b/033/c50/22b033c50a144c7491662c8cd292fbab.jpg)
 
 There is a rule in architecture - Dependency Rule.\
 The rule interprets that the inner layers should not depend on the outer ones. That is, our business logic and application logic should not depend on presenters, UI, databases, etc. On the original diagram, this rule is depicted with arrows pointing inward.\
@@ -304,7 +304,7 @@ This project has only DTO, DAO and business entities, ViewModels here, since thi
 Mapping of models should take place in the layer that should be provided to another in a form convenient for him.\
 This is stated in [the original article](https://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html).
 ```
-So when we pass data across a boundary, it is always in the form that is most convenient for the inner circle.\
+So when we pass data across a boundary, it is always in the form that is most convenient for the inner circle.
 ```
 Therefore, the data should get into the Interactor in the form it needs. Mapping takes place in the Interface Adapters layer, that is, in the Presenter and Repository.
 #### "UseCases is useless"
