@@ -219,6 +219,9 @@ Full batch scalability might look like this:
 │      │               ├──── page/
 │      │               ├──── picker/
 │      │               └──── scope/
+│      ├── core/
+│      │   ├─── client/
+│      │   └─── database/
 │      └── utility/
 │          └────── extension/
 ├─ package/
@@ -226,8 +229,10 @@ Full batch scalability might look like this:
 │  ├────── component/
 │  ├────── bloc/ <IEvent & IState>
 │  ├────── core/ 
+│  │       ├── api/ <IApi>
+│  │       ├── dao/ <IDao>
 │  │       ├── repository/ <IRepository>
-│  │       └── api/
+│  │       └── table/
 │  ├────── domain/ 
 │  │       ├───── entity/
 │  │       ├───── interactor/ <IInteractor>
@@ -256,7 +261,6 @@ You can also describe it as application logic and enterprise logic, getting some
 ```
 ├─ lib/
 │  └── src/
-│      │
 │      └── core/
 │          └─── domain/
 │               ├───── bloc/
