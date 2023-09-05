@@ -1,6 +1,7 @@
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/cupertino.dart';
 
+//TODO Starter: MVSScaffold
 class MVSScaffold extends StatelessWidget {
   const MVSScaffold({
     this.appBar,

@@ -1,6 +1,7 @@
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
 
+//TODO Starter: MVSAnimatedSize
 class MVSAnimatedSize extends StatelessWidget {
   const MVSAnimatedSize({
     super.key,

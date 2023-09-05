@@ -7,10 +7,7 @@ class PopUpModal extends StatelessWidget {
     super.key,
   });
 
-  static show({
-    required BuildContext context,
-  }) =>
-      showMVSPopUpModal(
+  static show(BuildContext context) => showMVSPopUpModal(
         context: context,
         child: const PopUpModal(),
       );

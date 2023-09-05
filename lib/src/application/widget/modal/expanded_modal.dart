@@ -7,10 +7,7 @@ class ExpandedModal extends StatelessWidget {
     super.key,
   });
 
-  static show({
-    required BuildContext context,
-  }) =>
-      showMVSExpandedModal(
+  static show(BuildContext context) => showMVSExpandedModal(
         context: context,
         child: const ExpandedModal(),
       );

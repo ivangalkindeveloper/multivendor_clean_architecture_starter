@@ -2,6 +2,7 @@ import 'package:multivendor_clean_architecture_starter/src/core/data/data/depend
 import 'package:multivendor_clean_architecture_starter/src/utility/mixin/scope_mixin.dart';
 import 'package:flutter/material.dart';
 
+//TODO Starter: DependencyScope
 class DependencyScope extends InheritedWidget with ScopeMixin {
   const DependencyScope({
     super.key,

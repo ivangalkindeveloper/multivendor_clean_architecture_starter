@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 
+//TODO Starter: MVSText
 class MVSText {
   static Widget regular16Black({
     required BuildContext context,

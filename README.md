@@ -167,7 +167,8 @@ The structure of the project clearly reflects the interaction of the layers of t
 │      │               ├──── modal/       - modals directory;
 │      │               ├──── page/        - pages directory;
 │      │               ├──── picker/      - dateTime/timeOfDay pickers directory;
-│      │               └──── scope/       - inherited scopes;
+│      │               ├──── scope/       - inherited scopes;
+│      │               └──── snackbar/    - snackbars directory;
 │      │
 │     <I>-<IEvent & IState>
 │      ├── bloc/ - directory of application business logic;
@@ -218,25 +219,27 @@ Full batch scalability might look like this:
 │      │               ├──── modal/
 │      │               ├──── page/
 │      │               ├──── picker/
-│      │               └──── scope/
+│      │               ├──── scope/
+│      │               └──── snackbar/
 │      ├── core/
 │      │   ├─── client/
+│      │   │    └───── interceptor/
 │      │   └─── database/
+│      │        └─────── table/
 │      └── utility/
 │          └────── extension/
 ├─ package/
-│  ├────── localization/
-│  ├────── component/
 │  ├────── bloc/ <IEvent & IState>
+│  ├────── component/
 │  ├────── core/ 
 │  │       ├── api/ <IApi>
 │  │       ├── dao/ <IDao>
-│  │       ├── repository/ <IRepository>
-│  │       └── table/
+│  │       └── repository/ <IRepository>
 │  ├────── domain/ 
 │  │       ├───── entity/
 │  │       ├───── interactor/ <IInteractor>
 │  │       └───── use_case/ <IUseCase>
+│  ├────── localization/
 │  └────── utility/
 │          ├────── initializer/
 │          ├────── logger/

@@ -7,10 +7,7 @@ class Dialog extends StatelessWidget {
     super.key,
   });
 
-  static show({
-    required BuildContext context,
-  }) =>
-      showMVSDialog(
+  static show(BuildContext context) => showMVSDialog(
         context: context,
         child: const Dialog(),
       );

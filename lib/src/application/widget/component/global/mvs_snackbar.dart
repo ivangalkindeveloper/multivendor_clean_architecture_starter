@@ -1,12 +1,12 @@
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
 
-//TODO Starter: showMVSDialog
-Future<T?> showMVSDialog<T>({
+//TODO Starter: showMVSSnackbar
+void showMVSSnackbar({
   required BuildContext context,
   required Widget child,
 }) =>
-    showFPCDialog<T>(
+    showFPCSnackBar(
       context: context,
       child: child,
     );
