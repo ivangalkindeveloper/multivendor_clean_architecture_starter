@@ -1,7 +1,7 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/database.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/dao/dao.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/dao/dao.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dto/fact/fact_dto.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/api/fact_api.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/api/fact_api.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
 import 'dart:async';
 

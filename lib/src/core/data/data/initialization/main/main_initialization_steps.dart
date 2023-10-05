@@ -3,12 +3,12 @@ import 'package:multivendor_clean_architecture_starter/src/core/data/data/initia
 import 'package:multivendor_clean_architecture_starter/src/bloc/application/application_bloc_observer.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config_vendor_cat.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config_vendor_dog.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/dao/fact_dao.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/dao/fact_dao.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/database/database.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/source/api/fact_api.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/api/fact_api.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/client/http_clent.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';

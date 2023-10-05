@@ -168,7 +168,7 @@ The structure of the project clearly reflects the interaction of the layers of t
 │      │               ├──── page/        - pages directory;
 │      │               ├──── picker/      - dateTime/timeOfDay pickers directory;
 │      │               ├──── scope/       - inherited scopes;
-│      │               └──── snackbar/    - snackbars directory;
+│      │               └──── snack_bar/    - snack bars directory;
 │      │
 │     <I>-<IEvent & IState>
 │      ├── bloc/ - directory of application business logic;
@@ -180,12 +180,12 @@ The structure of the project clearly reflects the interaction of the layers of t
 │      │   │    ├─── client/                - clents classes, for example - HTTP client;
 │      │   │    │    └───── interceptor/    - interceptors for HTTP client;
 │      │   │    ├─── data/                  - all core data models;
-│      │   │    ├─── repository/            - repositories for working with datasources;
-│      │   │    └─── source/                - datasources directory;
-│      │   │         ├───── api/            - api directory;
-│      │   │         └───── database/       - database directory;
-│      │   │                ├─────── dao/   - DAO(CRUD) database models;
-│      │   │                └─────── table/ - tables of database;
+│      │   │    ├─── data_source/           - data sources directory;
+│      │   │    │    ├───── api/            - api directory;
+│      │   │    │    └───── database/       - database directory;
+│      │   │    │           ├─────── dao/   - DAO(CRUD) database models;
+│      │   │    │           └─────── table/ - tables of database;
+│      │   │    └─── repository/            - repositories for working with datasources;
 │      │   │
 │      │  <I>--<IUseCase / IInteractor>
 │      │   └─── domain/            - directory of domain (enterprise) business entities and rules;

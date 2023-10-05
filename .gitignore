@@ -32,6 +32,7 @@ migrate_working_dir/
 .pub/
 /build/
 lib/generated/
+lib//split_debug_info/
 
 # Symbolication related
 app.*.symbols
