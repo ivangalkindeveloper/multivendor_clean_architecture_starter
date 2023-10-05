@@ -1,13 +1,13 @@
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/global/mvs_snackbar.dart';
 import 'package:flutter/widgets.dart';
 
-//TODO Starter: SuccessSnackbar
-class SuccessSnackbar extends StatelessWidget {
-  const SuccessSnackbar({super.key});
+//TODO Starter: SuccessSnackBar
+class SuccessSnackBar extends StatelessWidget {
+  const SuccessSnackBar({super.key});
 
   static show(BuildContext context) => showMVSSnackbar(
         context: context,
-        child: const SuccessSnackbar(),
+        child: const SuccessSnackBar(),
       );
 
   @override

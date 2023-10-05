@@ -5,6 +5,13 @@ import 'package:dio/dio.dart';
 abstract class IHttpClient {
   const IHttpClient();
 
+  Future<Response> request({
+    required String endpoint,
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  });
+
   Future<Response> get({
     required String endpoint,
     Object? data,
@@ -52,6 +59,22 @@ class HttpClient implements IHttpClient {
   }
 
   final Dio _dio;
+
+  @override
+  Future<Response> request({
+    required String endpoint,
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) =>
+      this._dio.request(
+            endpoint,
+            data: data,
+            queryParameters: queryParameters,
+            options: Options(
+              headers: headers,
+            ),
+          );
 
   @override
   Future<Response> get({
