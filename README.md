@@ -442,19 +442,20 @@ The build function in widgets should always be clean.
 dart run build_runner build --delete-conflicting-outputs
 dart run build_runner build
 ```
-#### Vendor
+#### Vendor switch
 ```sh
-bash ./vendor/VendorCat/switch.sh
-bash ./vendor/VendorDog/switch.sh
+bash ./vendor/vendor_cat/switch.sh
+bash ./vendor/vendor_dog/switch.sh
 ```
-#### Build
-```
-flutter build web -t lib/main/main_vendor_cat.dart --release --no-tree-shake-icons
-flutter build web -t lib/main/main_vendor_dog.dart --release --no-tree-shake-icons
+#### Vendor build
+```sh
+bash ./vendor/vendor_cat/build_apk.sh
+bash ./vendor/vendor_cat/build_appbundle.sh
+bash ./vendor/vendor_cat/build_ipa.sh
+bash ./vendor/vendor_cat/build_web.sh
 
-flutter build web -t lib/main/main_vendor_cat.dart --release
-flutter build web -t lib/main/main_vendor_dog.dart --release
-
-flutter build web -t lib/main/main_vendor_cat.dart
-flutter build web -t lib/main/main_vendor_dog.dart
+bash ./vendor/vendor_dog/build_apk.sh
+bash ./vendor/vendor_dog/build_appbundle.sh
+bash ./vendor/vendor_dog/build_ipa.sh
+bash ./vendor/vendor_dog/build_web.sh
 ```
