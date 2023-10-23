@@ -152,13 +152,20 @@ The starter used the following programming patterns:
 The current state of the project is great for small to medium projects.\
 The structure of the project clearly reflects the interaction of the layers of the architecture:
 ```
+├─ asset/
+│  ├──── font/    - text and icon fonts directory;
+│  ├──── icon/    - application icon (reserved for vendor script);
+│  ├──── l10n/    - localization arb files and untranslated fields;
+│  ├──── splash/  - application splash screen (reserved for vendor script);
+│  ├──── svg/     - svg files directory;
+│  └──── vec/     - vec fiels directory;
+│
 ├─ lib/
 │  ├── generated/ - directory of all generated files (should be in .gitignore);
-│  ├── main/      - main functions that launch the runner/initializer utility.
+│  ├── main/      - main functions that launch the runner/initializer utility;
 │  └── src/       - source directory;
 │      │
-│      ├── application/                   - application layer of widgets/renderObjects and other view dependencies;
-│      │   ├────────── l10n/              - localization arb files and untranslated fields;
+│      ├── application/                   - application layer of widgets/elements/renderObjects and other view dependencies;
 │      │   ├────────── router/            - router(s) of application;
 │      │   └────────── widget/            - main directory of widgets;
 │      │               ├──── application/ - root application widgets;
@@ -202,11 +209,13 @@ The structure of the project clearly reflects the interaction of the layers of t
 │          │       ├─────── opener/ - open datasources library-utility;
 │          │       └─────── runner/ - runner application library-utility;
 │          └────── scope/           - scopes utilities;
+│
 ├─ vendor/ - directory vendor for materials and scripts;
 ```
 In the further development of the project, scalability is inevitable, so the necessary layers and components of the system are separated into separate packages and their changes are handled by individual developers or employees.\
 Full batch scalability might look like this:
 ```
+├─ asset/
 ├─ lib/
 │  ├── generated/
 │  ├── main/
@@ -248,7 +257,7 @@ Full batch scalability might look like this:
 │          │       ├─────── opener/
 │          │       └─────── runner/
 │          └────── scope/
-├─ vendor/ - directory vendor for materials and scripts;
+├─ vendor/
 ```
 ### Adaptation
 Each project is unique in its own way, both in its purpose, potential scale, ease of development and its developers.\
