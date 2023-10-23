@@ -1,3 +1,4 @@
+import 'package:multivendor_clean_architecture_starter/src/core/data/client/interceptor/request_interceptor.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_step.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/application/application_bloc_observer.dart';
@@ -64,6 +65,9 @@ class MainInitializationSteps {
       ) =>
           progress.httpClient = HttpClient(
         config: progress.config!,
+        interceptors: const [
+          RequestInterceptor(),
+        ],
       ),
     ),
     InitializationStep(

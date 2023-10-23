@@ -1,4 +1,3 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/interceptor/request_interceptor.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:dio/dio.dart';
 
@@ -45,17 +44,18 @@ class HttpClient implements IHttpClient {
   HttpClient({
     required IConfig config,
     BaseOptions? baseOptions,
+    List<Interceptor>? interceptors,
   }) : this._dio = Dio(baseOptions?.copyWith(
               baseUrl: config.baseUrl,
             ) ??
             BaseOptions(
               baseUrl: config.baseUrl,
             )) {
-    this._dio.interceptors.addAll(
-      const [
-        RequestInterceptor(),
-      ],
-    );
+    if (interceptors != null) {
+      this._dio.interceptors.addAll(
+            interceptors,
+          );
+    }
   }
 
   final Dio _dio;
