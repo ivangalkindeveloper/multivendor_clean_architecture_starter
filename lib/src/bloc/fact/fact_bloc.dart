@@ -30,9 +30,13 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
           newFactStatus: FactStatus.initial,
         )) {
     on<FactEvent>(
-      ((FactEvent event, Emitter<IFactState> emit) => event.map(
-            getFacts: (_GetFactsEvent event) => this._getFacts(event, emit),
-          )),
+      (
+        FactEvent event,
+        Emitter<IFactState> emit,
+      ) =>
+          event.map(
+        getFacts: (_GetFactsEvent event) => this._getFacts(event, emit),
+      ),
       transformer: bloc_concurrency.sequential(),
     );
   }
