@@ -9,7 +9,8 @@ class TimePicker extends StatelessWidget {
 
   static show(BuildContext context) => showMVSTimePicker(
         context: context,
-        cupertinoModalBuilder: (BuildContext context) => const TimePicker(),
+        cupertinoBottomSheetBuilder: (BuildContext context) =>
+            const TimePicker(),
       );
 
   @override

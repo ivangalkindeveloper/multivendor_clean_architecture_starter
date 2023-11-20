@@ -4,9 +4,9 @@ import 'package:multivendor_clean_architecture_starter/src/application/widget/co
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/button/mvs_primary_button.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/default/mvs_list_view.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/scaffold/mvs_scaffold.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/text/mvs_text.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/fact/fact_bloc.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
@@ -42,18 +42,18 @@ class _FactPage extends StatelessWidget {
     final Dependency dependency = DependencyScope.of(context);
     final IConfig config = dependency.data.config;
 
-    final IFPCSize size = context.componentSize;
+    final IFPCSize size = context.fpcSize;
 
     return MVSScaffold(
       appBar: MVSScreenAppBar(
-        context: context,
+        context,
         title: "Animal Fact",
       ),
       body: MVSListView(
         children: [
           MVSText.medium16Black(
-            context: context,
-            text: "Animal: ${config.animalType}",
+            context,
+            "Animal: ${config.animalType}",
           ),
           SizedBox(height: size.s16),
           MVSAnimatedSize(
@@ -75,19 +75,19 @@ class _FactPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MVSText.medium16Black(
-                          context: context,
-                          text: "Last fact about ${config.animalType}s:",
+                          context,
+                          "Last fact about ${config.animalType}s:",
                         ),
                         SizedBox(height: size.s16 / 4),
                         if (state.lastFact != null)
                           MVSText.regular16Black(
-                            context: context,
-                            text: state.lastFact!.description,
+                            context,
+                            state.lastFact!.description,
                           )
                         else
                           MVSText.regular16Black(
-                            context: context,
-                            text: "No last fact :(",
+                            context,
+                            "No last fact :(",
                           ),
                       ],
                     );
@@ -98,14 +98,14 @@ class _FactPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MVSText.medium16Black(
-                          context: context,
-                          text: "Last fact error:",
+                          context,
+                          "Last fact error:",
                         ),
                         SizedBox(height: size.s16 / 4),
                         if (state.lastFactError != null)
                           MVSText.regular16Danger(
-                            context: context,
-                            text: state.lastFactError!,
+                            context,
+                            state.lastFactError!,
                           ),
                         if (state.lastFact != null)
                           Column(
@@ -113,13 +113,13 @@ class _FactPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               MVSText.medium16Black(
-                                context: context,
-                                text: "Last fact about ${config.animalType}s:",
+                                context,
+                                "Last fact about ${config.animalType}s:",
                               ),
                               SizedBox(height: size.s16 / 4),
                               MVSText.regular16Black(
-                                context: context,
-                                text: state.lastFact!.description,
+                                context,
+                                state.lastFact!.description,
                               ),
                             ],
                           ),
@@ -149,14 +149,14 @@ class _FactPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MVSText.medium16Black(
-                          context: context,
-                          text: "New fact about ${config.animalType}s:",
+                          context,
+                          "New fact about ${config.animalType}s:",
                         ),
                         SizedBox(height: size.s16 / 4),
                         if (state.newFact != null)
                           MVSText.regular16Black(
-                            context: context,
-                            text: state.newFact!.description,
+                            context,
+                            state.newFact!.description,
                           ),
                       ],
                     );
@@ -167,14 +167,14 @@ class _FactPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MVSText.medium16Black(
-                          context: context,
-                          text: "New fact error:",
+                          context,
+                          "New fact error:",
                         ),
                         SizedBox(height: size.s16 / 4),
                         if (state.newFactError != null)
                           MVSText.regular16Danger(
-                            context: context,
-                            text: state.newFactError!,
+                            context,
+                            state.newFactError!,
                           ),
                       ],
                     );

@@ -3,10 +3,15 @@ import 'package:flutter/widgets.dart';
 
 //TODO Starter: DangerSnackBar
 class DangerSnackBar extends StatelessWidget {
-  const DangerSnackBar({super.key});
+  const DangerSnackBar({
+    super.key,
+  });
 
-  static show(BuildContext context) => showMVSSnackbar(
-        context: context,
+  static show(
+    BuildContext context,
+  ) =>
+      showMVSSnackbar(
+        context,
         child: const DangerSnackBar(),
       );
 

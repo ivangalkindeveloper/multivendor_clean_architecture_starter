@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 
 //TODO Starter: ApplicationWidget
 class ApplicationWidget extends StatelessWidget {
-  const ApplicationWidget({super.key});
+  const ApplicationWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final Dependency dependency = DependencyScope.of(context);
 
     return FPCApp.router(
-      context: context,
+      context,
       locale: dependency.presentation.locale,
       localizationsDelegates: ApplicationLocalization.localizationsDelegates,
       supportedLocales: ApplicationLocalization.supportedLocales,

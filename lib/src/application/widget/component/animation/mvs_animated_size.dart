@@ -12,8 +12,8 @@ class MVSAnimatedSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IFPCAnimation animation = context.componentAnimation;
-    final IFPCDuration duration = context.componentDuration;
+    final IFPCAnimation animation = context.fpcAnimation;
+    final IFPCDuration duration = context.fpcDuration;
 
     return AnimatedSize(
       alignment: Alignment.topLeft,

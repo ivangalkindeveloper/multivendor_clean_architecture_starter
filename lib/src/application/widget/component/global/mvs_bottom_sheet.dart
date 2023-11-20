@@ -1,21 +1,21 @@
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
 
-//TODO Starter: showMVSExpandedModal
-Future<T?> showMVSExpandedModal<T>({
+//TODO Starter: showMVSExpandedBottomSheet
+Future<T?> showMVSExpandedBottomSheet<T>({
   required BuildContext context,
   required Widget child,
 }) =>
-    showFPCExpandedModal<T>(
-      context: context,
+    showFPCExpandedBottomSheet<T>(
+      context,
       child: child,
     );
 
-Future<T?> showMVSPopUpModal<T>({
+Future<T?> showMVSSmallBottomSheet<T>({
   required BuildContext context,
   required Widget child,
 }) =>
-    showFPCPopUpModal<T>(
-      context: context,
+    showFPCSmallBottomSheet<T>(
+      context,
       child: child,
     );

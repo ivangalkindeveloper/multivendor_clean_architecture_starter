@@ -3,10 +3,15 @@ import 'package:flutter/widgets.dart';
 
 //TODO Starter: SuccessSnackBar
 class SuccessSnackBar extends StatelessWidget {
-  const SuccessSnackBar({super.key});
+  const SuccessSnackBar({
+    super.key,
+  });
 
-  static show(BuildContext context) => showMVSSnackbar(
-        context: context,
+  static show(
+    BuildContext context,
+  ) =>
+      showMVSSnackbar(
+        context,
         child: const SuccessSnackBar(),
       );
 

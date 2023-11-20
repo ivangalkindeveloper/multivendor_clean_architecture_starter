@@ -3,10 +3,15 @@ import 'package:flutter/widgets.dart';
 
 //TODO Starter: InfoSnackBar
 class InfoSnackBar extends StatelessWidget {
-  const InfoSnackBar({super.key});
+  const InfoSnackBar({
+    super.key,
+  });
 
-  static show(BuildContext context) => showMVSSnackbar(
-        context: context,
+  static show(
+    BuildContext context,
+  ) =>
+      showMVSSnackbar(
+        context,
         child: const InfoSnackBar(),
       );
 

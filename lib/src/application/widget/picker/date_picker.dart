@@ -7,9 +7,13 @@ class DatePicker extends StatelessWidget {
     super.key,
   });
 
-  static show(BuildContext context) => showMVSDatePicker(
-        context: context,
-        cupertinoModalBuilder: (BuildContext context) => const DatePicker(),
+  static show(
+    BuildContext context,
+  ) =>
+      showMVSDatePicker(
+        context,
+        cupertinoBottomSheetBuilder: (BuildContext context) =>
+            const DatePicker(),
       );
 
   @override
