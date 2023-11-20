@@ -4,12 +4,12 @@ import 'package:multivendor_clean_architecture_starter/src/utility/logger/logger
 import 'dart:async';
 
 class Runner {
-  static Future<void> run({
-    required Environment environment,
-  }) async {
+  static Future<void> run(
+    Environment environment,
+  ) async {
     runZonedGuarded<Future<void>>(
       Initializer.main(
-        environment: environment,
+        environment,
       ).initializeAndRunApp,
       Logger.logZoneError,
     );

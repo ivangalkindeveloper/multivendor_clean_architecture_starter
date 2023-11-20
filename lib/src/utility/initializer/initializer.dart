@@ -18,10 +18,7 @@ class Initializer {
     this.onErrorRun,
   });
 
-  factory Initializer.main({
-    required Environment environment,
-  }) =>
-      Initializer(
+  factory Initializer.main(Environment environment) => Initializer(
         environment: environment,
         steps: MainInitializationSteps.steps,
         callback: const MainItializationCallback(),

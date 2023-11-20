@@ -5,14 +5,14 @@ import 'package:url_strategy/url_strategy.dart';
 import 'dart:async';
 
 class Runner {
-  static Future<void> run({
-    required Environment environment,
-  }) async {
+  static Future<void> run(
+    Environment environment,
+  ) async {
     setPathUrlStrategy();
 
     runZonedGuarded<Future<void>>(
       Initializer.main(
-        environment: environment,
+        environment,
       ).initializeAndRunApp,
       Logger.logZoneError,
     );

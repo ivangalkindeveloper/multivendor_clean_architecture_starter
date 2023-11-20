@@ -1,6 +1,12 @@
 targets:
   $default:
     builders:
+      auto_route_generator:auto_router_generator:
+        generate_for:
+          - lib/src/application/router/application_router.dart
+      auto_route_generator:auto_route_generator:
+        generate_for:
+          - lib/src/application/widget/**.dart
       source_gen|combining_builder:
         options:
           build_extensions:
