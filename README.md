@@ -165,17 +165,17 @@ The structure of the project clearly reflects the interaction of the layers of t
 │  ├── main/      - main functions that launch the runner/initializer utility;
 │  └── src/       - source directory;
 │      │
-│      ├── application/                   - application layer of widgets/elements/renderObjects and other view dependencies;
-│      │   ├────────── router/            - router(s) of application;
-│      │   └────────── widget/            - main directory of widgets;
-│      │               ├──── application/ - root application widgets;
-│      │               ├──── component/   - components directory/library;
-│      │               ├──── dialog/      - dialogs directory;
-│      │               ├──── modal/       - modals directory;
-│      │               ├──── page/        - pages directory;
-│      │               ├──── picker/      - dateTime/timeOfDay pickers directory;
-│      │               ├──── scope/       - inherited scopes;
-│      │               └──── snack_bar/    - snack bars directory;
+│      ├── application/                     - application layer of widgets/elements/renderObjects and other view dependencies;
+│      │   ├────────── router/              - router(s) of application;
+│      │   └────────── widget/              - main directory of widgets;
+│      │               ├──── application/   - root application widgets;
+│      │               ├──── bottom_sheet/  - bottom sheets directory;
+│      │               ├──── component/     - components directory/library;
+│      │               ├──── dialog/        - dialogs directory;
+│      │               ├──── page/          - pages directory;
+│      │               ├──── picker/        - dateTime/timeOfDay pickers directory;
+│      │               ├──── scope/         - inherited scopes;
+│      │               └──── snack_bar/     - snack bars directory;
 │      │
 │     <I>-<IEvent & IState>
 │      ├── bloc/ - directory of application business logic;
@@ -224,8 +224,8 @@ Full batch scalability might look like this:
 │      │   ├────────── router/
 │      │   └────────── widget/
 │      │               ├──── application/
+│      │               ├──── bottom_sheet/
 │      │               ├──── dialog/
-│      │               ├──── modal/
 │      │               ├──── page/
 │      │               ├──── picker/
 │      │               ├──── scope/
@@ -306,7 +306,7 @@ FWAppBar, FWPrimaryButton, FWText...\
 Components should not contain business logic, but should only provide an API to manage them.\
 You can pass any model to a component only if the model properties are needed only to display the component.
 #### Widget
-No need to create separate services for modals, dialogs and pickers.\
+No need to create separate services for bottom sheets, dialogs and pickers.\
 You just need separate widget classes, with static "show" method, in which the required field will be BuildContext.
 
 ## Misconceptions
