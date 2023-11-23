@@ -5,12 +5,12 @@ import 'package:multivendor_clean_architecture_starter/src/application/widget/ap
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_animation.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_date_time.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_duration.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_haptic.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_size.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
-import 'package:flutter_platform_component/flutter_platform_component.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/scope/scope_nester.dart';
+import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: Application
@@ -26,10 +26,13 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopeNester(
       scopes: [
-        (Widget child) => DependencyScope(
+        (
+          Widget child,
+        ) =>
+            DependencyScope(
               dependency: Dependency(
                 data: result.data,
-                presentation: result.presentation,
+                application: result.application,
               ),
               child: child,
             ),

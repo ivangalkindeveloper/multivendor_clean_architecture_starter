@@ -172,9 +172,9 @@ The structure of the project clearly reflects the interaction of the layers of t
 │      │               ├──── bottom_sheet/  - bottom sheets directory;
 │      │               ├──── component/     - components directory/library;
 │      │               ├──── dialog/        - dialogs directory;
-│      │               ├──── page/          - pages directory;
 │      │               ├──── picker/        - dateTime/timeOfDay pickers directory;
 │      │               ├──── scope/         - inherited scopes;
+│      │               ├──── screen/        - screens directory;
 │      │               └──── snack_bar/     - snack bars directory;
 │      │
 │     <I>-<IEvent & IState>
@@ -226,9 +226,9 @@ Full batch scalability might look like this:
 │      │               ├──── application/
 │      │               ├──── bottom_sheet/
 │      │               ├──── dialog/
-│      │               ├──── page/
 │      │               ├──── picker/
 │      │               ├──── scope/
+│      │               ├──── screen/
 │      │               └──── snackbar/
 │      ├── core/
 │      │   ├─── client/

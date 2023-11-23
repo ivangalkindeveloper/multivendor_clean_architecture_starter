@@ -1,5 +1,5 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +16,10 @@ class ApplicationWidget extends StatelessWidget {
 
     return FPCApp.router(
       context,
-      locale: dependency.presentation.locale,
+      locale: dependency.application.locale,
       localizationsDelegates: ApplicationLocalization.localizationsDelegates,
       supportedLocales: ApplicationLocalization.supportedLocales,
-      routerConfig: dependency.presentation.router.config(),
+      routerConfig: dependency.application.router.config(),
     );
   }
 }

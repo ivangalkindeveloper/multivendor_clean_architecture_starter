@@ -14,10 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
-//TODO Starter: Page
+//TODO Starter: Screen
 @RoutePage()
-class FactPage extends StatelessWidget {
-  const FactPage({
+class FactScreen extends StatelessWidget {
+  const FactScreen({
     super.key,
   });
 

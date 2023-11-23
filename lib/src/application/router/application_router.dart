@@ -1,4 +1,4 @@
-import 'package:multivendor_clean_architecture_starter/src/application/widget/page/fact/fact_page.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/screen/fact/fact_screen.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
@@ -6,9 +6,7 @@ import 'package:flutter/foundation.dart';
 part 'application_router.gr.dart';
 
 //TODO Starter: ApplicationRouter
-@AutoRouterConfig(
-  replaceInRouteName: "Screen, Page, Route",
-)
+@AutoRouterConfig()
 class ApplicationRouter extends _$ApplicationRouter {
   ApplicationRouter();
 
@@ -24,7 +22,7 @@ class ApplicationRouter extends _$ApplicationRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           path: "/fact",
-          page: FactPageRoute.page,
+          page: FactRoute.page,
           initial: true,
         ),
       ];

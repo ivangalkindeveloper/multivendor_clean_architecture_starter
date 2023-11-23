@@ -2,11 +2,11 @@ import 'package:multivendor_clean_architecture_starter/src/core/data/data/initia
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/main/main_initialization_steps.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_presentation.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_step.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_application.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/application/application.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_data.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/application/application.dart';
 import 'package:flutter/widgets.dart';
 
 class Initializer {
@@ -85,7 +85,7 @@ class Initializer {
         database: progress.database!,
         factRepository: progress.factRepository!,
       ),
-      presentation: DependencyPresentation(
+      application: DependencyApplication(
         locale: progress.locale!,
         router: progress.router!,
       ),
