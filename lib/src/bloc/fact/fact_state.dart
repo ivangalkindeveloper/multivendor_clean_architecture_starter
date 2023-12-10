@@ -55,17 +55,6 @@ class FactState extends Equatable implements IFactState {
   final String? newFactError;
 
   @override
-  List get props => [
-        this.lastFact,
-        this.lastFactStatus,
-        this.lastFactError,
-        //
-        this.newFact,
-        this.newFactStatus,
-        this.newFactError,
-      ];
-
-  @override
   IFactState copyWith({
     Fact? lastFact,
     FactStatus? lastFactStatus,
@@ -84,4 +73,15 @@ class FactState extends Equatable implements IFactState {
         newFactStatus: newFactStatus ?? this.newFactStatus,
         newFactError: newFactError,
       );
+
+  @override
+  List<Object?> get props => [
+        this.lastFact,
+        this.lastFactStatus,
+        this.lastFactError,
+        //
+        this.newFact,
+        this.newFactStatus,
+        this.newFactError,
+      ];
 }

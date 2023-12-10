@@ -14,7 +14,6 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("\n")
       ..writeln("Bloc On Create: ${bloc.runtimeType}");
     Logger.i(stringBuffer.toString());
-
     super.onCreate(bloc);
   }
 
@@ -28,7 +27,6 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("Bloc On Event: ${bloc.runtimeType}")
       ..writeln("Event: ${event.runtimeType}");
     Logger.i(stringBuffer.toString());
-
     super.onEvent(bloc, event);
   }
 
@@ -43,7 +41,6 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln(
           "Change: ${change.currentState.runtimeType} > ${change.nextState.runtimeType}");
     Logger.i(stringBuffer.toString());
-
     super.onChange(bloc, change);
   }
 
@@ -60,7 +57,6 @@ class ApplicationBlocObserver extends BlocObserver {
           "State: ${transition.currentState.runtimeType} > ${transition.nextState.runtimeType}")
       ..writeln("New State: ${transition.nextState.toString().limit(100)}");
     Logger.i(stringBuffer.toString());
-
     super.onTransition(bloc, transition);
   }
 
@@ -76,7 +72,6 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("Error: ${error.runtimeType}")
       ..writeln("StackTrace: ${stackTrace.toString()}");
     Logger.e(stringBuffer.toString());
-
     super.onError(bloc, error, stackTrace);
   }
 
@@ -88,7 +83,6 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("\n")
       ..writeln("Bloc On Close: ${bloc.runtimeType}");
     Logger.i(stringBuffer.toString());
-
     super.onClose(bloc);
   }
 }

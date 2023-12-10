@@ -5,7 +5,7 @@ import 'package:multivendor_clean_architecture_starter/src/application/widget/co
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/default/mvs_list_view.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/scaffold/mvs_scaffold.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/text/mvs_text.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
+import 'package:multivendor_clean_architecture_starter/src/utility/extension/build_context_extension.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/fact/fact_bloc.dart';
@@ -13,6 +13,11 @@ import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+
+part '_reload_button.dart';
+part '_fact_screen.dart';
+part '_last_fact.dart';
+part '_new_fact.dart';
 
 //TODO Starter: Screen
 @RoutePage()
@@ -23,185 +28,15 @@ class FactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Dependency dependency = DependencyScope.of(context);
+    final Dependency dependency = context.dependency;
 
     return BlocProvider(
       create: (BuildContext context) => FactBloc(
         factRepository: dependency.data.factRepository,
-      )..add(const FactEvent.getFacts()),
-      child: const _FactPage(),
-    );
-  }
-}
-
-class _FactPage extends StatelessWidget {
-  const _FactPage();
-
-  @override
-  Widget build(BuildContext context) {
-    final Dependency dependency = DependencyScope.of(context);
-    final IConfig config = dependency.data.config;
-
-    final IFPCSize size = context.fpcSize;
-
-    return MVSScaffold(
-      appBar: MVSScreenAppBar(
-        context,
-        title: "Animal Fact",
-      ),
-      body: MVSListView(
-        children: [
-          MVSText.medium16Black(
-            context,
-            "Animal: ${config.animalType}",
-          ),
-          SizedBox(height: size.s16),
-          MVSAnimatedSize(
-            child: BlocBuilder<FactBloc, IFactState>(
-              builder: (
-                BuildContext context,
-                IFactState state,
-              ) {
-                switch (state.lastFactStatus) {
-                  case FactStatus.initial:
-                    return const SizedBox();
-
-                  case FactStatus.loading:
-                    return const MVSPrimaryCircularIndicator();
-
-                  case FactStatus.success:
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MVSText.medium16Black(
-                          context,
-                          "Last fact about ${config.animalType}s:",
-                        ),
-                        SizedBox(height: size.s16 / 4),
-                        if (state.lastFact != null)
-                          MVSText.regular16Black(
-                            context,
-                            state.lastFact!.description,
-                          )
-                        else
-                          MVSText.regular16Black(
-                            context,
-                            "No last fact :(",
-                          ),
-                      ],
-                    );
-
-                  case FactStatus.error:
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MVSText.medium16Black(
-                          context,
-                          "Last fact error:",
-                        ),
-                        SizedBox(height: size.s16 / 4),
-                        if (state.lastFactError != null)
-                          MVSText.regular16Danger(
-                            context,
-                            state.lastFactError!,
-                          ),
-                        if (state.lastFact != null)
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MVSText.medium16Black(
-                                context,
-                                "Last fact about ${config.animalType}s:",
-                              ),
-                              SizedBox(height: size.s16 / 4),
-                              MVSText.regular16Black(
-                                context,
-                                state.lastFact!.description,
-                              ),
-                            ],
-                          ),
-                      ],
-                    );
-                }
-              },
-            ),
-          ),
-          SizedBox(height: size.s16),
-          MVSAnimatedSize(
-            child: BlocBuilder<FactBloc, IFactState>(
-              builder: (
-                BuildContext context,
-                IFactState state,
-              ) {
-                switch (state.newFactStatus) {
-                  case FactStatus.initial:
-                    return const SizedBox();
-
-                  case FactStatus.loading:
-                    return const MVSPrimaryCircularIndicator();
-
-                  case FactStatus.success:
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MVSText.medium16Black(
-                          context,
-                          "New fact about ${config.animalType}s:",
-                        ),
-                        SizedBox(height: size.s16 / 4),
-                        if (state.newFact != null)
-                          MVSText.regular16Black(
-                            context,
-                            state.newFact!.description,
-                          ),
-                      ],
-                    );
-
-                  case FactStatus.error:
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MVSText.medium16Black(
-                          context,
-                          "New fact error:",
-                        ),
-                        SizedBox(height: size.s16 / 4),
-                        if (state.newFactError != null)
-                          MVSText.regular16Danger(
-                            context,
-                            state.newFactError!,
-                          ),
-                      ],
-                    );
-                }
-              },
-            ),
-          ),
-          SizedBox(height: size.s16),
-          BlocBuilder<FactBloc, IFactState>(
-            builder: (
-              BuildContext context,
-              IFactState state,
-            ) {
-              final bool isLoading =
-                  state.lastFactStatus == FactStatus.loading ||
-                      state.newFactStatus == FactStatus.loading;
-
-              return MVSPrimaryButton(
-                title: "Reload",
-                onPressed: () =>
-                    context.read<FactBloc>().add(const FactEvent.getFacts()),
-                isLoading: isLoading,
-              );
-            },
-          ),
-        ],
-      ),
+      )..add(
+          const FactEvent.getFacts(),
+        ),
+      child: const _FactScreen(),
     );
   }
 }

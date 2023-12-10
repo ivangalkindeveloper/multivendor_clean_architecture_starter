@@ -6,12 +6,11 @@ import 'dart:async';
 class Runner {
   static Future<void> run(
     Environment environment,
-  ) async {
-    runZonedGuarded<Future<void>>(
-      Initializer.main(
-        environment,
-      ).initializeAndRunApp,
-      Logger.logZoneError,
-    );
-  }
+  ) =>
+      runZonedGuarded<Future<void>>(
+        Initializer.main(
+          environment,
+        ).initializeAndRunApp,
+        Logger.logZoneError,
+      )!;
 }

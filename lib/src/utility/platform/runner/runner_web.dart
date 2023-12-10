@@ -10,7 +10,7 @@ class Runner {
   ) async {
     setPathUrlStrategy();
 
-    runZonedGuarded<Future<void>>(
+    return runZonedGuarded<Future<void>>(
       Initializer.main(
         environment,
       ).initializeAndRunApp,

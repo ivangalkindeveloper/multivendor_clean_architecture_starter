@@ -1,7 +1,6 @@
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_time_of_day.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_text_style.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/application/application_widget.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_animation.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_date_time.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_duration.dart';
@@ -11,6 +10,7 @@ import 'package:multivendor_clean_architecture_starter/src/application/widget/sc
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/scope/scope_nester.dart';
 import 'package:flutter_platform_component/flutter_platform_component.dart';
+import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: Application
@@ -46,7 +46,19 @@ class Application extends StatelessWidget {
         haptic: const MVSHaptic(),
         theme: this.result.data.config.themeLight,
         size: const MVSSize(),
-        child: const ApplicationWidget(),
+        child: Builder(
+          builder: (
+            BuildContext context,
+          ) =>
+              FPCApp.router(
+            context,
+            locale: this.result.application.locale,
+            localizationsDelegates:
+                ApplicationLocalization.localizationsDelegates,
+            supportedLocales: ApplicationLocalization.supportedLocales,
+            routerConfig: this.result.application.router.config(),
+          ),
+        ),
       ),
     );
   }
