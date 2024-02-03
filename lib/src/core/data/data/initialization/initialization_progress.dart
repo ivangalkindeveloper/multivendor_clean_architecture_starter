@@ -5,8 +5,8 @@ import 'package:multivendor_clean_architecture_starter/src/core/data/data_source
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/http_clent.dart';
 import 'package:mvs_utility/mvs_utility.dart';
+import 'package:mvs_rest/mvs_rest.dart';
 import 'package:flutter/widgets.dart';
 
 class InitializationProgress
@@ -21,7 +21,7 @@ class InitializationProgress
   });
 
   IConfig? config;
-  IHttpClient? httpClient;
+  IMVSHttpClient? httpClient;
   Database? database;
   IFactRepository? factRepository;
   Locale? locale;

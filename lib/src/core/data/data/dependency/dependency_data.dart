@@ -1,7 +1,7 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/http_clent.dart';
+import 'package:mvs_rest/mvs_rest.dart';
 
 class DependencyData {
   const DependencyData({
@@ -12,7 +12,7 @@ class DependencyData {
   });
 
   final IConfig config;
-  final IHttpClient httpClient;
+  final IMVSHttpClient httpClient;
   final Database database;
   final IFactRepository factRepository;
 }

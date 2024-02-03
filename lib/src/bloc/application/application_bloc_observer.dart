@@ -10,12 +10,16 @@ class ApplicationBlocObserver extends BlocObserver {
   void onCreate(
     BlocBase<Object?> bloc,
   ) {
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
       "Bloc Create: ${bloc.runtimeType}\n",
     );
-    MVSLogger.i(stringBuffer.toString());
-    super.onCreate(bloc);
+    MVSLogger.i(
+      buffer.toString(),
+    );
+    super.onCreate(
+      bloc,
+    );
   }
 
   @override
@@ -23,12 +27,20 @@ class ApplicationBlocObserver extends BlocObserver {
     Bloc<Object?, Object?> bloc,
     Object? event,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Event: ${bloc.runtimeType}")
-      ..writeln("Event: ${event.runtimeType}");
-    MVSLogger.i(stringBuffer.toString());
-    super.onEvent(bloc, event);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Bloc Event: ${bloc.runtimeType}",
+    );
+    buffer.writeln(
+      "Event: ${event.runtimeType}\n",
+    );
+    MVSLogger.i(
+      buffer.toString(),
+    );
+    super.onEvent(
+      bloc,
+      event,
+    );
   }
 
   @override
@@ -36,13 +48,20 @@ class ApplicationBlocObserver extends BlocObserver {
     BlocBase<Object?> bloc,
     Change<dynamic> change,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Change: ${bloc.runtimeType}")
-      ..writeln(
-          "Change: ${change.currentState.runtimeType} > ${change.nextState.runtimeType}");
-    MVSLogger.i(stringBuffer.toString());
-    super.onChange(bloc, change);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Bloc Change: ${bloc.runtimeType}",
+    );
+    buffer.writeln(
+      "Change: ${change.currentState.runtimeType} > ${change.nextState.runtimeType}\n",
+    );
+    MVSLogger.i(
+      buffer.toString(),
+    );
+    super.onChange(
+      bloc,
+      change,
+    );
   }
 
   @override
@@ -50,15 +69,26 @@ class ApplicationBlocObserver extends BlocObserver {
     Bloc<Object?, Object?> bloc,
     Transition<Object?, Object?> transition,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Transition: ${bloc.runtimeType}")
-      ..writeln("Event: ${transition.event.runtimeType}")
-      ..writeln(
-          "State: ${transition.currentState.runtimeType} > ${transition.nextState.runtimeType}")
-      ..writeln("New State: ${transition.nextState.toString().limit(100)}");
-    MVSLogger.i(stringBuffer.toString());
-    super.onTransition(bloc, transition);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Bloc Transition: ${bloc.runtimeType}",
+    );
+    buffer.writeln(
+      "Event: ${transition.event.runtimeType}",
+    );
+    buffer.writeln(
+      "State: ${transition.currentState.runtimeType} > ${transition.nextState.runtimeType}",
+    );
+    buffer.writeln(
+      "New State: ${transition.nextState.toString().limit(100)}",
+    );
+    MVSLogger.i(
+      buffer.toString(),
+    );
+    super.onTransition(
+      bloc,
+      transition,
+    );
   }
 
   @override
@@ -67,23 +97,39 @@ class ApplicationBlocObserver extends BlocObserver {
     Object error,
     StackTrace stackTrace,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Error: ${bloc.runtimeType}")
-      ..writeln("Error: ${error.runtimeType}")
-      ..writeln("StackTrace: ${stackTrace.toString()}");
-    MVSLogger.e(stringBuffer.toString());
-    super.onError(bloc, error, stackTrace);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Bloc Error: ${bloc.runtimeType}",
+    );
+    buffer.writeln(
+      "Error: ${error.runtimeType}",
+    );
+    buffer.writeln(
+      "StackTrace: ${stackTrace.toString()}\n",
+    );
+    MVSLogger.e(
+      buffer.toString(),
+    );
+    super.onError(
+      bloc,
+      error,
+      stackTrace,
+    );
   }
 
   @override
   void onClose(
     BlocBase<Object?> bloc,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Close: ${bloc.runtimeType}");
-    MVSLogger.i(stringBuffer.toString());
-    super.onClose(bloc);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Bloc Close: ${bloc.runtimeType}\n",
+    );
+    MVSLogger.i(
+      buffer.toString(),
+    );
+    super.onClose(
+      bloc,
+    );
   }
 }

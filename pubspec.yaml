@@ -27,7 +27,6 @@ dependencies:
   sqlite3_flutter_libs:
   mvs_rest:
     path: package/mvs_rest
-  json_annotation:
   # Utility
   collection:
   equatable:
@@ -53,7 +52,6 @@ dev_dependencies:
     sdk: flutter
   test:
   # Utility
-  build_runner:
   flutter_lints:
 
 flutter:

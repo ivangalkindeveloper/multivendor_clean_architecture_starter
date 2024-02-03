@@ -1,6 +1,4 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dto/fact/fact_dto.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/http_clent.dart';
+import 'package:mvs_rest/mvs_rest.dart';
 import 'package:dio/dio.dart';
 
 //TODO Starter: IApi
@@ -14,20 +12,20 @@ abstract class IFactApi {
 
 class FactApi implements IFactApi {
   const FactApi({
-    required IConfig config,
-    required IHttpClient httpClient,
-  })  : this._config = config,
-        this._httpClient = httpClient;
+    required IMVSHttpClient httpClient,
+    required String animalType,
+  })  : this._httpClient = httpClient,
+        this._animalType = animalType;
 
-  final IConfig _config;
-  final IHttpClient _httpClient;
+  final IMVSHttpClient _httpClient;
+  final String _animalType;
 
   @override
   Future<FactDto> getRandomFact() async {
     final Response response = await this._httpClient.get(
       endpoint: "/facts/random",
       queryParameters: {
-        "animal_type": this._config.animalType,
+        "animal_type": this._animalType,
         "amount": 1,
       },
     );
@@ -43,7 +41,7 @@ class FactApi implements IFactApi {
     final Response response = await this._httpClient.get(
       endpoint: "/facts/random",
       queryParameters: {
-        "animal_type": this._config.animalType,
+        "animal_type": this._animalType,
         "amount": amount,
       },
     );

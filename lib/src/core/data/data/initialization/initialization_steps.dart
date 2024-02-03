@@ -1,18 +1,16 @@
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/interceptor/request_interceptor.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/dao/fact_dao.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/application/application_bloc_observer.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
-import 'package:mvs_rest/src/api/fact_api.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/client/http_clent.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/typedef.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvs_utility/mvs_utility.dart';
 import 'package:flutter/foundation.dart';
+import 'package:mvs_rest/mvs_rest.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
 
@@ -57,10 +55,10 @@ class InitializationSteps {
         IConfig config,
         InitializationProgress progress,
       ) =>
-          progress.httpClient = HttpClient(
-        config: progress.config!,
+          progress.httpClient = MVSHttpClient(
+        baseUrl: progress.config!.baseUrl,
         interceptors: const [
-          RequestInterceptor(),
+          MVSRequestInterceptor(),
         ],
       ),
     ),
@@ -82,8 +80,8 @@ class InitializationSteps {
       ) =>
           progress.factRepository = FactRepository(
         factApi: FactApi(
-          config: progress.config!,
           httpClient: progress.httpClient!,
+          animalType: progress.config!.animalType,
         ),
         factDao: FactDao(
           database: progress.database!,

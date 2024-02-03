@@ -26,7 +26,7 @@ enum FactStatus {
   initial,
   loading,
   success,
-  error,
+  error;
 }
 
 class FactState extends Equatable implements IFactState {

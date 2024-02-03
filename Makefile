@@ -34,9 +34,11 @@ build-runner:
 	@find . -name \*.g.dart -type f -delete
 	@dart run build_runner clean
 	@dart run build_runner build --delete-conflicting-outputs
+	@cd package/mvs_rest && dart run build_runner clean
+	@cd package/mvs_rest && dart run build_runner build --delete-conflicting-outputs
 
 pre-build:
-	clean build-runner
+	@make clean && make build-runner
 
 
 

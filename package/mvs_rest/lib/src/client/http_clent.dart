@@ -1,38 +1,39 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
+import 'dart:io' as io;
 
-abstract class IHttpClient {
-  const IHttpClient();
+abstract class IMVSHttpClient {
+  const IMVSHttpClient();
 
-  Future<Response> request({
+  Future<Response<T>> request<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
-  Future<Response> get({
+  Future<Response> get<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
-  Future<Response> post({
+  Future<Response<T>> post<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
-  Future<Response> put({
+  Future<Response<T>> put<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
 
-  Future<Response> delete({
+  Future<Response<T>> delete<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
@@ -40,34 +41,72 @@ abstract class IHttpClient {
   });
 }
 
-class HttpClient implements IHttpClient {
-  HttpClient({
-    required IConfig config,
+class MVSHttpClient implements IMVSHttpClient {
+  MVSHttpClient({
+    required String baseUrl,
+    List<String>? proxyUrlList,
     BaseOptions? baseOptions,
     List<Interceptor>? interceptors,
-  }) : this._dio = Dio(baseOptions?.copyWith(
-              baseUrl: config.baseUrl,
-            ) ??
-            BaseOptions(
-              baseUrl: config.baseUrl,
-            )) {
-    if (interceptors != null) {
-      this._dio.interceptors.addAll(
-            interceptors,
-          );
+  }) : this._dio = Dio(
+          baseOptions?.copyWith(
+                baseUrl: baseUrl,
+              ) ??
+              BaseOptions(
+                baseUrl: baseUrl,
+              ),
+        ) {
+    if (proxyUrlList?.isEmpty == true) {
+      this._enableProxy(
+        proxyUrlList!,
+      );
     }
+    if (interceptors?.isNotEmpty == true) {
+      this._addInterceptors(
+        interceptors!,
+      );
+    }
+  }
+
+  void _enableProxy(
+    List<String> proxyHostList,
+  ) {
+    this._dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final client = io.HttpClient();
+        client.findProxy = (Uri uri) {
+          final String proxyHostListString = proxyHostList
+              .map(
+                (
+                  String proxyHost,
+                ) =>
+                    "PROXY $proxyHost;",
+              )
+              .join(" ");
+          return "$proxyHostListString DIRECT";
+        };
+        return client;
+      },
+    );
+  }
+
+  void _addInterceptors(
+    List<Interceptor> interceptors,
+  ) {
+    this._dio.interceptors.addAll(
+          interceptors,
+        );
   }
 
   final Dio _dio;
 
   @override
-  Future<Response> request({
+  Future<Response<T>> request<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this._dio.request(
+      this._dio.request<T>(
             endpoint,
             data: data,
             queryParameters: queryParameters,
@@ -77,13 +116,13 @@ class HttpClient implements IHttpClient {
           );
 
   @override
-  Future<Response> get({
+  Future<Response<T>> get<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this._dio.get(
+      this._dio.get<T>(
             endpoint,
             data: data,
             queryParameters: queryParameters,
@@ -93,13 +132,13 @@ class HttpClient implements IHttpClient {
           );
 
   @override
-  Future<Response> post({
+  Future<Response<T>> post<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this._dio.post(
+      this._dio.post<T>(
             endpoint,
             data: data,
             queryParameters: queryParameters,
@@ -109,13 +148,13 @@ class HttpClient implements IHttpClient {
           );
 
   @override
-  Future<Response> put({
+  Future<Response<T>> put<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this._dio.put(
+      this._dio.put<T>(
             endpoint,
             data: data,
             queryParameters: queryParameters,
@@ -125,13 +164,13 @@ class HttpClient implements IHttpClient {
           );
 
   @override
-  Future<Response> delete({
+  Future<Response<T>> delete<T>({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) =>
-      this._dio.delete(
+      this._dio.delete<T>(
             endpoint,
             data: data,
             queryParameters: queryParameters,

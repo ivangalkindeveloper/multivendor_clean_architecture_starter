@@ -11,15 +11,15 @@ class InitializationCallback extends IMVSInitializationCallback<
   void onStart(
     List<InitializationStep> steps,
   ) {
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
-      'Initialization start',
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Initialization start",
     );
-    stringBuffer.writeln(
-      'Steps length [${steps.length}]\n',
+    buffer.writeln(
+      "Steps length [${steps.length}]\n",
     );
     MVSLogger.i(
-      stringBuffer.toString(),
+      buffer.toString(),
     );
   }
 
@@ -30,15 +30,15 @@ class InitializationCallback extends IMVSInitializationCallback<
     Duration duration,
   ) {
     final int index = steps.indexOf(step) + 1;
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
-      'Start initialization step: [$index/${steps.length}] ${step.title}',
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Start initialization step: [$index/${steps.length}] ${step.title}",
     );
-    stringBuffer.writeln(
-      'Duration: ${duration.inMicroseconds}\n',
+    buffer.writeln(
+      "Duration: ${duration.inMicroseconds}\n",
     );
     MVSLogger.i(
-      stringBuffer.toString(),
+      buffer.toString(),
     );
   }
 
@@ -49,15 +49,15 @@ class InitializationCallback extends IMVSInitializationCallback<
     Duration duration,
   ) {
     final int index = steps.indexOf(step) + 1;
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
-      'Success initialization step: [$index/${steps.length}] ${step.title}',
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Success initialization step: [$index/${steps.length}] ${step.title}",
     );
-    stringBuffer.writeln(
-      'Duration: ${duration.inMicroseconds}\n',
+    buffer.writeln(
+      "Duration: ${duration.inMicroseconds}\n",
     );
     MVSLogger.i(
-      stringBuffer.toString(),
+      buffer.toString(),
     );
   }
 
@@ -66,15 +66,15 @@ class InitializationCallback extends IMVSInitializationCallback<
     InitializationResult result,
     Duration duration,
   ) {
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
-      'Initialization success',
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Initialization success",
     );
-    stringBuffer.writeln(
-      'Duration: ${duration.inMicroseconds}\n',
+    buffer.writeln(
+      "Duration: ${duration.inMicroseconds}\n",
     );
     MVSLogger.i(
-      stringBuffer.toString(),
+      buffer.toString(),
     );
   }
 
@@ -86,18 +86,18 @@ class InitializationCallback extends IMVSInitializationCallback<
     StackTrace stackTrace,
   ) {
     final int index = steps.indexOf(step);
-    final StringBuffer stringBuffer = StringBuffer();
-    stringBuffer.writeln(
-      'Initialization failed on the step: [$index/${steps.length}] ${step.title}.',
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln(
+      "Initialization failed on the step: [$index/${steps.length}] ${step.title}.",
     );
-    stringBuffer.writeln(
-      'Error: $error',
+    buffer.writeln(
+      "Error: $error",
     );
-    stringBuffer.writeln(
-      'StackTrace: $stackTrace \n',
+    buffer.writeln(
+      "StackTrace: $stackTrace \n",
     );
     MVSLogger.e(
-      stringBuffer.toString(),
+      buffer.toString(),
     );
   }
 }

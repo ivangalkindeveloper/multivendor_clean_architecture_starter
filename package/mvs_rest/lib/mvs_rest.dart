@@ -1,3 +1,8 @@
 library mvs_rest;
 
-export 'src/mvs_rest_base.dart';
+export 'src/api/fact_api.dart';
+
+export 'src/client/interceptor/mvs_request_interceptor.dart';
+export 'src/client/http_clent.dart';
+
+export 'src/dto/fact/fact_dto.dart';
