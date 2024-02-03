@@ -16,7 +16,7 @@ class _ReloadButton extends StatelessWidget {
         return MVSPrimaryButton(
           title: "Reload",
           onPressed: () => context.read<FactBloc>().add(
-                const FactEvent.getFacts(),
+                const FactEvent.getFact(),
               ),
           isLoading: isLoading,
         );

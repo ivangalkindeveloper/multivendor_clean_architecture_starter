@@ -354,7 +354,6 @@ Utility:
 - [build_runner](https://pub.dev/packages/build_runner);
 
 Data:
-- [freezed](https://pub.dev/packages/freezed);
 - [json_annotation](https://pub.dev/packages/json_annotation);
 - [equatable](https://pub.dev/packages/equatable);
 
@@ -444,27 +443,3 @@ Widget:
 - [flutter_hooks](https://pub.dev/packages/flutter_hooks):\
 Violation of the functional programming paradigm, which in turn talks about the clean of functions, which should be clean, not affect any external variables and states.\
 The build function in widgets should always be clean.
-
-## CLI
-#### Build runner
-```
-dart run build_runner build --delete-conflicting-outputs
-dart run build_runner build
-```
-#### Vendor switch
-```sh
-bash ./vendor/vendor_cat/switch.sh
-bash ./vendor/vendor_dog/switch.sh
-```
-#### Vendor build
-```sh
-bash ./vendor/vendor_cat/build_apk.sh
-bash ./vendor/vendor_cat/build_appbundle.sh
-bash ./vendor/vendor_cat/build_ipa.sh
-bash ./vendor/vendor_cat/build_web.sh
-
-bash ./vendor/vendor_dog/build_apk.sh
-bash ./vendor/vendor_dog/build_appbundle.sh
-bash ./vendor/vendor_dog/build_ipa.sh
-bash ./vendor/vendor_dog/build_web.sh
-```

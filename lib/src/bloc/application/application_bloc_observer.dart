@@ -1,6 +1,6 @@
 import "package:multivendor_clean_architecture_starter/src/utility/extension/string_extension.dart";
-import "package:multivendor_clean_architecture_starter/src/utility/logger/logger.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:mvs_utility/mvs_utility.dart";
 
 //TODO Starter: ApplicationBlocObserver
 class ApplicationBlocObserver extends BlocObserver {
@@ -10,10 +10,11 @@ class ApplicationBlocObserver extends BlocObserver {
   void onCreate(
     BlocBase<Object?> bloc,
   ) {
-    final StringBuffer stringBuffer = StringBuffer()
-      ..writeln("\n")
-      ..writeln("Bloc On Create: ${bloc.runtimeType}");
-    Logger.i(stringBuffer.toString());
+    final StringBuffer stringBuffer = StringBuffer();
+    stringBuffer.writeln(
+      "Bloc Create: ${bloc.runtimeType}\n",
+    );
+    MVSLogger.i(stringBuffer.toString());
     super.onCreate(bloc);
   }
 
@@ -26,7 +27,7 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("\n")
       ..writeln("Bloc On Event: ${bloc.runtimeType}")
       ..writeln("Event: ${event.runtimeType}");
-    Logger.i(stringBuffer.toString());
+    MVSLogger.i(stringBuffer.toString());
     super.onEvent(bloc, event);
   }
 
@@ -40,7 +41,7 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("Bloc On Change: ${bloc.runtimeType}")
       ..writeln(
           "Change: ${change.currentState.runtimeType} > ${change.nextState.runtimeType}");
-    Logger.i(stringBuffer.toString());
+    MVSLogger.i(stringBuffer.toString());
     super.onChange(bloc, change);
   }
 
@@ -56,7 +57,7 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln(
           "State: ${transition.currentState.runtimeType} > ${transition.nextState.runtimeType}")
       ..writeln("New State: ${transition.nextState.toString().limit(100)}");
-    Logger.i(stringBuffer.toString());
+    MVSLogger.i(stringBuffer.toString());
     super.onTransition(bloc, transition);
   }
 
@@ -71,7 +72,7 @@ class ApplicationBlocObserver extends BlocObserver {
       ..writeln("Bloc On Error: ${bloc.runtimeType}")
       ..writeln("Error: ${error.runtimeType}")
       ..writeln("StackTrace: ${stackTrace.toString()}");
-    Logger.e(stringBuffer.toString());
+    MVSLogger.e(stringBuffer.toString());
     super.onError(bloc, error, stackTrace);
   }
 
@@ -82,7 +83,7 @@ class ApplicationBlocObserver extends BlocObserver {
     final StringBuffer stringBuffer = StringBuffer()
       ..writeln("\n")
       ..writeln("Bloc On Close: ${bloc.runtimeType}");
-    Logger.i(stringBuffer.toString());
+    MVSLogger.i(stringBuffer.toString());
     super.onClose(bloc);
   }
 }

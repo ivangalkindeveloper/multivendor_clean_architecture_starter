@@ -8,7 +8,7 @@ class _FactScreen extends StatelessWidget {
     final Dependency dependency = context.dependency;
     final IConfig config = dependency.data.config;
 
-    final IFPCSize size = context.fpcSize;
+    final FPCSize size = context.fpcSize;
 
     return MVSScaffold(
       appBar: MVSScreenAppBar(

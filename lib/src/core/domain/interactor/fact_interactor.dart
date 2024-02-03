@@ -16,22 +16,22 @@ abstract class IFactInteractor {
 
 class FactInteractor implements IFactInteractor {
   const FactInteractor({
-    required this.catFactRepository,
+    required this.factRepository,
   });
 
-  final IFactRepository catFactRepository;
+  final IFactRepository factRepository;
 
   @override
-  Future<Fact?> getLast() => this.catFactRepository.getLastFact();
+  Future<Fact?> getLast() => this.factRepository.getLastFact();
 
   @override
-  Future<Fact> getRandom() => this.catFactRepository.getOneRandomFact();
+  Future<Fact> getRandom() => this.factRepository.getOneRandomFact();
 
   @override
   Future<void> save({
     required Fact fact,
   }) =>
-      this.catFactRepository.insertFact(
+      this.factRepository.insertFact(
             fact: fact,
           );
 }

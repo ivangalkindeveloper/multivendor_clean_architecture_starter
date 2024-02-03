@@ -28,37 +28,3 @@ targets:
           generic_argument_factories: false
           ignore_unannotated: false
           include_if_null: true
-      freezed:
-        enabled: true
-        generate_for:
-          - lib/**.dart
-        options:
-          build_extensions:
-            '^lib/{{}}.dart': 'lib/generated/{{}}.freezed.dart'
-          generic_argument_factories: true
-          copy_with: true
-          equal: true
-          map:
-            map: true
-            map_or_null: false
-            maybe_map: false
-          when:
-            when: false
-            when_or_null: false
-            maybe_when: false
-
-builders:
-  freezed:
-    import: "package:freezed/builder.dart"
-    builder_factories: ["freezed"]
-    build_extensions: { ".dart": [".freezed.dart"] }
-    auto_apply: dependents
-    build_to: source
-    runs_before: ["json_serializable"]
-
-  json_serializable:
-    import: "package:json_serializable/builder.dart"
-    builder_factories: ["jsonSerializable"]
-    build_extensions: {".dart": ["json_serializable.g.part"]}
-    auto_apply: dependents
-    build_to: cache

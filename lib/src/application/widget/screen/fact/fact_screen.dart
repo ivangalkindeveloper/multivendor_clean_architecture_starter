@@ -31,11 +31,14 @@ class FactScreen extends StatelessWidget {
     final Dependency dependency = context.dependency;
 
     return BlocProvider(
-      create: (BuildContext context) => FactBloc(
+      create: (
+        BuildContext context,
+      ) =>
+          FactBloc(
         factRepository: dependency.data.factRepository,
       )..add(
-          const FactEvent.getFacts(),
-        ),
+              const FactEvent.getFact(),
+            ),
       child: const _FactScreen(),
     );
   }

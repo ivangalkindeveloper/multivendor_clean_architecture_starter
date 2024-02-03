@@ -1,14 +1,10 @@
-import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/get_random_fact_use_case.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/get_last_fact_use_case.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/domain/use_case/fact/save_fact_use_case.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/interactor/fact_interactor.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part '../../../generated/src/bloc/fact/fact_bloc.freezed.dart';
 part 'fact_event.dart';
 part 'fact_state.dart';
 
@@ -16,13 +12,7 @@ part 'fact_state.dart';
 class FactBloc extends Bloc<FactEvent, IFactState> {
   FactBloc({
     required IFactRepository factRepository,
-  })  : this._getRandomFactUseCase = GetRandomFactUseCase(
-          factRepository: factRepository,
-        ),
-        this._getLastFactUseCase = GetLastFactUseCase(
-          factRepository: factRepository,
-        ),
-        this._saveFactUseCase = SaveFactUseCase(
+  })  : this._factInteractor = FactInteractor(
           factRepository: factRepository,
         ),
         super(
@@ -34,8 +24,8 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
         Emitter<IFactState> emit,
       ) =>
           event.map(
-        getFacts: (
-          _GetFactsEvent event,
+        getFact: (
+          _GetFactEvent event,
         ) =>
             this._getFacts(
           event,
@@ -46,12 +36,10 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
     );
   }
 
-  final GetRandomFactUseCase _getRandomFactUseCase;
-  final GetLastFactUseCase _getLastFactUseCase;
-  final SaveFactUseCase _saveFactUseCase;
+  final FactInteractor _factInteractor;
 
   Future<void> _getFacts(
-    _GetFactsEvent event,
+    _GetFactEvent event,
     Emitter emit,
   ) async {
     emit(
@@ -72,7 +60,7 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
     Emitter emit,
   ) async {
     try {
-      final Fact? lastFact = await this._getLastFactUseCase.execute();
+      final Fact? lastFact = await this._factInteractor.getLast();
       emit(
         state.copyWith(
           lastFact: lastFact,
@@ -93,8 +81,8 @@ class FactBloc extends Bloc<FactEvent, IFactState> {
     Emitter emit,
   ) async {
     try {
-      final Fact randomFact = await this._getRandomFactUseCase.execute();
-      await this._saveFactUseCase.execute(
+      final Fact randomFact = await this._factInteractor.getRandom();
+      await this._factInteractor.save(
             fact: randomFact,
           );
       emit(

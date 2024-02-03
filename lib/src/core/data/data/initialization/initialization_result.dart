@@ -1,13 +1,12 @@
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_application.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_data.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '../../../../../generated/src/core/data/data/initialization/initialization_result.freezed.dart';
+class InitializationResult {
+  const InitializationResult({
+    required this.data,
+    required this.application,
+  });
 
-@freezed
-class InitializationResult with _$InitializationResult {
-  const factory InitializationResult({
-    required DependencyData data,
-    required DependencyApplication application,
-  }) = _InitializationResult;
+  final DependencyData data;
+  final DependencyApplication application;
 }

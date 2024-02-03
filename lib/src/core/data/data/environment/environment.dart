@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 
 //TODO Starter: Environment
 enum Environment {
-  vendorCat,
-  vendorDog;
+  cat,
+  dog;
 
   static Environment fromString(
     String value,

@@ -13,7 +13,9 @@ class ApplicationRouter extends _$ApplicationRouter {
   @override
   RouteType get defaultRouteType =>
       FPCPlatformUtility.decompose<RouteType, RouteType, RouteType>(
-        platform: FPCPlatform.fromTargetPlatform(defaultTargetPlatform),
+        platform: FPCPlatform.fromTarget(
+          defaultTargetPlatform,
+        ),
         cupertino: const RouteType.cupertino(),
         material: const RouteType.material(),
       );
