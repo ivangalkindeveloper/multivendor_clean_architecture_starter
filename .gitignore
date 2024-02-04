@@ -33,7 +33,6 @@ migrate_working_dir/
 /build/
 lib/generated/
 lib/split_debug_info/
-package/mvs_rest/lib/generated/
 
 # Symbolication related
 app.*.symbols

@@ -13,9 +13,18 @@
 
 include: package:lints/recommended.yaml
 
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.gr.dart"
+  errors:
+    invalid_annotation_target: ignore
+
 # Uncomment the following section to specify additional rules.
 
-# linter:
+linter:
+  rules:
+    unnecessary_this: false
 #   rules:
 #     - camel_case_types
 

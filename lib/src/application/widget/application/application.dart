@@ -1,16 +1,9 @@
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_time_of_day.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_animation.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_date_time.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_duration.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_haptic.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_size.dart';
-import 'package:multivendor_clean_architecture_starter/src/application/widget/component/entity/mvs_font.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/scope/scope_nester.dart';
-import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
+import 'package:mvs_widget/mvs_widget.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: Application
@@ -37,7 +30,7 @@ class Application extends StatelessWidget {
               child: child,
             ),
       ],
-      child: FlutterPlatformComponent(
+      child: MVSWidgetScope(
         animation: const MVSAnimation(),
         timeOfDay: MVSTimeOfDay(),
         dateTime: MVSDateTime(),
@@ -50,7 +43,7 @@ class Application extends StatelessWidget {
           builder: (
             BuildContext context,
           ) =>
-              FPCAppRouter(
+              MVSAppRouter(
             locale: this.result.application.locale,
             localizationsDelegates:
                 ApplicationLocalization.localizationsDelegates,

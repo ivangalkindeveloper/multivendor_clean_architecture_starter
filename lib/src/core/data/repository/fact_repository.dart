@@ -1,8 +1,6 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/dao/dao.dart';
-import 'package:mvs_rest/src/api/fact_api.dart';
-import 'package:mvs_rest/src/dto/fact/fact_dto.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
+import 'package:mvs_database/mvs_database.dart';
+import 'package:mvs_rest/mvs_rest.dart';
 import 'dart:async';
 
 //TODO Starter: IRepository
@@ -20,17 +18,17 @@ abstract class IFactRepository {
 
 class FactRepository implements IFactRepository {
   const FactRepository({
-    required IFactApi factApi,
-    required IDao<FactDatabaseTableData> factDao,
+    required IMVSFactApi factApi,
+    required IMVSDao<MVSFactDatabaseTableData> factDao,
   })  : this._factApi = factApi,
         this._factDao = factDao;
 
-  final IFactApi _factApi;
-  final IDao<FactDatabaseTableData> _factDao;
+  final IMVSFactApi _factApi;
+  final IMVSDao<MVSFactDatabaseTableData> _factDao;
 
   @override
   Future<Fact> getOneRandomFact() async {
-    final FactDto factorDto = await this._factApi.getRandomFact();
+    final MVSFactDto factorDto = await this._factApi.getRandomFact();
 
     return Fact(
       id: factorDto.id,
@@ -40,13 +38,13 @@ class FactRepository implements IFactRepository {
 
   @override
   Future<Fact?> getLastFact() async {
-    final List<FactDatabaseTableData> factsDatabaseData =
+    final List<MVSFactDatabaseTableData> factsDatabaseData =
         await this._factDao.get();
     if (factsDatabaseData.isEmpty) {
       return null;
     }
 
-    final FactDatabaseTableData lastFactDatabase = factsDatabaseData.last;
+    final MVSFactDatabaseTableData lastFactDatabase = factsDatabaseData.last;
 
     return Fact(
       id: lastFactDatabase.factId,
@@ -59,7 +57,7 @@ class FactRepository implements IFactRepository {
     required Fact fact,
   }) =>
       this._factDao.insert(
-            companion: FactDatabaseTableCompanion.insert(
+            companion: MVSFactDatabaseTableCompanion.insert(
               factId: fact.id,
               timestamp: DateTime.timestamp(),
               description: fact.description,

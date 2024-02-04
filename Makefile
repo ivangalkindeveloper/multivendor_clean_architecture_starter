@@ -1,6 +1,7 @@
 repair:
 	@echo "Project clean, pub repair, pub get"
 	@flutter pub cache repair && flutter pub get
+	@cd package/mvs_database && flutter pub cache repair && flutter pub get
 	@cd package/mvs_rest && flutter pub cache repair && flutter pub get
 	@cd package/mvs_utility && flutter pub cache repair && flutter pub get
 	@cd package/mvs_widget && flutter pub cache repair && flutter pub get
@@ -12,6 +13,7 @@ clean:
 	@rm -rf ~/Library/Application\ Support/Code/CachedData/*
 	@rm -rf pubspec.lock
 	@flutter clean && flutter pub get
+	@cd package/mvs_database && rm -rf pubspec.lock && flutter clean && flutter pub get
 	@cd package/mvs_rest && rm -rf pubspec.lock && flutter clean && flutter pub get
 	@cd package/mvs_utility && rm -rf pubspec.lock && flutter clean && flutter pub get
 	@cd package/mvs_widget && rm -rf pubspec.lock && flutter clean && flutter pub get
@@ -19,6 +21,7 @@ clean:
 upgrade:
 	@echo "Project pub upgrade"
 	@flutter pub upgrade && flutter pub get
+	@cd package/mvs_database && flutter pub upgrade && flutter pub get
 	@cd package/mvs_rest && flutter pub upgrade && flutter pub get
 	@cd package/mvs_utility && flutter pub upgrade && flutter pub get
 	@cd package/mvs_widget && flutter pub upgrade && flutter pub get
@@ -34,6 +37,8 @@ build-runner:
 	@find . -name \*.g.dart -type f -delete
 	@dart run build_runner clean
 	@dart run build_runner build --delete-conflicting-outputs
+	@cd package/mvs_database && dart run build_runner clean
+	@cd package/mvs_database && dart run build_runner build --delete-conflicting-outputs
 	@cd package/mvs_rest && dart run build_runner clean
 	@cd package/mvs_rest && dart run build_runner build --delete-conflicting-outputs
 

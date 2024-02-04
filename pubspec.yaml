@@ -19,34 +19,24 @@ dependencies:
   flutter_bloc:
   flutter_localizations:
     sdk: flutter
-  flutter_platform_component:
   intl:
   # Data
-  dio:
-  drift:
-  sqlite3_flutter_libs:
+  mvs_database:
+    path: package/mvs_database
   mvs_rest:
     path: package/mvs_rest
   # Utility
   collection:
   equatable:
-  l:
   mvs_utility:
     path: package/mvs_utility
-  path:
-  path_provider:
   stack_trace:
   flutter_launcher_icons:
   flutter_native_splash:
-  url_strategy:
-
 
 dev_dependencies:
   # Application
   auto_route_generator:
-  # Data
-  drift_dev:
-  json_serializable:
   # Test
   flutter_test:
     sdk: flutter

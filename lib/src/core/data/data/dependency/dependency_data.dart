@@ -1,6 +1,6 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data_source/database/database.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
+import 'package:mvs_database/mvs_database.dart';
 import 'package:mvs_rest/mvs_rest.dart';
 
 class DependencyData {
@@ -13,6 +13,6 @@ class DependencyData {
 
   final IConfig config;
   final IMVSHttpClient httpClient;
-  final Database database;
+  final MVSDatabase database;
   final IFactRepository factRepository;
 }
