@@ -8,6 +8,8 @@ class ConfigCat implements IConfig {
   @override
   final String baseUrl = "https://cat-fact.herokuapp.com";
   @override
+  final List<String> proxyUrls = const [];
+  @override
   final String animalType = "cat";
   @override
   final String databaseName = "fact_cat_db";

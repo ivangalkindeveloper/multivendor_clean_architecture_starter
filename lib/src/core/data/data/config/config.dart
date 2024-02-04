@@ -9,6 +9,7 @@ sealed class IConfig {
 
   abstract final Environment environment;
   abstract final String baseUrl;
+  abstract final List<String> proxyUrls;
   abstract final String databaseName;
   abstract final String animalType;
 }

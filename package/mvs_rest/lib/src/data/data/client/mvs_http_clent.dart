@@ -44,7 +44,7 @@ abstract class IMVSHttpClient {
 class MVSHttpClient implements IMVSHttpClient {
   MVSHttpClient({
     required String baseUrl,
-    List<String>? proxyUrlList,
+    List<String>? proxyUrls,
     BaseOptions? baseOptions,
     List<Interceptor>? interceptors,
   }) : this._dio = Dio(
@@ -55,9 +55,9 @@ class MVSHttpClient implements IMVSHttpClient {
                 baseUrl: baseUrl,
               ),
         ) {
-    if (proxyUrlList?.isEmpty == true) {
+    if (proxyUrls?.isEmpty == true) {
       this._enableProxy(
-        proxyUrlList!,
+        proxyUrls!,
       );
     }
     if (interceptors?.isNotEmpty == true) {
@@ -68,13 +68,13 @@ class MVSHttpClient implements IMVSHttpClient {
   }
 
   void _enableProxy(
-    List<String> proxyHostList,
+    List<String> proxyUrls,
   ) {
     this._dio.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
         final client = io.HttpClient();
         client.findProxy = (Uri uri) {
-          final String proxyHostListString = proxyHostList
+          final String proxyHostListString = proxyUrls
               .map(
                 (
                   String proxyHost,

@@ -1,6 +1,6 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/application/application_bloc_observer.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
@@ -59,6 +59,7 @@ class InitializationStepList {
       ) =>
           progress.httpClient = MVSHttpClient(
         baseUrl: progress.config!.baseUrl,
+        proxyUrls: progress.config!.proxyUrls,
         interceptors: const [
           MVSRequestInterceptor(),
         ],
