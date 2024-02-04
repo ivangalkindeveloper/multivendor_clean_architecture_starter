@@ -1,5 +1,5 @@
 import 'package:multivendor_clean_architecture_starter/src/application/widget/screen/fact/fact_screen.dart';
-import 'package:flutter_platform_component/flutter_platform_component.dart';
+import 'package:mvs_widget/mvs_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 
@@ -12,10 +12,8 @@ class ApplicationRouter extends _$ApplicationRouter {
 
   @override
   RouteType get defaultRouteType =>
-      FPCPlatformUtility.decompose<RouteType, RouteType, RouteType>(
-        platform: FPCPlatform.fromTarget(
-          defaultTargetPlatform,
-        ),
+      MVSPlatformUtility.decomposeFromTarget<RouteType, RouteType, RouteType>(
+        platform: defaultTargetPlatform,
         cupertino: const RouteType.cupertino(),
         material: const RouteType.material(),
       );

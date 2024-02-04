@@ -1,3 +1,4 @@
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/environment/environment.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_progress.dart';
 import 'package:multivendor_clean_architecture_starter/src/bloc/application/application_bloc_observer.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/foundation.dart';
 import 'package:mvs_rest/mvs_rest.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
+
+import 'package:mvs_widget/mvs_widget.dart';
 
 //TODO Starter: MainInitializationSteps
 class InitializationStepList {
@@ -102,6 +105,20 @@ class InitializationStepList {
   ];
 
   static final List<InitializationStep> _application = [
+    MVSInitializationStep(
+      title: "Theme",
+      initialize: (
+        IConfig config,
+        InitializationProgress progress,
+      ) {
+        switch (config.environment) {
+          case Environment.cat:
+            progress.theme = MVSThemeCatLight();
+          case Environment.dog:
+            progress.theme = MVSThemeDogLight();
+        }
+      },
+    ),
     MVSInitializationStep(
       title: "Locale",
       initialize: (

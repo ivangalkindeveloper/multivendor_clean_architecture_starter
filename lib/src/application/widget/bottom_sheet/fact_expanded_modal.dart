@@ -1,9 +1,9 @@
-import 'package:flutter_platform_component/flutter_platform_component.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mvs_widget/mvs_widget.dart';
 
 //TODO Starter: ExpandedBottomSheet
 class FactExpandedBottomSheet<T> extends StatelessWidget
-    with FPCExpandedBottomSheetMixin<T> {
+    with MVSExpandedBottomSheetMixin<T> {
   const FactExpandedBottomSheet({
     super.key,
   });

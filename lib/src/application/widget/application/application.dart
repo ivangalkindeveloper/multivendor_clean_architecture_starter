@@ -36,7 +36,7 @@ class Application extends StatelessWidget {
         dateTime: MVSDateTime(),
         duration: const MVSDuration(),
         haptic: const MVSHaptic(),
-        theme: this.result.data.config.themeLight,
+        theme: this.result.application.theme,
         size: const MVSSize(),
         font: const MVSFont(),
         child: Builder(

@@ -1,8 +1,8 @@
-import 'package:flutter_platform_component/flutter_platform_component.dart';
+import 'package:mvs_widget/mvs_widget.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: DatePicker
-class FactDatePicker extends StatelessWidget with FPCDatePickerMixin {
+class FactDatePicker extends StatelessWidget with MVSDatePickerMixin {
   const FactDatePicker({
     super.key,
   });

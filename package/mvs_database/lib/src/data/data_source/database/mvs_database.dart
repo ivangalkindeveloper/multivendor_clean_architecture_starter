@@ -1,7 +1,7 @@
 import 'package:mvs_database/mvs_database.dart';
 import 'package:drift/drift.dart';
 
-part '../../generated/src/data/mvs_database.g.dart';
+part '../../../../generated/src/data/data_source/database/mvs_database.g.dart';
 
 //TODO Starter: Database
 @DriftDatabase(

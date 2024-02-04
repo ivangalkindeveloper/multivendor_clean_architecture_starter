@@ -28,4 +28,11 @@ export 'src/domain/entity/theme/light/mvs_theme_cat_light.dart';
 export 'src/domain/entity/theme/light/mvs_theme_dog_light.dart';
 export 'src/domain/entity/theme/mvs_theme.dart';
 
+export 'src/utility/mixin/mvs_date_picker_mixin.dart';
+export 'src/utility/mixin/mvs_dialog_mixin.dart';
+export 'src/utility/mixin/mvs_expanded_bottom_sheet_mixin.dart';
+export 'src/utility/mixin/mvs_small_bottom_sheet_mixin.dart';
+export 'src/utility/mixin/mvs_snack_bar_mixin.dart';
+export 'src/utility/mixin/mvs_time_picker_mixin.dart';
 export 'src/utility/mvs_build_context_extension.dart';
+export 'src/utility/mvs_platform_utility.dart';

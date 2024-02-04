@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part '../../../generated/src/dto/fact/mvs_fact_dto.g.dart';
+part '../../../../../generated/src/data/data/dto/fact/mvs_fact_dto.g.dart';
 
 //TODO Starter: DTO
 @JsonSerializable()

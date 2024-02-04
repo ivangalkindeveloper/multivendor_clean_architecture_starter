@@ -9,21 +9,6 @@ PODS:
     - FlutterMacOS
   - smart_auth (0.0.1):
     - Flutter
-  - sqlite3 (3.45.1):
-    - sqlite3/common (= 3.45.1)
-  - sqlite3/common (3.45.1)
-  - sqlite3/fts5 (3.45.1):
-    - sqlite3/common
-  - sqlite3/perf-threadsafe (3.45.1):
-    - sqlite3/common
-  - sqlite3/rtree (3.45.1):
-    - sqlite3/common
-  - sqlite3_flutter_libs (0.0.1):
-    - Flutter
-    - sqlite3 (~> 3.45.1)
-    - sqlite3/fts5
-    - sqlite3/perf-threadsafe
-    - sqlite3/rtree
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -31,11 +16,6 @@ DEPENDENCIES:
   - flutter_vibrate (from `.symlinks/plugins/flutter_vibrate/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
-  - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/ios`)
-
-SPEC REPOS:
-  trunk:
-    - sqlite3
 
 EXTERNAL SOURCES:
   Flutter:
@@ -48,8 +28,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   smart_auth:
     :path: ".symlinks/plugins/smart_auth/ios"
-  sqlite3_flutter_libs:
-    :path: ".symlinks/plugins/sqlite3_flutter_libs/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
@@ -57,8 +35,6 @@ SPEC CHECKSUMS:
   flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
-  sqlite3: 73b7fc691fdc43277614250e04d183740cb15078
-  sqlite3_flutter_libs: af0e8fe9bce48abddd1ffdbbf839db0302d72d80
 
 PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
 
