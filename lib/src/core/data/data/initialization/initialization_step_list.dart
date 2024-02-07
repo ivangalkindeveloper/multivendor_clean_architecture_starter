@@ -57,7 +57,7 @@ class InitializationStepList {
         IConfig config,
         InitializationProgress progress,
       ) =>
-          progress.httpClient = MVSHttpClient(
+          progress.httpClient = MVSHTTPClient(
         baseUrl: progress.config!.baseUrl,
         proxyUrls: progress.config!.proxyUrls,
         interceptors: const [
@@ -82,11 +82,11 @@ class InitializationStepList {
         InitializationProgress progress,
       ) =>
           progress.factRepository = FactRepository(
-        factApi: MVSFactApi(
+        factAPI: MVSFactAPI(
           httpClient: progress.httpClient!,
           animalType: progress.config!.animalType,
         ),
-        factDao: MVSFactDao(
+        factDAO: MVSFactDAO(
           database: progress.database!,
         ),
       ),

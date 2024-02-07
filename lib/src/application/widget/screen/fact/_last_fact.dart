@@ -10,19 +10,21 @@ class _LastFact extends StatelessWidget {
 
     final MVSSize size = context.mvsSize;
 
-    return BlocBuilder<FactBloc, IFactState>(
+    return BlocBuilder<FactBloc, FactState>(
       builder: (
         BuildContext context,
-        IFactState state,
+        FactState state,
       ) {
-        switch (state.lastFactStatus) {
-          case FactStatus.initial:
+        switch (state) {
+          case FactInitialState():
             return const SizedBox();
 
-          case FactStatus.loading:
+          case FactLoadingState():
             return const MVSPrimaryCircularIndicator();
 
-          case FactStatus.success:
+          case FactSuccessState(
+              data: final FactStateData data,
+            ):
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,11 +33,13 @@ class _LastFact extends StatelessWidget {
                   context,
                   "Last fact about ${config.animalType}s:",
                 ),
-                SizedBox(height: size.s16 / 4),
-                if (state.lastFact != null)
+                SizedBox(
+                  height: size.s16 / 4,
+                ),
+                if (data.lastFact != null)
                   MVSText.regular16Black(
                     context,
-                    state.lastFact!.description,
+                    data.lastFact!.description,
                   )
                 else
                   MVSText.regular16Black(
@@ -45,7 +49,9 @@ class _LastFact extends StatelessWidget {
               ],
             );
 
-          case FactStatus.error:
+          case FactErrorState(
+              data: final FactStateData data,
+            ):
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,13 +60,15 @@ class _LastFact extends StatelessWidget {
                   context,
                   "Last fact error:",
                 ),
-                SizedBox(height: size.s16 / 4),
-                if (state.lastFactError != null)
+                SizedBox(
+                  height: size.s16 / 4,
+                ),
+                if (data.lastFactError != null)
                   MVSText.regular16Danger(
                     context,
-                    state.lastFactError!,
+                    data.lastFactError!,
                   ),
-                if (state.lastFact != null)
+                if (data.lastFact != null)
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,10 +77,12 @@ class _LastFact extends StatelessWidget {
                         context,
                         "Last fact about ${config.animalType}s:",
                       ),
-                      SizedBox(height: size.s16 / 4),
+                      SizedBox(
+                        height: size.s16 / 4,
+                      ),
                       MVSText.regular16Black(
                         context,
-                        state.lastFact!.description,
+                        data.lastFact!.description,
                       ),
                     ],
                   ),

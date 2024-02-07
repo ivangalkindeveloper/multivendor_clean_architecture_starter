@@ -1,6 +1,6 @@
 //TODO Starter: Entity
-class Fact {
-  const Fact({
+class FactBO {
+  const FactBO({
     required this.id,
     required this.description,
   });

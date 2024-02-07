@@ -1,87 +1,65 @@
 part of 'fact_bloc.dart';
 
-abstract class IFactState {
-  const IFactState();
-
-  abstract final Fact? lastFact;
-  abstract final FactStatus lastFactStatus;
-  abstract final String? lastFactError;
-  //
-  abstract final Fact? newFact;
-  abstract final FactStatus newFactStatus;
-  abstract final String? newFactError;
-
-  IFactState copyWith({
-    Fact? lastFact,
-    FactStatus? lastFactStatus,
-    String? lastFactError,
-    //
-    Fact? newFact,
-    FactStatus? newFactStatus,
-    String? newFactError,
-  });
-}
-
-enum FactStatus {
-  initial,
-  loading,
-  success,
-  error;
-}
-
-class FactState extends Equatable implements IFactState {
-  const FactState({
+class FactStateData {
+  const FactStateData({
     this.lastFact,
-    this.lastFactStatus = FactStatus.initial,
     this.lastFactError,
-    //
     this.newFact,
-    this.newFactStatus = FactStatus.initial,
     this.newFactError,
   });
 
-  @override
-  final Fact? lastFact;
-  @override
-  final FactStatus lastFactStatus;
-  @override
+  final FactBO? lastFact;
   final String? lastFactError;
-  //
-  @override
-  final Fact? newFact;
-  @override
-  final FactStatus newFactStatus;
-  @override
+  final FactBO? newFact;
   final String? newFactError;
 
-  @override
-  IFactState copyWith({
-    Fact? lastFact,
-    FactStatus? lastFactStatus,
+  FactStateData copyWith({
+    FactBO? lastFact,
     String? lastFactError,
-    //
-    Fact? newFact,
-    FactStatus? newFactStatus,
+    FactBO? newFact,
     String? newFactError,
   }) =>
-      FactState(
+      FactStateData(
         lastFact: lastFact ?? this.lastFact,
-        lastFactStatus: lastFactStatus ?? this.lastFactStatus,
-        lastFactError: lastFactError,
-        //
+        lastFactError: lastFactError ?? this.lastFactError,
         newFact: newFact ?? this.newFact,
-        newFactStatus: newFactStatus ?? this.newFactStatus,
-        newFactError: newFactError,
+        newFactError: newFactError ?? this.newFactError,
       );
+}
+
+sealed class FactState extends Equatable {
+  const FactState({
+    this.data = const FactStateData(),
+  });
+
+  final FactStateData data;
 
   @override
   List<Object?> get props => [
-        this.lastFact,
-        this.lastFactStatus,
-        this.lastFactError,
-        //
-        this.newFact,
-        this.newFactStatus,
-        this.newFactError,
+        this.data,
       ];
+}
+
+class FactInitialState extends FactState {
+  const FactInitialState({
+    super.data,
+  });
+}
+
+class FactLoadingState extends FactState {
+  const FactLoadingState({
+    super.data,
+  });
+}
+
+class FactSuccessState extends FactState {
+  const FactSuccessState({
+    super.data,
+  });
+}
+
+class FactErrorState extends FactState {
+  const FactErrorState({
+    super.data,
+  });
 }

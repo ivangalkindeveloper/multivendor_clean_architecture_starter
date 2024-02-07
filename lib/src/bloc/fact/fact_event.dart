@@ -7,10 +7,14 @@ sealed class FactEvent {
   const factory FactEvent.getFact() = _GetFactEvent;
 
   T map<T>({
-    required T Function(_GetFactEvent value) getFact,
+    required T Function(
+      _GetFactEvent value,
+    ) getFact,
   }) =>
       switch (this) {
-        _GetFactEvent() => getFact(this as _GetFactEvent),
+        _GetFactEvent() => getFact(
+            this as _GetFactEvent,
+          ),
       };
 }
 

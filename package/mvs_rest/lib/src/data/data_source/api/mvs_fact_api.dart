@@ -2,7 +2,7 @@ import 'package:mvs_rest/mvs_rest.dart';
 import 'package:dio/dio.dart';
 
 //TODO Starter: IApi
-abstract class IMVSFactApi {
+abstract class IMVSFactAPI {
   Future<MVSFactDto> getRandomFact();
 
   Future<List<MVSFactDto>> getRandomFacts({
@@ -10,14 +10,14 @@ abstract class IMVSFactApi {
   });
 }
 
-class MVSFactApi implements IMVSFactApi {
-  const MVSFactApi({
-    required IMVSHttpClient httpClient,
+class MVSFactAPI implements IMVSFactAPI {
+  const MVSFactAPI({
+    required IMVSHTTPClient httpClient,
     required String animalType,
   })  : this._httpClient = httpClient,
         this._animalType = animalType;
 
-  final IMVSHttpClient _httpClient;
+  final IMVSHTTPClient _httpClient;
   final String _animalType;
 
   @override

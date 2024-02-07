@@ -12,7 +12,7 @@ class DependencyData {
   });
 
   final IConfig config;
-  final IMVSHttpClient httpClient;
+  final IMVSHTTPClient httpClient;
   final MVSDatabase database;
   final IFactRepository factRepository;
 }

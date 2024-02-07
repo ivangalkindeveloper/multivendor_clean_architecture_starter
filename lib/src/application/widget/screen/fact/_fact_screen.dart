@@ -21,15 +21,21 @@ class _FactScreen extends StatelessWidget {
             context,
             "Animal: ${config.animalType}",
           ),
-          SizedBox(height: size.s16),
+          SizedBox(
+            height: size.s16,
+          ),
           const MVSAnimatedSize(
             child: _LastFact(),
           ),
-          SizedBox(height: size.s16),
+          SizedBox(
+            height: size.s16,
+          ),
           const MVSAnimatedSize(
             child: _NewFact(),
           ),
-          SizedBox(height: size.s16),
+          SizedBox(
+            height: size.s16,
+          ),
           const _ReloadButton(),
         ],
       ),

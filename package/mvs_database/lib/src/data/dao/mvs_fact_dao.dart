@@ -2,8 +2,8 @@ import 'package:mvs_database/mvs_database.dart';
 import 'package:drift/drift.dart';
 
 //TODO Starter: DAO
-class MVSFactDao implements IMVSDao<MVSFactDatabaseTableData> {
-  const MVSFactDao({
+class MVSFactDAO implements IMVSDAO<MVSFactDatabaseTableData> {
+  const MVSFactDAO({
     required this.database,
   });
 

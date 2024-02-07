@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'dart:io' as io;
 
-abstract class IMVSHttpClient {
-  const IMVSHttpClient();
+abstract class IMVSHTTPClient {
+  const IMVSHTTPClient();
 
   Future<Response<T>> request<T>({
     required String endpoint,
@@ -41,8 +41,8 @@ abstract class IMVSHttpClient {
   });
 }
 
-class MVSHttpClient implements IMVSHttpClient {
-  MVSHttpClient({
+class MVSHTTPClient implements IMVSHTTPClient {
+  MVSHTTPClient({
     required String baseUrl,
     List<String>? proxyUrls,
     BaseOptions? baseOptions,

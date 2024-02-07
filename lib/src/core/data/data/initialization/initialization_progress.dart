@@ -23,7 +23,7 @@ class InitializationProgress
   });
 
   IConfig? config;
-  IMVSHttpClient? httpClient;
+  IMVSHTTPClient? httpClient;
   MVSDatabase? database;
   IFactRepository? factRepository;
   MVSTheme? theme;

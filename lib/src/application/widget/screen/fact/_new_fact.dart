@@ -10,19 +10,21 @@ class _NewFact extends StatelessWidget {
 
     final MVSSize size = context.mvsSize;
 
-    return BlocBuilder<FactBloc, IFactState>(
+    return BlocBuilder<FactBloc, FactState>(
       builder: (
         BuildContext context,
-        IFactState state,
+        FactState state,
       ) {
-        switch (state.newFactStatus) {
-          case FactStatus.initial:
+        switch (state) {
+          case FactInitialState():
             return const SizedBox();
 
-          case FactStatus.loading:
+          case FactLoadingState():
             return const MVSPrimaryCircularIndicator();
 
-          case FactStatus.success:
+          case FactSuccessState(
+              data: final FactStateData data,
+            ):
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,16 +33,20 @@ class _NewFact extends StatelessWidget {
                   context,
                   "New fact about ${config.animalType}s:",
                 ),
-                SizedBox(height: size.s16 / 4),
-                if (state.newFact != null)
+                SizedBox(
+                  height: size.s16 / 4,
+                ),
+                if (data.newFact != null)
                   MVSText.regular16Black(
                     context,
-                    state.newFact!.description,
+                    data.newFact!.description,
                   ),
               ],
             );
 
-          case FactStatus.error:
+          case FactErrorState(
+              data: final FactStateData data,
+            ):
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,11 +55,13 @@ class _NewFact extends StatelessWidget {
                   context,
                   "New fact error:",
                 ),
-                SizedBox(height: size.s16 / 4),
-                if (state.newFactError != null)
+                SizedBox(
+                  height: size.s16 / 4,
+                ),
+                if (data.newFactError != null)
                   MVSText.regular16Danger(
                     context,
-                    state.newFactError!,
+                    data.newFactError!,
                   ),
               ],
             );

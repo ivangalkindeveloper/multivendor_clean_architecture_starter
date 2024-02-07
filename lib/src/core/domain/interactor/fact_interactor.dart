@@ -1,16 +1,16 @@
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/domain/entity/fact/fact_bo.dart';
 
 //TODO Starter: IInteractor
 abstract class IFactInteractor {
   const IFactInteractor();
 
-  Future<Fact?> getLast();
+  Future<FactBO?> getLast();
 
-  Future<Fact> getRandom();
+  Future<FactBO> getRandom();
 
   Future<void> save({
-    required Fact fact,
+    required FactBO fact,
   });
 }
 
@@ -22,14 +22,14 @@ class FactInteractor implements IFactInteractor {
   final IFactRepository factRepository;
 
   @override
-  Future<Fact?> getLast() => this.factRepository.getLastFact();
+  Future<FactBO?> getLast() => this.factRepository.getLastFact();
 
   @override
-  Future<Fact> getRandom() => this.factRepository.getOneRandomFact();
+  Future<FactBO> getRandom() => this.factRepository.getOneRandomFact();
 
   @override
   Future<void> save({
-    required Fact fact,
+    required FactBO fact,
   }) =>
       this.factRepository.insertFact(
             fact: fact,

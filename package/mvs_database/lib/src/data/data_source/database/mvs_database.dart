@@ -18,8 +18,6 @@ class MVSDatabase extends _$MVSDatabase {
           ),
         );
 
-  // You should bump this number whenever you change or add a table definition.
-  // Migrations are covered later in the documentation.
   @override
   int get schemaVersion => 1;
 }

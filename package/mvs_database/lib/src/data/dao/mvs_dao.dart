@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-abstract class IMVSDao<T> {
+abstract class IMVSDAO<T> {
   Future<List<T>> get();
 
   Stream<List<T>> watch();
