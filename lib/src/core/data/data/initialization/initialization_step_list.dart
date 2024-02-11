@@ -130,7 +130,10 @@ class InitializationStepList {
         if (ApplicationLocalization.supportedLocales.contains(platformLocale)) {
           progress.locale = platformLocale;
         } else {
-          progress.locale = const Locale("en", "US");
+          progress.locale = const Locale(
+            "en",
+            "US",
+          );
         }
       },
     ),

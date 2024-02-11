@@ -1,7 +1,7 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_application.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency_data.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/router/application_router.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/repository/fact_repository.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/config/config.dart';
 import 'package:mvs_database/mvs_database.dart';
@@ -10,8 +10,7 @@ import 'package:mvs_widget/mvs_widget.dart';
 import 'package:mvs_rest/mvs_rest.dart';
 import 'package:flutter/widgets.dart';
 
-class InitializationProgress
-    implements IMVSInitializationProgress<InitializationResult> {
+class InitializationProgress implements IMVSInitializationProgress<Dependency> {
   InitializationProgress({
     this.config,
     this.httpClient,
@@ -31,7 +30,7 @@ class InitializationProgress
   ApplicationRouter? router;
 
   @override
-  InitializationResult freeze() => InitializationResult(
+  Dependency freeze() => Dependency(
         data: DependencyData(
           config: this.config!,
           httpClient: this.httpClient!,

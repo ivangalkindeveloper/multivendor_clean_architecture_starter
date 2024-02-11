@@ -7,11 +7,11 @@ import 'dart:async';
 abstract class IFactRepository {
   const IFactRepository();
 
-  Future<FactBO> getOneRandomFact();
+  FutureOr<FactBO> getOneRandomFact();
 
-  Future<FactBO?> getLastFact();
+  FutureOr<FactBO?> getLastFact();
 
-  Future<void> insertFact({
+  FutureOr<void> insertFact({
     required FactBO fact,
   });
 }

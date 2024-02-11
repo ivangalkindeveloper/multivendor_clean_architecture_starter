@@ -7,88 +7,82 @@ class _LastFact extends StatelessWidget {
   Widget build(BuildContext context) {
     final Dependency dependency = context.dependency;
     final IConfig config = dependency.data.config;
-
     final MVSSize size = context.mvsSize;
+    final ApplicationLocalization l10n = context.l10n;
 
     return BlocBuilder<FactBloc, FactState>(
       builder: (
         BuildContext context,
         FactState state,
-      ) {
-        switch (state) {
-          case FactInitialState():
-            return const SizedBox();
-
-          case FactLoadingState():
-            return const MVSPrimaryCircularIndicator();
-
-          case FactSuccessState(
-              data: final FactStateData data,
-            ):
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MVSText.medium16Black(
+      ) =>
+          switch (state) {
+        FactInitialState() => const SizedBox(),
+        FactLoadingState() => const MVSPrimaryCircularIndicator(),
+        FactSuccessState(
+          data: final FactStateData data,
+        ) =>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MVSText.medium16Black(
+                context,
+                l10n.factLastFactDescription(config.animalType),
+              ),
+              SizedBox(
+                height: size.s16 / 4,
+              ),
+              if (data.lastFact != null)
+                MVSText.regular16Black(
                   context,
-                  "Last fact about ${config.animalType}s:",
-                ),
-                SizedBox(
-                  height: size.s16 / 4,
-                ),
-                if (data.lastFact != null)
-                  MVSText.regular16Black(
-                    context,
-                    data.lastFact!.description,
-                  )
-                else
-                  MVSText.regular16Black(
-                    context,
-                    "No last fact :(",
-                  ),
-              ],
-            );
-
-          case FactErrorState(
-              data: final FactStateData data,
-            ):
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MVSText.medium16Black(
+                  data.lastFact!.description,
+                )
+              else
+                MVSText.regular16Black(
                   context,
-                  "Last fact error:",
+                  l10n.factNoLastFactDescription,
                 ),
-                SizedBox(
-                  height: size.s16 / 4,
+            ],
+          ),
+        FactErrorState(
+          data: final FactStateData data,
+        ) =>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MVSText.medium16Black(
+                context,
+                l10n.errorLastFact,
+              ),
+              SizedBox(
+                height: size.s16 / 4,
+              ),
+              if (data.lastFactError != null)
+                MVSText.regular16Danger(
+                  context,
+                  data.lastFactError!,
                 ),
-                if (data.lastFactError != null)
-                  MVSText.regular16Danger(
-                    context,
-                    data.lastFactError!,
-                  ),
-                if (data.lastFact != null)
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MVSText.medium16Black(
-                        context,
-                        "Last fact about ${config.animalType}s:",
-                      ),
-                      SizedBox(
-                        height: size.s16 / 4,
-                      ),
-                      MVSText.regular16Black(
-                        context,
-                        data.lastFact!.description,
-                      ),
-                    ],
-                  ),
-              ],
-            );
-        }
+              if (data.lastFact != null)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MVSText.medium16Black(
+                      context,
+                      l10n.factLastFactDescription(config.animalType),
+                    ),
+                    SizedBox(
+                      height: size.s16 / 4,
+                    ),
+                    MVSText.regular16Black(
+                      context,
+                      data.lastFact!.description,
+                    ),
+                  ],
+                ),
+            ],
+          )
       },
     );
   }

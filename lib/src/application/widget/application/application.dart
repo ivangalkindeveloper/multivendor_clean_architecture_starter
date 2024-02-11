@@ -1,7 +1,6 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
 import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
-import 'package:multivendor_clean_architecture_starter/src/utility/scope/scope_nester.dart';
+import 'package:multivendor_clean_architecture_starter/src/utility/nester/scope_nester.dart';
 import 'package:flutter_gen/gen_l10n/application_localization.dart';
 import 'package:mvs_widget/mvs_widget.dart';
 import 'package:flutter/widgets.dart';
@@ -13,7 +12,7 @@ class Application extends StatelessWidget {
     super.key,
   });
 
-  final InitializationResult result;
+  final Dependency result;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +22,7 @@ class Application extends StatelessWidget {
           Widget child,
         ) =>
             DependencyScope(
-              dependency: Dependency(
-                data: result.data,
-                application: result.application,
-              ),
+              dependency: result,
               child: child,
             ),
       ],

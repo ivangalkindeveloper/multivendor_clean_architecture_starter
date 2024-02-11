@@ -1,25 +1,25 @@
 part of 'fact_screen.dart';
 
-class _FactScreen extends StatelessWidget {
-  const _FactScreen();
+class _Screen extends StatelessWidget {
+  const _Screen();
 
   @override
   Widget build(BuildContext context) {
     final Dependency dependency = context.dependency;
     final IConfig config = dependency.data.config;
-
     final MVSSize size = context.mvsSize;
+    final ApplicationLocalization l10n = context.l10n;
 
     return MVSScaffold(
       appBar: MVSScreenAppBar(
         context,
-        title: "Animal Fact",
+        title: l10n.factTitle,
       ),
       body: MVSListView(
         children: [
           MVSText.medium16Black(
             context,
-            "Animal: ${config.animalType}",
+            "${l10n.factAnimalDescription} ${config.animalType}",
           ),
           SizedBox(
             height: size.s16,

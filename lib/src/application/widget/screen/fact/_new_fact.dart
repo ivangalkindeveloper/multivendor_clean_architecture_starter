@@ -7,65 +7,59 @@ class _NewFact extends StatelessWidget {
   Widget build(BuildContext context) {
     final Dependency dependency = context.dependency;
     final IConfig config = dependency.data.config;
-
     final MVSSize size = context.mvsSize;
+    final ApplicationLocalization l10n = context.l10n;
 
     return BlocBuilder<FactBloc, FactState>(
       builder: (
         BuildContext context,
         FactState state,
-      ) {
-        switch (state) {
-          case FactInitialState():
-            return const SizedBox();
-
-          case FactLoadingState():
-            return const MVSPrimaryCircularIndicator();
-
-          case FactSuccessState(
-              data: final FactStateData data,
-            ):
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MVSText.medium16Black(
+      ) =>
+          switch (state) {
+        FactInitialState() => const SizedBox(),
+        FactLoadingState() => const MVSPrimaryCircularIndicator(),
+        FactSuccessState(
+          data: final FactStateData data,
+        ) =>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MVSText.medium16Black(
+                context,
+                l10n.factNewFactDescription(config.animalType),
+              ),
+              SizedBox(
+                height: size.s16 / 4,
+              ),
+              if (data.newFact != null)
+                MVSText.regular16Black(
                   context,
-                  "New fact about ${config.animalType}s:",
+                  data.newFact!.description,
                 ),
-                SizedBox(
-                  height: size.s16 / 4,
-                ),
-                if (data.newFact != null)
-                  MVSText.regular16Black(
-                    context,
-                    data.newFact!.description,
-                  ),
-              ],
-            );
-
-          case FactErrorState(
-              data: final FactStateData data,
-            ):
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MVSText.medium16Black(
+            ],
+          ),
+        FactErrorState(
+          data: final FactStateData data,
+        ) =>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MVSText.medium16Black(
+                context,
+                l10n.errorNewFact,
+              ),
+              SizedBox(
+                height: size.s16 / 4,
+              ),
+              if (data.newFactError != null)
+                MVSText.regular16Danger(
                   context,
-                  "New fact error:",
+                  data.newFactError!,
                 ),
-                SizedBox(
-                  height: size.s16 / 4,
-                ),
-                if (data.newFactError != null)
-                  MVSText.regular16Danger(
-                    context,
-                    data.newFactError!,
-                  ),
-              ],
-            );
-        }
+            ],
+          ),
       },
     );
   }

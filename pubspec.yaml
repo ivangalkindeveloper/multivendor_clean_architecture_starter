@@ -12,37 +12,37 @@ dependencies:
   flutter:
     sdk: flutter
   # Application
-  auto_route:
-  bloc_concurrency:
+  auto_route: 7.8.4
+  bloc_concurrency: 0.2.3
   mvs_widget:
     path: package/mvs_widget
-  flutter_bloc:
+  flutter_bloc: 8.1.3
   flutter_localizations:
     sdk: flutter
-  intl:
+  intl: 0.18.1
   # Data
   mvs_database:
     path: package/mvs_database
   mvs_rest:
     path: package/mvs_rest
   # Utility
-  collection:
-  equatable:
+  collection: 1.18.0
+  equatable: 2.0.5
   mvs_utility:
     path: package/mvs_utility
-  stack_trace:
-  flutter_launcher_icons:
-  flutter_native_splash:
+  stack_trace: 1.11.1
+  flutter_launcher_icons: 0.13.1
+  flutter_native_splash: 2.3.10
 
 dev_dependencies:
   # Application
-  auto_route_generator:
+  auto_route_generator: 7.3.2
   # Test
   flutter_test:
     sdk: flutter
-  test:
+  test: 1.24.9
   # Utility
-  flutter_lints:
+  flutter_lints: 3.0.1
 
 flutter:
   generate: true

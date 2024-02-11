@@ -5,13 +5,15 @@ class _ReloadButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ApplicationLocalization l10n = context.l10n;
+
     return BlocBuilder<FactBloc, FactState>(
       builder: (
         BuildContext context,
         FactState state,
       ) =>
           MVSPrimaryButton(
-        title: "Reload",
+        title: l10n.buttonReload,
         onPressed: () => context.read<FactBloc>().add(
               const FactEvent.getFact(),
             ),

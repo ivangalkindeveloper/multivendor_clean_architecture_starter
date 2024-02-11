@@ -1,11 +1,29 @@
 {
-  "@@locale": "en",
-  "appTitle": "Miltivendor Starter",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
-  "samplePlaceholder": "Sample placeholder {value}",
-  "@samplePlaceholder": {
-    "description": "Sample placeholder"
-  }
+    "@@locale": "en",
+    "buttonReload": "Reload",
+
+    "factTitle": "Animal Fact",
+    "factAnimalDescription": "Animal:",
+    "factNewFactDescription": "New fact about {animal}",
+    "@factNewFactDescription": {
+      "placeholders": {
+        "animal": {
+          "type": "String",
+          "example": "Cat"
+        }
+      }
+    },
+    "factLastFactDescription": "Last fact about {animal}",
+    "@factLastFactDescription": {
+      "placeholders": {
+        "animal": {
+          "type": "String",
+          "example": "Cat"
+        }
+      }
+    },
+    "factNoLastFactDescription": "No last fact :(",
+
+    "errorNewFact": "New fact error:",
+    "errorLastFact": "Last fact error:"
 }

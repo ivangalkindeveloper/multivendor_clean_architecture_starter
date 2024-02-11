@@ -1,10 +1,10 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/initialization/initialization_result.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
 import 'package:multivendor_clean_architecture_starter/src/utility/typedef.dart';
 import 'package:mvs_utility/mvs_utility.dart';
 
 //TODO Starter: InitializationCallback
-class InitializationCallback extends IMVSInitializationCallback<
-    InitializationStep, InitializationResult> {
+class InitializationCallback
+    extends IMVSInitializationCallback<InitializationStep, Dependency> {
   const InitializationCallback();
 
   @override
@@ -63,7 +63,7 @@ class InitializationCallback extends IMVSInitializationCallback<
 
   @override
   void onSuccess(
-    InitializationResult result,
+    Dependency result,
     Duration duration,
   ) {
     final StringBuffer buffer = StringBuffer();

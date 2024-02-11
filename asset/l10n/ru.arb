@@ -1,0 +1,29 @@
+{
+    "@@locale": "ru",
+    "buttonReload": "Перезагрузить",
+  
+    "factTitle": "Факты о животных",
+    "factAnimalDescription": "Фивотное:",
+    "factNewFactDescription": "Новый факт о {animal}",
+    "@factNewFactDescription": {
+      "placeholders": {
+        "animal": {
+          "type": "String",
+          "example": "Cat"
+        }
+      }
+    },
+    "factLastFactDescription": "Последний факт о {animal}",
+    "@factLastFactDescription": {
+      "placeholders": {
+        "animal": {
+          "type": "String",
+          "example": "Cat"
+        }
+      }
+    },
+    "factNoLastFactDescription": "Последнего факта пока нет :(",
+  
+    "errorNewFact": "Ошибка о новом факте:",
+    "errorLastFact": "Ошибка о последнем факте:"
+  }
