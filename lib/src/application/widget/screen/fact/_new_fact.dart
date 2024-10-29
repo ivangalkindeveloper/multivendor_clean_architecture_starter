@@ -6,9 +6,11 @@ class _NewFact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Dependency dependency = context.dependency;
-    final IConfig config = dependency.data.config;
+    final Environment environment = dependency.environment;
+
     final MVSSize size = context.mvsSize;
-    final ApplicationLocalization l10n = context.l10n;
+
+    final L10N l10n = context.l10n;
 
     return BlocBuilder<FactBloc, FactState>(
       builder: (
@@ -16,50 +18,26 @@ class _NewFact extends StatelessWidget {
         FactState state,
       ) =>
           switch (state) {
-        FactInitialState() => const SizedBox(),
         FactLoadingState() => const MVSPrimaryCircularIndicator(),
-        FactSuccessState(
-          data: final FactStateData data,
-        ) =>
-          Column(
+        FactSuccessState() => Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MVSText.medium16Black(
                 context,
-                l10n.factNewFactDescription(config.animalType),
+                l10n.factNewFactDescription(environment.animalType),
               ),
               SizedBox(
                 height: size.s16 / 4,
               ),
-              if (data.newFact != null)
+              if (state.newFact != null)
                 MVSText.regular16Black(
                   context,
-                  data.newFact!.description,
+                  state.newFact!.description,
                 ),
             ],
           ),
-        FactErrorState(
-          data: final FactStateData data,
-        ) =>
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MVSText.medium16Black(
-                context,
-                l10n.errorNewFact,
-              ),
-              SizedBox(
-                height: size.s16 / 4,
-              ),
-              if (data.newFactError != null)
-                MVSText.regular16Danger(
-                  context,
-                  data.newFactError!,
-                ),
-            ],
-          ),
+        FactErrorState() => const SizedBox(),
       },
     );
   }

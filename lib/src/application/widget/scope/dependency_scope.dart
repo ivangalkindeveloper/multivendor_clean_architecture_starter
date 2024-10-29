@@ -1,9 +1,9 @@
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
-import 'package:multivendor_clean_architecture_starter/src/utility/mixin/scope_mixin.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/dependency.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/utility/mixin/scope_mixin.dart';
 import 'package:flutter/material.dart';
 
 //TODO Starter: DependencyScope
-class DependencyScope extends InheritedWidget with ScopeMixin {
+class DependencyScope extends InheritedWidget {
   const DependencyScope({
     super.key,
     required this.dependency,
@@ -12,8 +12,12 @@ class DependencyScope extends InheritedWidget with ScopeMixin {
 
   final Dependency dependency;
 
-  static Dependency of(BuildContext context) =>
-      ScopeMixin.of<DependencyScope>(context).dependency;
+  static Dependency of(
+    BuildContext context,
+  ) =>
+      ScopeMixin.of<DependencyScope>(
+        context,
+      ).dependency;
 
   @override
   bool updateShouldNotify(DependencyScope oldWidget) => false;

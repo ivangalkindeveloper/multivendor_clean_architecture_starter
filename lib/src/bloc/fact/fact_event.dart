@@ -1,23 +1,28 @@
 // ignore_for_file:library_private_types_in_public_api
 part of 'fact_bloc.dart';
 
-sealed class FactEvent {
+sealed class FactEvent extends Equatable {
   const FactEvent();
 
-  const factory FactEvent.getFact() = _GetFactEvent;
+  factory FactEvent.getFacts() => const _GetFacts();
 
-  T map<T>({
-    required T Function(
-      _GetFactEvent value,
-    ) getFact,
-  }) =>
-      switch (this) {
-        _GetFactEvent() => getFact(
-            this as _GetFactEvent,
-          ),
-      };
+  @override
+  List<Object> get props => [];
 }
 
-class _GetFactEvent extends FactEvent {
-  const _GetFactEvent();
+final class _GetFacts extends FactEvent {
+  const _GetFacts();
+}
+
+final class _UpdateFacts extends FactEvent {
+  const _UpdateFacts({
+    required this.state,
+  });
+
+  final FactSuccessState state;
+
+  @override
+  List<Object> get props => [
+        state,
+      ];
 }

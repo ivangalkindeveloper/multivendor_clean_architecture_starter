@@ -1,91 +1,106 @@
-.PHONY: repair clean upgrade pod-install build-runner pre-build
+include .env
+
+.PHONY: init pod-install build-runner clean repair upgrade format
 .SILENT:
 
-repair:
-	flutter pub cache repair && flutter pub get
-	cd package/mvs_database && flutter pub cache repair && flutter pub get
-	cd package/mvs_rest && flutter pub cache repair && flutter pub get
-	cd package/mvs_utility && flutter pub cache repair && flutter pub get
-	cd package/mvs_widget && flutter pub cache repair && flutter pub get
+init:
+	fvm install $(FLUTTER_VERSION) && fvm use $(FLUTTER_VERSION)
+	bash ./bin/as_xc_check_version.sh $(XCODE_VERSION) $(ANDROID_STUDIO_VERSION)
+	make pod-install
+	make build-runner
+	make clean
+
+pod-install:
+	cd ios && rm -rf Pods && rm -rf Podfile.lock && rm -rf Flutter/Flutter.podspec
+	cd ios && pod deintegrate && sudo gem uninstall cocoapods && sudo gem uninstall cocoapods-core && sudo gem uninstall cocoapods-downloader
+	cd ios && sudo gem install cocoapods && pod setup && flutter precache --ios && pod install --repo-update && pod cache clean --all && pod update
+	fvm flutter clean && fvm flutter pub get
+
+build-runner:
+	find . -name \*.g.dart -type f -delete
+	fvm dart run build_runner clean
+	fvm dart run build_runner build --delete-conflicting-outputs
+	cd package/mvs_database && rm -rf lib/generated && fvm dart run build_runner clean && fvm dart run build_runner build --delete-conflicting-outputs
+	cd package/mvs_rest && rm -rf lib/generated && fvm dart run build_runner clean && fvm dart run build_runner build --delete-conflicting-outputs
 
 clean:
 	rm -rf ~/Library/Caches/CocoaPods
 	rm -rf ~/Library/Application\ Support/Code/Cache/*
 	rm -rf ~/Library/Application\ Support/Code/CachedData/*
-	rm -rf pubspec.lock
-	flutter clean && flutter pub get
-	cd package/mvs_database && rm -rf pubspec.lock && flutter clean && flutter pub get
-	cd package/mvs_rest && rm -rf pubspec.lock && flutter clean && flutter pub get
-	cd package/mvs_utility && rm -rf pubspec.lock && flutter clean && flutter pub get
-	cd package/mvs_widget && rm -rf pubspec.lock && flutter clean && flutter pub get
+	rm -rf ./build && rm -rf ./.dart_tool && rm -rf pubspec.lock
+	fvm flutter clean && fvm flutter pub get
+	cd package/mvs_database && rm -rf ./build && rm -rf ./.dart_tool && rm -rf pubspec.lock && fvm flutter clean && fvm flutter pub get
+	cd package/mvs_rest && rm -rf ./build && rm -rf ./.dart_tool && rm -rf pubspec.lock && fvm flutter clean && fvm flutter pub get
+	cd package/mvs_utility && rm -rf ./build && rm -rf ./.dart_tool && rm -rf pubspec.lock && fvm flutter clean && fvm flutter pub get
+	cd package/mvs_widget && rm -rf ./build && rm -rf ./.dart_tool && rm -rf pubspec.lock && fvm flutter clean && fvm flutter pub get
+
+repair:
+	fvm flutter pub cache repair && fvm flutter pub get
+	cd package/mvs_database && fvm flutter pub cache repair && fvm flutter pub get
+	cd package/mvs_rest && fvm flutter pub cache repair && fvm flutter pub get
+	cd package/mvs_utility && fvm flutter pub cache repair && fvm flutter pub get
+	cd package/mvs_widget && fvm flutter pub cache repair && fvm flutter pub get
 
 upgrade:
-	flutter pub upgrade && flutter pub get
-	cd package/mvs_database && flutter pub upgrade && flutter pub get
-	cd package/mvs_rest && flutter pub upgrade && flutter pub get
-	cd package/mvs_utility && flutter pub upgrade && flutter pub get
-	cd package/mvs_widget && flutter pub upgrade && flutter pub get
+	fvm flutter pub upgrade && fvm flutter pub get
+	cd package/mvs_database && fvm flutter pub upgrade && fvm flutter pub get
+	cd package/mvs_rest && fvm flutter pub upgrade && fvm flutter pub get
+	cd package/mvs_utility && fvm flutter pub upgrade && fvm flutter pub get
+	cd package/mvs_widget && fvm flutter pub upgrade && fvm flutter pub get
 
-pod-install:
-	cd ios && rm -rf Pods && rm -rf Podfile.lock && rm -rf Flutter/Flutter.podspec
-	cd ios && pod deintegrate && sudo gem uninstall cocoapods && sudo gem uninstall cocoapods-core && sudo gem uninstall cocoapods-downloader && sudo gem install cocoapods
-	cd ios && pod setup && pod install --repo-update && pod cache clean --all && pod update
-	flutter clean && flutter pub get && flutter pub cache repair && flutter pub get
+format:
+	fvm dart format .
 
-build-runner:
-	find . -name \*.g.dart -type f -delete
-	dart run build_runner clean
-	dart run build_runner build --delete-conflicting-outputs
-	cd package/mvs_database && dart run build_runner clean
-	cd package/mvs_database && dart run build_runner build --delete-conflicting-outputs
-	cd package/mvs_rest && dart run build_runner clean
-	cd package/mvs_rest && dart run build_runner build --delete-conflicting-outputs
-
-pre-build: clean build-runner
 
 
 switch-cat:
-	bash ./vendor/cat/switch.sh
+	bash ./bin/vendor/cat/switch.sh
 
 switch-dog:
-	bash ./vendor/dog/switch.sh
+	bash ./bin/vendor/dog/switch.sh
 
 
 
-build-cat-apk: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "apk"
+build-apk-cat: pre-build switch-cat
+	bash ./bin/build.sh "apk" "cat"
 
-build-cat-appbundle: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "appbundle"
+build-appbundle-cat: pre-build switch-cat
+	bash ./bin/build.sh "appbundle" "cat"
 
-build-cat-ipa: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "ipa"
+build-ipa-cat: pre-build switch-cat
+	bash ./bin/build.sh "ipa" "cat"
 
-build-cat-linux: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "linux"
+build-linux-cat: pre-build switch-cat
+	bash ./bin/build.sh "linux" "cat"
 
-build-cat-macos: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "macos"
+build-macos-cat: pre-build switch-cat
+	bash ./bin/build.sh "macos" "cat"
 
-build-cat-web: pre-build switch-cat
-	bash ./vendor/core/build.sh "cat" "web"
+build-web-cat: pre-build switch-cat
+	bash ./bin/build.sh "web" "cat"
+
+build-windows-cat: pre-build switch-cat
+	bash ./bin/build.sh "windows" "cat"
 
 
 
-build-dog-apk: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "apk"
+build-apk-dog: pre-build switch-dog
+	bash ./bin/build.sh "apk" "dog"
 
 build-appbundle-dog: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "appbundle"
+	bash ./bin/build.sh "appbundle" "dog"
 
 build-ipa-dog: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "ipa"
+	bash ./bin/build.sh "ipa" "dog"
 
 build-linux-dog: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "linux"
+	bash ./bin/build.sh "linux" "dog"
 
 build-macos-dog: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "macos"
+	bash ./bin/build.sh "macos" "dog"
 
 build-web-dog: pre-build switch-dog
-	bash ./vendor/core/build.sh "dog" "web"
+	bash ./bin/build.sh "web" "dog"
+
+build-windows-dog: pre-build switch-dog
+	bash ./bin/build.sh "windows" "dog"

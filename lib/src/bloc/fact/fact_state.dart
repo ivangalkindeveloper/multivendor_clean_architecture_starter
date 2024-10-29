@@ -1,65 +1,52 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'fact_bloc.dart';
 
-class FactStateData {
-  const FactStateData({
-    this.lastFact,
-    this.lastFactError,
-    this.newFact,
-    this.newFactError,
-  });
+sealed class FactState extends Equatable {
+  const FactState();
 
-  final FactBO? lastFact;
-  final String? lastFactError;
-  final FactBO? newFact;
-  final String? newFactError;
-
-  FactStateData copyWith({
-    FactBO? lastFact,
-    String? lastFactError,
-    FactBO? newFact,
-    String? newFactError,
-  }) =>
-      FactStateData(
-        lastFact: lastFact ?? this.lastFact,
-        lastFactError: lastFactError ?? this.lastFactError,
-        newFact: newFact ?? this.newFact,
-        newFactError: newFactError ?? this.newFactError,
-      );
+  @override
+  List<Object?> get props => const [];
 }
 
-sealed class FactState extends Equatable {
-  const FactState({
-    this.data = const FactStateData(),
+final class FactLoadingState extends FactState {
+  const FactLoadingState();
+}
+
+final class FactSuccessState extends FactState {
+  const FactSuccessState({
+    this.isLastFactLoading = false,
+    this.lastFact,
+    this.isNewFactLoading = false,
+    this.newFact,
   });
 
-  final FactStateData data;
+  final bool isLastFactLoading;
+  final Fact? lastFact;
+  final bool isNewFactLoading;
+  final Fact? newFact;
+
+  FactSuccessState copyWith({
+    bool? isLastFactLoading,
+    Fact? lastFact,
+    bool? isNewFactLoading,
+    Fact? newFact,
+  }) =>
+      FactSuccessState(
+        isLastFactLoading: isLastFactLoading ?? this.isLastFactLoading,
+        lastFact: lastFact ?? this.lastFact,
+        isNewFactLoading: isNewFactLoading ?? this.isNewFactLoading,
+        newFact: newFact ?? this.newFact,
+      );
 
   @override
   List<Object?> get props => [
-        this.data,
+        this.isLastFactLoading,
+        this.lastFact,
+        this.isNewFactLoading,
+        this.newFact,
       ];
 }
 
-class FactInitialState extends FactState {
-  const FactInitialState({
-    super.data,
-  });
-}
-
-class FactLoadingState extends FactState {
-  const FactLoadingState({
-    super.data,
-  });
-}
-
-class FactSuccessState extends FactState {
-  const FactSuccessState({
-    super.data,
-  });
-}
-
-class FactErrorState extends FactState {
-  const FactErrorState({
-    super.data,
-  });
+final class FactErrorState extends FactState {
+  const FactErrorState();
 }

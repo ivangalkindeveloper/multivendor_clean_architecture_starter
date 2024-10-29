@@ -7,7 +7,7 @@ part 'application_router.gr.dart';
 
 //TODO Starter: ApplicationRouter
 @AutoRouterConfig()
-class ApplicationRouter extends _$ApplicationRouter {
+class ApplicationRouter extends RootStackRouter {
   ApplicationRouter();
 
   @override

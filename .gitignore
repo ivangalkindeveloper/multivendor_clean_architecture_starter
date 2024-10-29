@@ -31,7 +31,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-lib/generated/
+*/generated/
+*.g.dart
+**.gr.dart
 lib/split_debug_info/
 
 # Symbolication related
@@ -44,3 +46,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# FVM Version Cache
+.fvm/

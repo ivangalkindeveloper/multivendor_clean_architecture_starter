@@ -1,6 +1,6 @@
 arb-dir: asset/l10n
 template-arb-file: en.arb
-output-localization-file: application_localization.dart
-output-class: ApplicationLocalization
+output-localization-file: l10n.dart
+output-class: L10N
 nullable-getter: false
 untranslated-messages-file: asset/l10n/untranslated.txt

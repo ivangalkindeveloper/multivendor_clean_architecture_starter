@@ -10,17 +10,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  drift:
-  path:
-  path_provider:
-  shared_preferences:
+  drift: 2.21.0
+  path: 1.9.0
+  path_provider: 2.1.4
+  shared_preferences: 2.3.2
   
 dev_dependencies:
-  build_runner:
+  build_runner: 2.4.13
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  drift_dev:
+  flutter_lints: 5.0.0
+  drift_dev: 2.21.1 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

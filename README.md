@@ -6,7 +6,6 @@ The starter uses an public [Cat-Facts API](https://alexwohlbruck.github.io/cat-f
 ## Getting Started
 - [Vendor](#vendor)
   - [Benefits](#benefits)
-  - [Requirements](#requirements)
   - [Before starting work with vendors](#before-starting-work-with-vendors)
   - [Add new vendor](#add-new-vendor)
   - [Switch vendor](#switch-vendor)
@@ -34,6 +33,11 @@ The starter uses an public [Cat-Facts API](https://alexwohlbruck.github.io/cat-f
   - [Vendor](#vendor)
   - [Build](#build)
 
+## Перед работой
+Перед началом работы с данным стартером необходимы слежующие установки:
+- [GNU SED](https://www.gnu.org/software/sed/), потоковый текстовый редактор для переключения вендор окружения;
+- [Makefile Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools), тулсы для мейк команды для упорядочивания кратких скриптов в Мейкфайл.
+
 ## Vendor
 This project has the ability to completely change the vendor environment.\
 Under vendors, not only specific vendors of one application can be implemented (for example, as an implementation of an "white-label" application), but also a canonical approach to "Development" and "Production" environments.
@@ -47,14 +51,11 @@ Current script changes the following environment properties:
 - Application splash screen (Android, iOS, Web);
 - Third-party services.
 And there are also examples of changing identifiers for [Facebook Events](https://pub.dev/packages/facebook_app_events) and [FreshchatSDK](https://pub.dev/packages/freshchat_sdk).
-### Requirements
-Make sure you have the [GNU sed](https://www.gnu.org/software/sed/) stream text editor installed.\
-You can work with scripts from any available shell.
 ### Before starting work with vendors
 Please carefully study how the core [script](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/vendor/core/switch_vendor.sh) works to change the environment.\
 You should modify this script to suit your needs so that the script uses only the materials and services you need.\
 The script contains an example of using [Facebook Events](https://pub.dev/packages/facebook_app_events) and [FreshchatSDK](https://pub.dev/packages/freshchat_sdk) - these lines are commented out for your understanding, so that you also comment or add the necessary lines for your project to work.\
-Also pay attention to [the vendor scripts](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/vendor/VendorCat/switch.sh), which pass parameters for the operation of the core script.
+Also pay attention to [the vendor scripts](https://github.com/ivangalkindeveloper/multivendor_clean_architecture_starter/blob/master/vendor/cat/switch.sh), which pass parameters for the operation of the core script.
 ### Add new vendor
 In order to create a new vendor environment, you need the following:
 1. Create a folder with the vendor name in the directory ./lib/vendor/;
@@ -76,19 +77,19 @@ The required names - splash_logo.png, splash_logo_dark.png.
 Repeat already created scripts for the environment and fill in the parameters that need to be updated.\
 The last line is sure to run the core script.\
 The required name - switch.sh.
-4. Add a command to change the vendor in this README in the CLI section for quick convenience:
-```sh
-bash ./vendor/<new-vendor-folder-name>/switch.sh
+4. Add a command to change the vendor in this Makefile:
 ```
-
+switch-<name>:
+	bash ./vendor/<name>/switch.sh
+```
 About launcher icon see details [here](https://pub.dev/packages/flutter_launcher_icons) or splash screen see details [here](https://pub.dev/packages/flutter_native_splash).
 ### Switch vendor
 To start the vendor environment change, run:
 ```sh
-bash ./vendor/<vendor-folder-name>/switch.sh
+make switch-<name>
 ```
 ### Config registration
-Registration of the config occurs in different main fucntions through the arguments of the runner and initializer utilities in order to be able to change the environment locally and look at the generated application materials by running only the development environment.\
+Registration of the config occurs in different main functions through the arguments of the runner and initializer utilities in order to be able to change the environment locally and look at the generated application materials by running only the development environment.\
 Made for the convenience for launching in VSСode and not through run commands.
 ### Why not flavors
 Flavors are not able to generate vendor application materials and do not know how to work with third-party services, but simply control the launch of the application only in the config part.\
@@ -279,6 +280,94 @@ You can also describe it as application logic and enterprise logic, getting some
 │               └───── entity/
 ```
 2) Remember that all technologies used are implementation details, therefore, tying to the names in the directories with the packages used (bloc, provider, widget) is not always good, since technologies can change, and the project can continue to exist from business needs .
+
+## Стиль кода
+### Общие правила
+1) Не объявлять переменные с краткими наименованиями в одну букву, переменным всегда давать полное имя через snakeCase;
+2) Не объявлять приватные переменные внутри стека функций;
+3) Не создавать директории с множественным наименованием;
+4) Использовать extension только для типов, которые находятся вне доступа текущего проекта и зависимых модулей;
+5) Создание mixin всегда поразумевает скоуп типов, для которых он будет использоваться через оператор on;
+6) Наименование interface/abstract классов всегда объявлять с префиксом "I";
+7) Если для одного interface/abstract классов необходимо несколько реализаций - размещать по каждой на один файл;
+8) Если для одного sealed класса необходимо несколько реализаций - размещать по каждой на один файл через соединение part/part of;
+### Классы
+1) Классы объявлять в порядке:
+- Конструкторы и фабрики;
+- Поля класса;
+- Приватные и публичные функции, геттеры и сеттеры.
+2) Реализумеые от interface/abstract или переопределяемые методы всегда обозначать аннотацией @override;
+3) Запрещено использование мутабельных классов-фукнций. Единственный мутабельный класс в проекте - прогресс инициализации.
+### Циклы
+1) Объявление в стеках циклов:
+- Переменная текущей рабочей сущности из индексирования;
+- Логика совершаемая с данной сущностью в итерации.
+### Архитектура
+1) Каждый внешняя деталь реализации как зависимость всегда должна быть абстрагируемой - иметь интерфейс и как минимум одну реализацию с данной деталью реализации;
+2) Каждую деталь реализации сначал пытаться абстрагирования на уровне зависимых уровней модулей, если такая деталь ни к какому модулю не может принадлежать - уровнеь текущего проекта;
+### Приложение
+1) Не выносим виджеты в функции, только в отдельные классы.
+2) Внутри массивов использоваться только if else операторы.
+Использование тернарного оператора возможно только при объявлении переменных в стеке функции.
+3) Верстка каждого экрана или большого компонента должна определять скоуп используемых виджетов.
+Каждый логический виджет, который потенциально может менять состояние (или еще пока того не делает), объявлять приватными классами и чеерез соединения part/part of.
+Приватный медиатор-контроллер размещать здесь же.
+Типичный пример экрана:
+```
+├─ order/
+│  ├───── _app_bar.dart
+│  ├───── _order_controller.dart
+│  ├───── _summary_card.dart
+│  ├───── _screen_.dart
+│  ├───── _order_button_.dart
+│  └───── order_screen.dart
+```
+4) В каждом разделенном на экране виджет-компоненте объявлять контекстные зависимости от корня передаваемого контекста.
+Иными словами что можно получить в самом начале метода build, обявляемые выше всего.
+5) Запрещено использовать виджет Container.
+#### Наимеования
+Контракты наименований виджетов:
+1) Префиксы:
+VK
+2) Главные наименования виджетов:
+Scaffold, Scrollbar, 
+3) Постфиксы компонентов:
+AppBar, Badge, Bar, BottomSheet, Button, Card, Checkbox, CodeField, Dialog, Divider, FormField, Icon, Indicator, Keyboard, List, Picker, PINField, PopUp, Radio, SegmentControl, SelectCard, SelectField, Shimmer, Slider, SlidingSegmentControl, SliverAppBar, SnackBar, Switch, Text, Toggle
+4) Постфиксы экранных частей:
+В дополнение к вышеописанным - Body, Section
+#### StatelessWidget
+1) Структура класса:
+- Конструктор;
+- Поля виджета;
+- Приватные функции;
+- Build-метод.
+2) Build-метод:
+- Объявление context зависимостей в отдельные переменные;
+- Объявление общих переменных;
+- Возвращаемый виджет.
+#### StatefulWidget
+1) Структура класса:
+- Конструктор;
+- Поля виджета;
+- createState.
+Структура стейта:
+- Зависимые от контекста переменные;
+- initState
+- didChangeDependencies
+- didChangeWidget
+- dispose 
+- Приватные функции, геттеры;
+- Build-метод.
+2) Build-метод:
+- Объявление context зависимостей в отдельные переменные;
+- Объявление общих переменных;
+- Возвращаемый виджет.
+### GIT Flow
+1) Перед отправкой MR всегда запускать:
+```sh
+dart format .
+```
+
 
 ## Approaches
 Existing good approaches to the implementation of the project, which help to better navigate the project code:

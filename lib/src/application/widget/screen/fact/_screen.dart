@@ -6,9 +6,11 @@ class _Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Dependency dependency = context.dependency;
-    final IConfig config = dependency.data.config;
+    final Environment environment = dependency.environment;
+
     final MVSSize size = context.mvsSize;
-    final ApplicationLocalization l10n = context.l10n;
+
+    final L10N l10n = context.l10n;
 
     return MVSScaffold(
       appBar: MVSScreenAppBar(
@@ -19,7 +21,7 @@ class _Screen extends StatelessWidget {
         children: [
           MVSText.medium16Black(
             context,
-            "${l10n.factAnimalDescription} ${config.animalType}",
+            "${l10n.factAnimalDescription} ${environment.animalType}",
           ),
           SizedBox(
             height: size.s16,

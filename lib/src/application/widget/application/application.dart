@@ -1,18 +1,18 @@
 import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/dependency_scope.dart';
-import 'package:multivendor_clean_architecture_starter/src/core/data/data/dependency/dependency.dart';
-import 'package:multivendor_clean_architecture_starter/src/utility/nester/scope_nester.dart';
-import 'package:flutter_gen/gen_l10n/application_localization.dart';
+import 'package:multivendor_clean_architecture_starter/src/core/dependency.dart';
+import 'package:multivendor_clean_architecture_starter/src/application/widget/scope/scope_nester.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:mvs_widget/mvs_widget.dart';
 import 'package:flutter/widgets.dart';
 
 //TODO Starter: Application
 class Application extends StatelessWidget {
   const Application({
-    required this.result,
     super.key,
+    required this.dependency,
   });
 
-  final Dependency result;
+  final Dependency dependency;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class Application extends StatelessWidget {
           Widget child,
         ) =>
             DependencyScope(
-              dependency: result,
+              dependency: dependency,
               child: child,
             ),
       ],
@@ -32,7 +32,7 @@ class Application extends StatelessWidget {
         dateTime: MVSDateTime(),
         duration: const MVSDuration(),
         haptic: const MVSHaptic(),
-        theme: this.result.application.theme,
+        theme: this.dependency.theme,
         size: const MVSSize(),
         font: const MVSFont(),
         child: Builder(
@@ -40,11 +40,10 @@ class Application extends StatelessWidget {
             BuildContext context,
           ) =>
               MVSAppRouter(
-            locale: this.result.application.locale,
-            localizationsDelegates:
-                ApplicationLocalization.localizationsDelegates,
-            supportedLocales: ApplicationLocalization.supportedLocales,
-            routerConfig: this.result.application.router.config(),
+            locale: this.dependency.locale,
+            localizationsDelegates: L10N.localizationsDelegates,
+            supportedLocales: L10N.supportedLocales,
+            routerConfig: this.dependency.router.config(),
           ),
         ),
       ),
